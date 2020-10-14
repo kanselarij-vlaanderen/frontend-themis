@@ -1,5 +1,18 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
+<AuMainHeader @brandLink="{{unless session.isAuthenticated "https://www.vlaanderen.be/nl"}}" 
+@homeRoute="index" @appTitle="De Centrale Vindplaats &mdash; Ontdek gestructureerde informatie in notulen, besluiten, codelijsten en meer.">
+</AuMainHeader>
 
-{{outlet}}
+
+<main id="main" class="au-c-main-container">
+  <div class="au-c-main-container__content au-c-main-container__content--scroll" id="content">
+    <div>{{outlet}}</div>
+    <AuMainFooter>
+      <AuHeading @level="3" @skin="4">
+       THEMIS
+      </AuHeading>
+      <AuContent @skin="small">
+        <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/agentschap-binnenlands-bestuur">Agentschap Binnenlands Bestuur</a></p>
+      </AuContent>
+    </AuMainFooter>
+  </div>
+</main>

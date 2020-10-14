@@ -20,18 +20,23 @@
     "test:ember": "ember test"
   },
   "devDependencies": {
+    "@appuniversum/appuniversum": "0.0.14",
+    "@appuniversum/ember-appuniversum": "0.0.35",
     "@ember/optional-features": "^2.0.0",
     "@glimmer/component": "^1.0.1",
     "@glimmer/tracking": "^1.0.1",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
+    "build-url": "^6.0.1",
     "ember-auto-import": "^1.6.0",
     "ember-cli": "~3.21.2",
     "ember-cli-app-version": "^3.2.0",
     "ember-cli-babel": "^7.22.1",
     "ember-cli-dependency-checker": "^3.2.0",
+    "ember-cli-fastboot": "^2.2.3",
     "ember-cli-htmlbars": "^5.3.1",
     "ember-cli-inject-live-reload": "^2.0.2",
+    "ember-cli-sass": "^10.0.1",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.0",
     "ember-data": "~3.21.0",
@@ -48,13 +53,16 @@
     "eslint-plugin-ember": "^8.13.0",
     "eslint-plugin-node": "^11.1.0",
     "loader.js": "^4.7.0",
+    "metis": "github:redpencilio/ember-metis#v0.1.0",
     "npm-run-all": "^4.1.5",
-    "qunit-dom": "^1.4.0"
+    "qunit-dom": "^1.4.0",
+    "sass": "^1.27.0"
   },
   "engines": {
     "node": "10.* || >= 12"
   },
   "ember": {
     "edition": "octane"
-  }
+  },
+  "dependencies": {}
 }
