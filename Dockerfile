@@ -8,7 +8,7 @@ RUN npm install
 COPY . .
 RUN ember build -prod
 
-FROM semtech/ember-proxy-service:1.5.1
+FROM semtech/static-file-service:0.1.0
 
-ENV STATIC_FOLDERS_REGEX "^/(assets|font|files|@appuniversum)/"
-COPY --from=builder /app/dist /app
+COPY nginx/app.conf /config/app.conf
+COPY --from=builder /app/dist /data
