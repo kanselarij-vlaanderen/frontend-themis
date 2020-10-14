@@ -1,5 +1,7 @@
-<AuMainHeader @brandLink="{{unless session.isAuthenticated "https://www.vlaanderen.be/nl"}}" 
-@homeRoute="index" @appTitle="De Centrale Vindplaats &mdash; Ontdek gestructureerde informatie in notulen, besluiten, codelijsten en meer.">
+<AuMainHeader
+  @brandLink="https://www.vlaanderen.be/nl"
+  @homeRoute="index"
+  @appTitle="Themis &mdash; Ontdek gestructureerde informatie over de besluitvorming van de Vlaamse Regering.">
 </AuMainHeader>
 
 
@@ -8,10 +10,10 @@
     <div>{{outlet}}</div>
     <AuMainFooter>
       <AuHeading @level="3" @skin="4">
-       THEMIS
+       Themis
       </AuHeading>
       <AuContent @skin="small">
-        <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/agentschap-binnenlands-bestuur">Agentschap Binnenlands Bestuur</a></p>
+        <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/nl/contact/adressengids/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/departement-kanselarij-en-bestuur">Departement Kanselarij en Bestuur</a></p>
       </AuContent>
     </AuMainFooter>
   </div>
