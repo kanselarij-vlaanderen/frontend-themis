@@ -8,7 +8,7 @@ module.exports = function(environment) {
     locationType: 'auto',
     metis: {
       routes: {},
-      baseUrl: "http://public-api/"
+      baseUrl: "http://data.themis.vlaanderen.be/"
     },
     fastboot: {
       hostWhitelist: [/^localhost(:[0-9]*)?/, "localhost",  /^.*$/ ] //TODO: this is potentialy a danger, FIX THIS
