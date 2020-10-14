@@ -10,6 +10,11 @@ module.exports = function(environment) {
       routes: {},
       baseUrl: "http://data.themis.vlaanderen.be/"
     },
+    yasgui: {
+      // NOTE: look at app/modifiers/yasgui.js when changing this variable
+      defaultQuery: "EMBER_YASGUI_DEFAULT_QUERY",
+      extraPrefixes: "EMBER_YASGUI_EXTRA_PREFIXES"
+    },
     fastboot: {
       hostWhitelist: [/^localhost(:[0-9]*)?/, "localhost",  /^.*$/ ] //TODO: this is potentialy a danger, FIX THIS
     },
