@@ -1,11 +1,14 @@
 {
-  "name": "frontend-public-api",
+  "name": "frontend-themis",
   "version": "0.1.0",
   "private": true,
-  "description": "Small description for frontend-public-api goes here",
-  "repository": "",
+  "description": "Discover data of the Department Kanselarij of the Flemish Government",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kanselarij-vlaanderen/frontend-themis.git"
+  },
   "license": "MIT",
-  "author": "",
+  "author": "redpencil.io",
   "directories": {
     "doc": "doc",
     "test": "tests"

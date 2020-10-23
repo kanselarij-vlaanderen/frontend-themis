@@ -2,13 +2,13 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'frontend-public-api',
+    modulePrefix: 'frontend-themis',
     environment,
     rootURL: '/',
     locationType: 'auto',
     metis: {
       routes: {},
-      baseUrl: "http://data.themis.vlaanderen.be/"
+      baseUrl: "http://themis.vlaanderen.be/"
     },
     yasgui: {
       // NOTE: look at app/modifiers/yasgui.js when changing this variable
