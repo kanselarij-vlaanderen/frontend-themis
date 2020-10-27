@@ -1,0 +1,291 @@
+<AuContent>
+  <h1>Besluitvormingscatalogus</h1>
+  <p>
+    Themis ontsluit momenteel een catalogus: de besluitvormingscatalogus. De verschillende datasets en bijhorende representaties die in deze catalogus aangeboden worden, worden hierna verder beschreven. In de toekomst kan Themis uitgebreid worden met bijkomende catalogussen en datasets.
+  </p>
+
+  <p>
+    De besluitvormingscatalogus omvat datasets rond de besluitvorming van de Vlaamse Regering. De meeste informatie in deze catalogus is afkomstig uit de <a href="https://overheid.vlaanderen.be/beleid-en-regelgeving/werking-en-besluitvorming-vlaamse-regering/kaleidos">Kaleidos applicatie</a>.
+  </p>
+
+  <p>
+    De catalogus bevat verschillende soorten datasets:
+  </p>
+  <ul>
+    <li><a href="#newsitems-vr">beslissingen van de Vlaamse Regering per ministerraad</a></li>
+    <li><a href="#dossier-lifecycle">levensboom van een dossier en de bijhorende procedurestappen (toekomst)</a></li>
+    <li><a href="#concept-schemes">concept schemes en codelijsten</a></li>
+  </ul>
+
+  <p>
+    De verschillende soorten datasets en de inhoud van de bijhordende representaties worden hieronder in detail toegelicht.
+  </p>
+
+  <h2 id="newsitems-vr">Vlaamse Regering in kort bestek per ministerraad</h2>
+  <p>
+    Na afloop van iedere ministerraad worden de beslissingen van de Vlaamse Regering via diverse kanalen gecommuniceerd in kort bestek aan de hand van nieuwsberichten. Een van deze kanalen is het Themis platform. De data wordt in <a href="https://www.w3.org/TR/turtle/">Turtle formaat</a> ter beschikking gesteld. Een werkdag later worden ook de bijhorende documenten bij de nieuwsberichten in PDF-formaat gepubliceerd.
+  </p>
+  <h3>Dataset en distributions</h3>
+  <p>
+    Iedere publicatie van de beslissingen van een ministerraad wordt gerepresenteerd door een <code>dcat:Dataset</code> met een specifiek type (<code>dct:type</code>). De dataset verwijst naar de mininsterraad (<code>besluit:Vergaderactiviteit</code>) die het onderwerp is van de dataset via <code>dct:subject</code>. De dataset heeft verschillende distributions:
+  </p>
+  <ul>
+    <li>een <code>dcat:Distribution</code> in <a href="https://www.w3.org/TR/turtle/">Turtle formaat</a> die de data zoals de agenda, agendapunten en nieuwsberichten bevat. Het model wordt verder gespecificeerd in <a href="#newsitems-vr-ttl">Inhoud van de Turtle distribution</a>.</li>
+    <li>een <code>dcat:Distribution</code> in PDF formaat per document dat toegevoegd wordt als bijlage bij een nieuwsbericht</li>
+  </ul>
+
+  <p>
+    De distributions zijn te onderscheiden op basis van hun type-eigenschap (<code>dct:type</code>). Iedere distribution bevat via <code>dct:subject</code> een verwijzing naar het bestand (<code>nfo:FileDataObject</code>) dat het representeert.
+  </p>
+
+  <p>
+    Herpublicaties, bijvoorbeeld bij de vrijgave van de documenten of na een aanpassing van een nieuwsbericht, worden gerepresenteerd door een nieuwe <code>dcat:Dataset</code>. Deze nieuwe dataset wordt via <code>prov:wasRevisionOf</code> gerelateerd aan de vorige versie. Op die manier ontstaat er een linked list van datasets voor een bepaalde ministerraad. De download URLs van de distributions van de voorgaande versie worden op dat moment ook onbeschikbaar gemaakt. Deze kunnen niet langer gedownload worden. Enkel de distributions van de laatste versie kunnen gedownload worden.
+  </p>
+
+  <p>
+    Uitzonderlijk moet een publicatie van de beslissingen van een ministerraad ongedaan gemaakt worden. Er wordt dan een nieuwe beperkte dataset gepubliceerd (zie <a href="#newsitems-vr-ttl">Inhoud van de Turtle distribution</a>). Net zoals bij herpublicatie wordt de nieuwe dataset via <code>prov:wasRevisionOf</code> gerelateerd aan de vorige versie en worden de download URLs van de vorige versie onbeschikbaar gemaakt.
+  </p>
+
+  <p>
+    Gebruikers van de datasets moeten nieuwe publicaties overnemen en data van voorgaande publicaties, net als het Themis platform, onbeschikbaar maken.
+  </p>
+
+  <h3 id="newsitems-vr-ttl">Inhoud van de Turtle distribution</h3>
+  <p>
+    Onderstaand diagram illustreert het data model dat gehanteerd wordt om de nieuwsberichten uit het kort bestek van een ministerraad te ontsluiten. De data is beschikbaar in in <a href="https://www.w3.org/TR/turtle/">Turtle formaat</a>. Het model is een uitbreiding van het <a href="https://test.data.vlaanderen.be/doc/applicatieprofiel/besluitvorming">OSLO besluitvorming applicatieprofiel</a>.
+  </p>
+
+  <div>
+    <img src="/assets/images/decisions-vr-model.svg" alt="Nieuwsberichten data model" />
+  </div>
+
+  <p>
+    Volgende prefixes worden gebruikt:
+  </p>
+
+  <div class="u-table-overflow">
+    <table class="data-table data-table--zebra" cellspacing="0" cellpadding="6">
+      <thead>
+        <tr>
+          <th>Prefix</th>
+          <th>URI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>besluitvorming</td>
+          <td><a href="https://data.vlaanderen.be/ns/besluitvorming#">https://data.vlaanderen.be/ns/besluitvorming#</a></td>
+        </tr>
+
+        <tr>
+          <td>besluit</td>
+          <td><a href="http://data.vlaanderen.be/ns/besluit#">http://data.vlaanderen.be/ns/besluit#</a></td>
+        </tr>
+
+        <tr>
+          <td>mandaat</td>
+          <td><a href="http://data.vlaanderen.be/ns/mandaat#">http://data.vlaanderen.be/ns/mandaat#</a></td>
+        </tr>
+
+        <tr>
+          <td>dossier</td>
+          <td><a href="https://data.vlaanderen.be/ns/dossier#">https://data.vlaanderen.be/ns/dossier#</a></td>
+        </tr>
+
+        <tr>
+          <td>prov</td>
+          <td><a href="http://www.w3.org/ns/prov#">http://www.w3.org/ns/prov#</a></td>
+        </tr>
+
+        <tr>
+          <td>dct</td>
+          <td><a href="http://purl.org/dc/terms/">http://purl.org/dc/terms/</a></td>
+        </tr>
+
+        <tr>
+          <td>schema</td>
+          <td><a href="http://schema.org/">http://schema.org/</a></td>
+        </tr>
+
+        <tr>
+          <td>nfo</td>
+          <td><a href="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#">http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#</a></td>
+        </tr>
+
+        <tr>
+          <td>nie</td>
+          <td><a href="http://www.semanticdesktop.org/ontologies/2007/01/19/nie#">http://www.semanticdesktop.org/ontologies/2007/01/19/nie#</a></td>
+        </tr>
+
+        <tr>
+          <td>dbpedia</td>
+          <td><a href="http://dbpedia.org/resource/">http://dbpedia.org/resource/</a></td>
+        </tr>
+
+        <tr>
+          <td>themis</td>
+          <td><a href="http://themis.vlaanderen.be/vocabularies/besluitvorming/">http://themis.vlaanderen.be/vocabularies/besluitvorming/</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    Het bereik van ieder predicaat wordt aangegeven in het diagram. <code>Code</code> verwijst hierbij naar een element uit een <a href="#concept-schemes">codelijst</a>. De exacte definities van de classes en eigenschappen kunnen gevonden worden in de <LinkTo @route="docs.publication">relevante vocabualaria en bijhorende applicatieprofielen</LinkTo>.
+  </p>
+
+  <p>
+    Iedere dataset voor een (her)publicatie van de beslissingen bevat een publicatie activiteit (<code>prov:Activity</code> met specifiek <code>dct:type</code>). De publicatie activiteit verwijst via <code>prov:used</code> naar de ministerraad (<code>besluit:Vergaderactiviteit</code>) waarop de publicatie van toepassing is. De activiteit resulteert (<code>prov:generated</code>) in een publieke agenda (<code>besluitvorming:Agenda</code>) en bijhorende publieke agendapunten (<code>besluit:Agendapunt</code>).
+  </p>
+
+  <p>
+    Iedere herpublicatie van een ministerraad resulteert in een nieuwe publicatie activiteit, agenda en agendapunten. De agenda en agendapunten verwijzen elk naar hun overeenkomstig item in de voorgaande dataset versie via <code>prov:wasRevisionOf</code>. Op die manier onstaat er voor iedere agenda en ieder agendapunt een linked list van versies over de verschillende datasets heen. Daarnaast bevat de agenda en elk agendapunt ook een verwijzing naar het overeenkomstige originele item in Kaleidos waaruit ze afgeleid zijn via <code>prov:wasDerivedFrom</code>. Een uitzondering hierop is het ongedaan maken van een publicatie. In dit geval zal de dataset enkel een publicatie activiteit bevatten met een verwijzing naar de ministerraad, maar zonder publieke agenda en agendapunten.
+  </p>
+
+  <p>
+    De agendapunten van een agenda worden geagendeerd in een bepaalde volgorde. Ook dit wordt, volgens het <a href="https://test.data.vlaanderen.be/doc/applicatieprofiel/besluitvorming">OSLO besluitvorming applicatieprofiel</a>, gemodelleerd aan de hand van een linked list gevormd via <code>besluit:aangebrachtNa</code>. Om praktische implementaties te vereenvoudigen wordt deze volgorde ook geexpliciteerd aan de hand van een volgnummer (<code>schema:position</code>) per agendapunt. Merk op dat deze volgorde niet noodzakelijk overeenstemt met de volgorde van de nieuwsberichten. Zij hebben een eigen volgnummer.
+  </p>
+
+  <p>
+    Uit iedere agendapunt wordt via <code>prov:wasDerivedFrom</code> een nieuwsbericht afgeleid. Een nieuwsbericht is een stuk uit een dossier (<code>dossier:Stuk</code>) met een specifiek type (<code>dct:type</code>). De belangrijkste eigenschap van een nieuwsbericht is <code>nie:htmlContent</code> wat de HTML inhoud van het nieuwsbericht bevat. De bevoegde minister(s) (<code>mandaat:Mandataris</code>) zijn gelinkt aan het nieuwsbericht via <code>prov:qualifiedAssociation</code>. De volgorde van de nieuwsberichten wordt uitgedrukt aan de hand van een volgnummer (<code>schema:position</code>) per nieuwsbericht. Zoals eerder gesteld stemt deze volgorde niet noodzakelijk overeen met de volgorde van de agendapunten.
+  </p>
+
+  <p>
+    Een werkdag na de publicatie van de beslissingen worden de bijhorende documenten gepubliceerd. Deze datum wordt via <code>themis:geplandePublicatieDatumDocumenten</code> gezet als eigenschap van de publicatie activiteit. Een nieuwsbericht kan een of meerdere documenten bevatten via <code>besluitvorming:heeftBijlage</code>. De bijlagen zijn op hun beurt weer een stuk van een dossier (<code>dossier:Stuk</code>).
+  </p>
+
+  <p>
+    De bijlage (<code>dossier:Stuk</code>) bevat enkel metadata van de bijlage. Het PDF bestand (<code>nfo:FileDataObject</code>) met de eigenlijke inhoud is gerelateerd via <code>prov:value</code> aan de bijlage. Het model dat gehanteerd wordt voor de PDF bestanden wordt verder toegelicht in <a href="https://github.com/mu-semtech/file-service#data-model">de documentatie van de file service van het gebruikte framework</a>. De URL waarop het PDF bestand gedownload kan worden is tevens de <code>dcat:downloadURL</code> van de bijhorende distribution.
+  </p>
+
+  <h2 id="dossier-lifecycle">Levensboom van een dossier</h2>
+  <p>
+    Te vervolledigen.
+  </p>
+
+  <h2 id="concept-schemes">Concept schemes en codelijsten</h2>
+  <p>
+    Voor sommige eigenschappen zijn er maar een beperkte set van waarden mogelijk (vb. het type van een agendapunt). Deze waarden worden gedefineerd in een codelijst: een gecontroleerde lijst van concepten. De modellering van deze codelijsten gebeurt doorgaans volgens de <a href="https://www.w3.org/2009/08/skos-reference/skos.html#">W3C SKOS vocabulary</a>. Iedere mogelijke waarde is een <code>skos:Concept</code>. Tussen de concepten kunnen (hiërarchische) relaties gedefinieerd worden. Concepten kunnen samen geaggregeerd worden in een <code>skos:ConceptScheme</code>.
+  </p>
+
+  <p>
+    Hieronder wordt een overzicht gegeven van de codelijsten die beschikbaar zijn in de besluitvormingscatalogus. De codelijsten kunnen als aparte datasets in <a href="https://www.w3.org/TR/turtle/">Turtle formaat</a> gedownload worden of opgevraagd worden via het SPARQL endpoint. Ieder concept heeft ook een subject page. Andere datasets kunnen verwijzingen naar concepten uit de codelijsten bevatten, maar zullen zelf geen verdere eigenschappen van de concepten uit de codelijst ontsluiten. De codelijsten zijn dus een aanvulling bij de andere datasets.
+  </p>
+
+  <p>
+    Om alle concepten uit een concept scheme op te lijsten, kan volgende SPARQL query gebruikt worden:
+  </p>
+  <div>
+
+    <pre class="src src-sparql">PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+SELECT *
+WHERE {
+  ?s a skos:Concept ;
+     skos:inScheme &lt;http://my-concept-scheme-uri.org&gt; .
+}</pre>
+  </div>
+
+  <h3>Dataset types</h3>
+  <p>
+    Al deze concepten zijn onderdeel van het concept scheme <a href="http://themis.vlaanderen.be/id/concept-scheme/e93481b2-342d-468b-8def-2d629232d3a5">http://themis.vlaanderen.be/id/concept-scheme/e93481b2-342d-468b-8def-2d629232d3a5</a>.
+  </p>
+
+  <p>
+    Een <code>dcat:Dataset</code> heeft een eigenschap <code>dct:type</code> waarmee het type van de dataset gespecifieerd kan worden. De codelijst van dataset types bevat volgende concepten:
+  </p>
+
+  <div class="u-table-overflow">
+    <table class="data-table data-table--zebra" cellspacing="0" cellpadding="6">
+      <thead>
+        <tr>
+          <th>Naam</th>
+          <th>URI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="org-left">Vergaderactiviteit in kort bestek</td>
+          <td class="org-left"><a href="http://themis.vlaanderen.be/id/concept/dataset-type/9119805f-9ee6-4ef1-9ef7-ad8dccc2bf2d">http://themis.vlaanderen.be/id/concept/dataset-type/9119805f-9ee6-4ef1-9ef7-ad8dccc2bf2d</a></td>
+        </tr>
+
+        <tr>
+          <td class="org-left">Codelijst / concept scheme</td>
+          <td class="org-left"><a href="http://themis.vlaanderen.be/id/concept/dataset-type/49e2bdc1-6c32-4021-b12b-2c9ff3674cd1">http://themis.vlaanderen.be/id/concept/dataset-type/49e2bdc1-6c32-4021-b12b-2c9ff3674cd1</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Distribution types</h3>
+  <p>
+    Al deze concepten zijn onderdeel van het concept scheme <a href="http://themis.vlaanderen.be/id/concept-scheme/f27ae84d-fded-4ea5-a8f8-f4b98664214b">http://themis.vlaanderen.be/id/concept-scheme/f27ae84d-fded-4ea5-a8f8-f4b98664214b</a>.
+  </p>
+
+  <p>
+    Een <code>dcat:Distribution</code> heeft een eigenschap <code>dct:type</code> waarmee het type van de distribution gespecifieerd kan worden. De codelijst van distribution types bevat volgende concepten:
+  </p>
+
+  <div class="u-table-overflow">
+    <table class="data-table data-table--zebra" cellspacing="0" cellpadding="6">
+      <thead>
+        <tr>
+          <th>Naam</th>
+          <th>URI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nieuwsberichten</td>
+          <td><a href="http://themis.vlaanderen.be/id/concept/distribution-type/dd5bfc23-8f88-4df5-80f6-a9f72e08d7c4">http://themis.vlaanderen.be/id/concept/distribution-type/dd5bfc23-8f88-4df5-80f6-a9f72e08d7c4</a></td>
+        </tr>
+
+        <tr>
+          <td>Bijlage bij nieuwsbericht</td>
+          <td><a href="http://themis.vlaanderen.be/id/concept/distribution-type/c4d99dde-3df9-4da1-8136-9a3b2de82de4">http://themis.vlaanderen.be/id/concept/distribution-type/c4d99dde-3df9-4da1-8136-9a3b2de82de4</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Activiteit types</h3>
+  <p>
+    Al deze concepten zijn onderdeel van het concept scheme <a href="http://themis.vlaanderen.be/id/concept-scheme/eabe9bb8-d4e1-409e-9132-2d09e5a89bef">http://themis.vlaanderen.be/id/concept-scheme/eabe9bb8-d4e1-409e-9132-2d09e5a89bef</a>.
+  </p>
+
+  <p>
+    Een <code>prov:Activity</code> heeft een eigenschap <code>dct:type</code> waarmee het type van de activiteit gespecifieerd kan worden. De codelijst van activiteit types bevat volgende concepten:
+  </p>
+
+  <div class="u-table-overflow">
+    <table class="data-table data-table--zebra" cellspacing="0" cellpadding="6">
+      <thead>
+        <tr>
+          <th>Naam</th>
+          <th>URI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Publieke vrijgave</td>
+          <td><a href="http://themis.vlaanderen.be/id/concept/activity-type/fb1916be-0a42-4a52-a69d-92764eba4955">http://themis.vlaanderen.be/id/concept/activity-type/fb1916be-0a42-4a52-a69d-92764eba4955</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <h3>Vergaderactiviteit types</h3>
+  <p>
+    Al deze concepten zijn onderdeel van het concept scheme <a href="http://themis.vlaanderen.be/id/concept-scheme/8030c0c4-aff1-4548-92d9-3299ebc43832">http://themis.vlaanderen.be/id/concept-scheme/8030c0c4-aff1-4548-92d9-3299ebc43832</a>.
+  </p>
+
+  <h3>Agendapunt types</h3>
+  <p>
+    Al deze concepten zijn onderdeel van het concept scheme <a href="http://themis.vlaanderen.be/id/concept-scheme/55c9120c-6a3d-49c4-80c8-ed01e9b92a9b">http://themis.vlaanderen.be/id/concept-scheme/55c9120c-6a3d-49c4-80c8-ed01e9b92a9b</a>.
+  </p>
+
+  <h3>Document types</h3>
+  <p>
+    Al deze concepten zijn onderdeel van het concept scheme <a href="http://themis.vlaanderen.be/id/concept-scheme/559774e3-061c-4f4b-a758-57228d4b68cd">http://themis.vlaanderen.be/id/concept-scheme/559774e3-061c-4f4b-a758-57228d4b68cd</a>.
+  </p>
+</AuContent>

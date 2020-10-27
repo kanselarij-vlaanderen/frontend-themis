@@ -1,0 +1,28 @@
+<div class="docs au-o-region-large au-o-layout">
+  <AuContent>
+    <AuHeading>
+      Documentatie
+    </AuHeading>
+
+    <p>
+      Data rond de besluitvorming van de Vlaamse Regering wordt gepubliceerd in gestandardiseerde formaten die zowel door mens- als machine geïnterpreteerd kunnen worden. Ontdek de data en ga er zelf mee aan de slag!
+    </p>
+  </AuContent>
+
+  <AuHr @size="large"/>
+
+  <div class="table-of-content">
+    <ul class="link-list">
+      <li>
+        <LinkTo @route="docs.publication" class="link--icon--caret">Data ontsluiting</LinkTo>
+      </li>
+      <li>
+        <LinkTo @route="docs.catalogs" class="link--icon--caret">Besluitvormingscatalogus</LinkTo>
+      </li>
+    </ul>
+  </div>
+
+  <AuHr @size="large"/>
+
+  {{outlet}}
+</div>

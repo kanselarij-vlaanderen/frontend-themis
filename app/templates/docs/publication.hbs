@@ -1,0 +1,424 @@
+<AuContent>
+  <h1>
+    Data ontsluiting
+  </h1>
+  <p>
+    Alle data op Themis wordt ontsloten als Linked Open Data volgens de richtlijnen en informatiemodellen van <a href="https://data.vlaanderen.be">https://data.vlaanderen.be</a>. De data wordt op verschillende manieren beschikbaar gesteld, zowel in mens- als in machine-leesbare formaten zodanig dat iedereen er mee aan de slag kan. Alle publicatiekanalen zijn gebasseerd op bestaande (web)standaarden.
+  </p>
+
+  <p>
+    In wat volgt worden de gebruikte <a href="#models-and-vocabs">informatiemodellen en vocabularia</a> van Themis in het algemeen toegelicht. In <a href="#apis">APIs</a> worden de verschillende manieren om toegang te krijgen tot de data toegelicht. Meer gedetailleerde informatie over specifieke datasets, kan je terugvinden in <LinkTo @route="docs.catalogs">Besluitvormingscatalogus</LinkTo>.
+  </p>
+  <h2>
+    Data formaat
+  </h2>
+  <h3 id="models-and-vocabs">
+    OSLO-standaarden en gerelateerde vocabularia
+  </h3>
+  <p>
+    De Linked Data op Themis volgt de informatiemodellen zoals bepaald in het <a href="https://data.vlaanderen.be/standaarden/kandidaat-standaarden/besluitvorming/besluitvorming.html">besluitvorming-traject</a> van de <a href="https://data.vlaanderen.be/standaarden/">Open Standaarden voor Linkende Organisaties (OSLO) van de Vlaamse overheid</a>. In <LinkTo @route="docs.catalogs">Besluitvormingscatalogus</LinkTo> worden informatiemodellen voor specifieke datasets verduidelijkt.
+  </p>
+
+  <p>
+    Deze informatiemodellen maken gebruik van onderstaande vocabuaria.
+  </p>
+
+  <div class="u-table-overflow">
+    <table class="data-table data-table--zebra" cellspacing="0" cellpadding="6">
+      <thead>
+        <tr>
+          <th>Naam</th>
+          <th>Prefix</th>
+          <th>Namespace</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OSLO Besluitvorming</td>
+          <td>besluitvorming</td>
+          <td><a href="https://data.vlaanderen.be/ns/besluitvorming#">https://data.vlaanderen.be/ns/besluitvorming#</a></td>
+        </tr>
+
+        <tr>
+          <td>OSLO Besluit</td>
+          <td>besluit</td>
+          <td><a href="http://data.vlaanderen.be/ns/besluit#">http://data.vlaanderen.be/ns/besluit#</a></td>
+        </tr>
+
+        <tr>
+          <td>OSLO Mandaat</td>
+          <td>mandaat</td>
+          <td><a href="http://data.vlaanderen.be/ns/mandaat#">http://data.vlaanderen.be/ns/mandaat#</a></td>
+        </tr>
+
+        <tr>
+          <td>OSLO Dossier</td>
+          <td>dossier</td>
+          <td><a href="https://data.vlaanderen.be/ns/dossier#">https://data.vlaanderen.be/ns/dossier#</a></td>
+        </tr>
+
+        <tr>
+          <td>OSLO Generiek</td>
+          <td>generiek</td>
+          <td><a href="https://data.vlaanderen.be/ns/generiek#">https://data.vlaanderen.be/ns/generiek#</a></td>
+        </tr>
+
+        <tr>
+          <td>OSLO Organisatie</td>
+          <td>organisatie</td>
+          <td><a href="https://data.vlaanderen.be/ns/organisatie#">https://data.vlaanderen.be/ns/organisatie#</a></td>
+        </tr>
+
+        <tr>
+          <td>W3C Provenance</td>
+          <td>prov</td>
+          <td><a href="http://www.w3.org/ns/prov#">http://www.w3.org/ns/prov#</a></td>
+        </tr>
+
+        <tr>
+          <td>Dublin Core Metadata Terms</td>
+          <td>dct</td>
+          <td><a href="http://purl.org/dc/terms/">http://purl.org/dc/terms/</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>
+    DCAT
+  </h3>
+
+  <p>
+    De verschillende datasets op Themis worden aangeboden gebasseerd op het <a href="https://www.w3.org/TR/vocab-dcat-2/">W3C Data Catalog Vocabulary</a>. Onderstaande modellen en eigenschappen uit het vocabularium zijn geïmplementeerd in Themis.
+  </p>
+
+  <h4>
+    Catalog
+  </h4>
+  <p>
+    Een catalogus is een collectie van datasets. In Themis wordt momenteel slechts een catalogus gepubliceerd: de besluitvormingscatalogus.
+  </p>
+
+  <p>
+    Onderstaande eigenschappen zijn beschikbaar voor een catalogus.
+  </p>
+
+  <div class="u-table-overflow">
+    <table class="data-table data-table--zebra" cellspacing="0" cellpadding="6">
+      <thead>
+        <tr>
+          <th>Naam</th>
+          <th>Predicaat</th>
+          <th>Bereik</th>
+          <th>Beschrijving</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>class</td>
+          <td>rdf:type</td>
+          <td>rdfs:Class</td>
+          <td><a href="http://www.w3.org/ns/dcat#Catalog">http://www.w3.org/ns/dcat#Catalog</a></td>
+        </tr>
+
+        <tr>
+          <td>title</td>
+          <td>dct:title</td>
+          <td>xsd:string</td>
+          <td>Titel van de catalogus</td>
+        </tr>
+
+        <tr>
+          <td>description</td>
+          <td>dct:description</td>
+          <td>xsd:string</td>
+          <td>Beschrijving van de catalogus</td>
+        </tr>
+
+        <tr>
+          <td>publisher</td>
+          <td>dct:publisher</td>
+          <td>rdfs:Resource</td>
+          <td><a href="https://data.vlaanderen.be/id/organisatie/OVO001827">https://data.vlaanderen.be/id/organisatie/OVO001827</a></td>
+        </tr>
+
+        <tr>
+          <td>release-date</td>
+          <td>dct:issued</td>
+          <td>xsd:dateTime</td>
+          <td>Release datum van de catalogus</td>
+        </tr>
+
+        <tr>
+          <td>modified</td>
+          <td>dct:modified</td>
+          <td>xsd:dateTime</td>
+          <td>Datum waarop de catalogus het laatst gewijzigd is</td>
+        </tr>
+
+        <tr>
+          <td>datasets</td>
+          <td>dcat:dataset</td>
+          <td>dcat:Dataset</td>
+          <td>Datasets die deel uitmaakt van de catalogus</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>
+    Dataset
+  </h4>
+  <p>
+    Een dataset is een verzameling van data dat toegankelijk en/of downloadbaar is in een of meerdere representaties. Een catalogus bevat een of meerdere datasets. De datasets hebben een bijkomend type om de inhoud van de verschillende datasets te onderscheiden.
+  </p>
+
+  <p>
+    Onderstaande eigenschappen zijn beschikbaar voor een dataset.
+  </p>
+
+  <div class="u-table-overflow">
+    <table class="data-table data-table--zebra" cellspacing="0" cellpadding="6">
+      <thead>
+        <tr>
+          <th>Naam</th>
+          <th>Predicaat</th>
+          <th>Bereik</th>
+          <th>Beschrijving</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>class</td>
+          <td>rdf:type</td>
+          <td>rdfs:Class</td>
+          <td><a href="http://www.w3.org/ns/dcat#Dataset">http://www.w3.org/ns/dcat#Dataset</a></td>
+        </tr>
+
+        <tr>
+          <td>title</td>
+          <td>dct:title</td>
+          <td>xsd:string</td>
+          <td>Titel van de dataset</td>
+        </tr>
+
+        <tr>
+          <td>description</td>
+          <td>dct:description</td>
+          <td>xsd:string</td>
+          <td>Beschrijving van de dataset</td>
+        </tr>
+
+        <tr>
+          <td>release-date</td>
+          <td>dct:issued</td>
+          <td>xsd:dateTime</td>
+          <td>Release datum van de dataset</td>
+        </tr>
+
+        <tr>
+          <td>modified</td>
+          <td>dct:modified</td>
+          <td>xsd:dateTime</td>
+          <td>Datum waarop de catalogus het laatst gewijzigd is</td>
+        </tr>
+
+        <tr>
+          <td>type</td>
+          <td>dct:type</td>
+          <td>rdfs:Resource</td>
+          <td>Type van de dataset</td>
+        </tr>
+
+        <tr>
+          <td>distributions</td>
+          <td>dcat:distribution</td>
+          <td>dcat:Distribution</td>
+          <td>Representaties van de dataset</td>
+        </tr>
+
+        <tr>
+          <td>previous-version</td>
+          <td>prov:wasRevisionOf</td>
+          <td>dcat:Dataset</td>
+          <td>Vorige versie van de dataset</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>
+    Distribution
+  </h4>
+
+  <p>
+    Een representatie van een (deel van een) dataset. Een dataset kan verschillende representaties hebben. Deze kunnen, maar hoeven niet per se, inhoudelijk equivalent te zijn.
+  </p>
+
+  <p>
+    Onderstaande eigenschappen zijn beschikbaar voor een representatie.
+  </p>
+
+  <div class="u-table-overflow">
+    <table class="data-table data-table--zebra" cellspacing="0" cellpadding="6">
+      <thead>
+        <tr>
+          <th>Naam</th>
+          <th>Predicaat</th>
+          <th>Bereik</th>
+          <th>Beschrijving</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>class</td>
+          <td>rdf:type</td>
+          <td>rdfs:Class</td>
+          <td><a href="http://www.w3.org/ns/dcat#Distribution">http://www.w3.org/ns/dcat#Distribution</a></td>
+        </tr>
+
+        <tr>
+          <td>title</td>
+          <td>dct:title</td>
+          <td>xsd:string</td>
+          <td>Titel van de representatie</td>
+        </tr>
+
+        <tr>
+          <td>description</td>
+          <td>dct:description</td>
+          <td>xsd:string</td>
+          <td>Beschrijving van de representatie</td>
+        </tr>
+
+        <tr>
+          <td>release-date</td>
+          <td>dct:issued</td>
+          <td>xsd:dateTime</td>
+          <td>Release datum van de representatie</td>
+        </tr>
+
+        <tr>
+          <td>modified</td>
+          <td>dct:modified</td>
+          <td>xsd:dateTime</td>
+          <td>Datum waarop de catalogus het laatst gewijzigd is</td>
+        </tr>
+
+        <tr>
+          <td>type</td>
+          <td>dct:type</td>
+          <td>rdfs:Resource</td>
+          <td>Type van de representatie</td>
+        </tr>
+
+        <tr>
+          <td>download-url</td>
+          <td>dcat:downloadURL</td>
+          <td>rdfs:Resource</td>
+          <td>URL waar de representatie gedownload kan worden</td>
+        </tr>
+
+        <tr>
+          <td>format</td>
+          <td>dct:format</td>
+          <td>xsd:string</td>
+          <td>Formaat van de representatie</td>
+        </tr>
+
+        <tr>
+          <td>byte-size</td>
+          <td>dcat:byteSize</td>
+          <td>xsd:decimal</td>
+          <td>Grootte van de representatie in bytes</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="apis">APIs</h2>
+  <h3>Subject pages</h3>
+  <p>
+    De subject pages bieden een human-readable HTML pagina met alle informatie die gekend is over een bepaalde subject URL. Aangezien de pagina's geannoteerd zijn met <a href="https://www.w3.org/TR/xhtml-rdfa-primer/">RDFa</a> zijn is de informatie ook interpreteerbaar door machines, denk hiebij bijvoorbeeld aan crawlers en zoekmachines.
+  </p>
+
+  <h3>REST API</h3>
+  <p>
+    Themis biedt een REST API aan om de DCAT resources te bevragen. Deze API is in lijn met de <a href="https://jsonapi.org/format/">JSON:API specificatie</a>. Paginatie, sortering en filteren gebeurt aan de hand van query parameters zoals <a href="https://github.com/mu-semtech/mu-cl-resources#querying-the-api">beschreven in de documentatie van het gebruikte framework</a>.
+  </p>
+
+  <p>
+    Onderstaande API endpoints zijn beschikbaar:
+  </p>
+
+  <div class="u-table-overflow">
+    <table class="data-table data-table--zebra" cellspacing="0" cellpadding="6">
+      <thead>
+        <th>Method</th>
+        <th>Path</th>
+        <th>Beschrijving</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GET</td>
+          <td>/catalogs</td>
+          <td>Gepagineerde lijst van alle catalogussen</td>
+        </tr>
+
+        <tr>
+          <td>GET</td>
+          <td>/catalogs/:id</td>
+          <td>Detail van een catalogus</td>
+        </tr>
+
+        <tr>
+          <td>GET</td>
+          <td>/datasets</td>
+          <td>Gepagineerde lijst van alle datasets</td>
+        </tr>
+
+        <tr>
+          <td>GET</td>
+          <td>/datasets/:id</td>
+          <td>Detail van een dataset</td>
+        </tr>
+
+        <tr>
+          <td>GET</td>
+          <td>/distributions</td>
+          <td>Gepagineerde lijst van alle representaties</td>
+        </tr>
+
+        <tr>
+          <td>GET</td>
+          <td>/distributions/:id</td>
+          <td>Detail van een representatie</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    De REST API biedt enkel endpoints om de DCAT resources te bevragen. De inhoud van de datasets kan gedownload worden via de download URL van de bijhorende representaties.
+  </p>
+
+  <h3>SPARQL endpoint</h3>
+
+  <p>
+    Themis biedt een SPARQL endpoint aan om de Linked Data te bevragen gebruik makend van de <a href="https://www.w3.org/TR/sparql11-query/">SPARQL 1.1 query language</a>. Op deze manier kan alle data die gepubliceerd is op Themis, dus niet enkel de DCAT resources, bevraagd worden. Het endpoint is beschikbaar op <code>/sparql</code>.
+  </p>
+
+  <p>
+    Het SPARQL endpoint heeft volgende constraints:
+  </p>
+  <ul>
+    <li>SPARQL queries kunnen enkel gestuurd worden via <a href="https://www.w3.org/TR/2013/REC-sparql11-protocol-20130321/#query-via-get">HTTP GET met percent encoded query parameters</a></li>
+    <li>enkel <a href="https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#select">SPARQL SELECT queries</a> worden ondersteund</li>
+    <li>de SPARQL query moet voldoen aan de <a href="https://www.w3.org/TR/sparql11-query/#sparqlGrammar">SPARQL EBNF formaat</a></li>
+    <li>query resultaten kunnen enkel vekregen worden in het <a href="https://www.w3.org/TR/sparql11-results-json/">application/sparql-results+json formaat</a></li>
+  </ul>
+
+  <p>
+    Merk op dat SPARQL update queries geen foutmelding geven, maar de gevraagde data manipulaties zullen niet uitgevoerd worden.
+  </p>
+</AuContent>

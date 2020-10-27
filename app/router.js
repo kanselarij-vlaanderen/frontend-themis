@@ -10,5 +10,9 @@ export default class Router extends EmberRouter {
 
 Router.map(function() {
   this.route('sparql');
+  this.route('docs', function() {
+    this.route('publication');
+    this.route('catalogs');
+  });
   metisFallbackRoute(this);
 });
