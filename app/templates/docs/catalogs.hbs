@@ -13,7 +13,7 @@
   </p>
   <ul>
     <li><a href="#newsitems-vr">beslissingen van de Vlaamse Regering per ministerraad in kort bestek</a></li>
-    <li><a href="#ministers">ministers van de Vlaamse Regering uit het verleden en heden</a></li>
+    <li><a href="#ministers">samenstelling van de Vlaamse Regering</a></li>
     <li><a href="#dossier-lifecycle">levensboom van een dossier en de bijhorende procedurestappen (toekomst)</a></li>
     <li><a href="#concept-schemes">concept schemes en codelijsten</a></li>
   </ul>
@@ -53,7 +53,7 @@
 
   <h3 id="newsitems-vr-ttl">Inhoud van de Turtle distribution</h3>
   <p>
-    Onderstaand diagram illustreert het data model dat gehanteerd wordt om de nieuwsberichten uit het kort bestek van een ministerraad te ontsluiten. De data is beschikbaar in in <a href="https://www.w3.org/TR/turtle/">Turtle formaat</a>. Het model is een uitbreiding van het <a href="https://test.data.vlaanderen.be/doc/applicatieprofiel/besluitvorming">OSLO besluitvorming applicatieprofiel</a>.
+    Onderstaand diagram illustreert het data model dat gehanteerd wordt om de nieuwsberichten uit het kort bestek van een ministerraad te ontsluiten. De data is beschikbaar in <a href="https://www.w3.org/TR/turtle/">Turtle formaat</a>. Het model is een uitbreiding van het <a href="https://data.vlaanderen.be/doc/applicatieprofiel/besluitvorming">OSLO besluitvorming applicatieprofiel</a>.
   </p>
 
   <div>
@@ -134,7 +134,7 @@
   </p>
 
   <p>
-    De agendapunten van een agenda worden geagendeerd in een bepaalde volgorde. Ook dit wordt, volgens het <a href="https://test.data.vlaanderen.be/doc/applicatieprofiel/besluitvorming">OSLO besluitvorming applicatieprofiel</a>, gemodelleerd aan de hand van een linked list gevormd via <code>besluit:aangebrachtNa</code>. Om praktische implementaties te vereenvoudigen wordt deze volgorde ook geexpliciteerd aan de hand van een volgnummer (<code>schema:position</code>) per agendapunt. Merk op dat deze volgorde niet noodzakelijk overeenstemt met de volgorde van de nieuwsberichten. Zij hebben een eigen volgnummer.
+    De agendapunten van een agenda worden geagendeerd in een bepaalde volgorde. Ook dit wordt, volgens het <a href="https://data.vlaanderen.be/doc/applicatieprofiel/besluitvorming">OSLO besluitvorming applicatieprofiel</a>, gemodelleerd aan de hand van een linked list gevormd via <code>besluit:aangebrachtNa</code>. Om praktische implementaties te vereenvoudigen wordt deze volgorde ook geexpliciteerd aan de hand van een volgnummer (<code>schema:position</code>) per agendapunt. Merk op dat deze volgorde niet noodzakelijk overeenstemt met de volgorde van de nieuwsberichten. Zij hebben een eigen volgnummer.
   </p>
 
   <p>
@@ -149,9 +149,98 @@
     De bijlage (<code>dossier:Stuk</code>) bevat enkel metadata van de bijlage. Het PDF bestand (<code>nfo:FileDataObject</code>) met de eigenlijke inhoud is gerelateerd via <code>prov:value</code> aan de bijlage. Het model dat gehanteerd wordt voor de PDF bestanden wordt verder toegelicht in <a href="https://github.com/mu-semtech/file-service#data-model">de documentatie van de file service van het gebruikte framework</a>. De URL waarop het PDF bestand gedownload kan worden is tevens de <code>dcat:downloadURL</code> van de bijhorende distribution.
   </p>
 
-  <h2 id="ministers">Ministers</h2>
+  <h2 id="ministers">Samenstelling van de Vlaamse Regering</h2>
+
+  <h3>Dataset en distributions</h3>
   <p>
-    Te vervolledigen.
+    De samenstelling van de Vlaamse Regering, zowel uit het heden als het verleden, wordt gerepresenteerd door een <code>dcat:Dataset</code> met een specifiek type (<code>dct:type</code>). De dataset omvat informatie over de verschillende bestuursorganen, legislaturen, mandaten, mandatarissen en personen die deel uitmaken of hebben uitgemaakt van de Vlaamse Regering. De dataset heeft momenteel slechts een distribution:
+  </p>
+  <ul>
+    <li>een <code>dcat:Distribution</code> in <a href="https://www.w3.org/TR/turtle/">Turtle formaat</a> die de volledige historiek van de samenstelling van de Vlaamse Regering bevat. Dit zijn o.a. de bestuursorganen, legislaturen, mandaten, mandatarissen en personen zowel uit het heden als het verleden die samen de Vlaamse Regering vormen. Het model wordt verder gespecificeerd in <a href="#ministers-ttl">Inhoud van de Turtle distribution</a>.</li>
+  </ul>
+
+  <p>
+    Herpublicaties, bijvoorbeeld bij de aanstelling van een nieuwe regering, worden gerepresenteerd door een nieuwe <code>dcat:Dataset</code>. Deze nieuwe dataset wordt via <code>prov:wasRevisionOf</code> gerelateerd aan de vorige versie. Op die manier ontstaat er een linked list van datasets. De laatste versie omvat opnieuw de volledige historiek van de samentelling van de Vlaamse Regering, niet enkel de wijzigingen. Distributions van vorige versies blijven beschikbaar om te downloaden.
+  </p>
+
+  <h3 id="ministers-ttl">Inhoud van de Turtle distribution</h3>
+  <p>
+    Het datamodel dat gehanteerd wordt om de historiek van de samenstelling van de Vlaamse Regering te ontsluiten is gebasseerd op <a href="https://data.vlaanderen.be/doc/applicatieprofiel/mandatendatabank/">het OSLO applicatieprofiel van de Mandatendatabank</a>. De exacte definities van de classes en eigenschappen kunnen gevonden worden in de <a href="https://data.vlaanderen.be/ns#Vocabularia">relevante OSLO vocabualaria</a> zoals <a href="https://data.vlaanderen.be/ns/besluit">het besluit-vocabularium</a> en <a href="https://data.vlaanderen.be/ns/mandaat">het mandaat-vocabularium</a>.
+  </p>
+
+  <p>
+    In wat volgt worden enkele praktische implementaties van het informatiemodel toegelicht zoals ze toegepast worden in de ontsloten dataset van de samenstelling van de Vlaames Regering.
+  </p>
+
+  <h4>Bestuurseenheid</h4>
+  <p>
+    De hele dataset handelt over de samenstelling van bestuursorganen van één bestuurseenheid: het Vlaams Gewest, met als URI <code>http://themis.vlaanderen.be/id/bestuurseenheid/e7a239de-c48c-441c-8293-ec365eedce93</code>. De samenstellingen van de andere gewesten vallen buiten de scope van deze dataset.
+  </p>
+
+  <h4>Bestuursorgaan en bestuursorgaan (in periode)</h4>
+  <p>
+    In <a href="https://data.vlaanderen.be/doc/applicatieprofiel/mandatendatabank/">het OSLO applicatieprofiel van de Mandatendatabank</a> worden bestuursorganen gerepresenteerd d.m.v. <a href="https://data.vlaanderen.be/doc/applicatieprofiel/mandatendatabank/#Bestuursorgaan">bestuursorgaan</a> en <a href="https://data.vlaanderen.be/doc/applicatieprofiel/mandatendatabank/#Bestuursorgaan%20(in%20bestuursperiode)">bestuursorgaan (in bestuursperiode)</a>, waarbij de tweede entiteit een tijdspecialisatie is van de eerste. Beiden hebben dezelfde <code>rdf:Class</code>, nl. <code>besluit:Bestuursorgaan</code>, maar de tijdsgebonden entiteit bevat enkel de eigenschappen die wijzigen doorheen de tijd. Alle andere eigenschappen worden impliciet overgenomen van de niet-tijdsgebonden entiteit.
+  </p>
+  <p>
+    In de toepassing van het applicatieprofiel in de dataset van de samenstelling van de Vlaamse Regering resulteert dit in een structuur met 3 'lagen':
+    <ol class="au-u-margin-left">
+      <li>Bestuursorgaan (niet-tijdsgebonden)</li>
+      <li>Legislatuur (tijdsgebonden)</li>
+      <li>Regeringssamentelling (tijdsgebonden)</li>
+    </ol>
+  </p>
+  <p>
+    Hieronder wordt elk van de lagen verder toegelicht.
+  </p>
+
+  <h5>Bestuursorgaan (niet-tijdsgebonden)</h5>
+  <p>De bovenste laag bevat de niet-tijdsgebonden bestuursorganen die bevoegd zijn om rechtshandelingen te stellen voor het Vlaamse Gewest. In de huidige staatstructuur zijn dit er twee:</p>
+  <ul>
+    <li>de Vlaamse Regering (<code>http://themis.vlaanderen.be/id/bestuursorgaan/7f2c82aa-75ac-40f8-a6c3-9fe539163025</code>)</li>
+    <li>het Vlaams Parlement (<code>http://themis.vlaanderen.be/id/bestuursorgaan/17caac00-34a2-4b84-b400-30823555c15e</code>)</li>
+  </ul>
+  <p>
+    Beide bestuursorganen zijn opgenomen in de dataset, maar enkel voor het bestuursorgaan van de Vlaamse Regering zijn er verdere tijdspecialisaties uitgewerkt.
+  </p>
+
+  <h5>Legislatuur (tijdsgebonden)</h5>
+  <p>
+    Het bestuursorgaan van de Vlaamse Regering bevat een tijdspecialisatie per legislatuur. Dit is de bestuursperiode waarvoor een regering aangesteld wordt d.m.v. een rechtstreekse verkiezing. Momenteel is dit een periode van 5 jaar.
+  </p>
+
+  <h5>Regeringsamenstelling (tijdsgebonden)</h5>
+  <p>
+    Een legislatuur kan op zijn beurt verschillende tijdspecialisaties bevatten, nl. een per samenstelling van de regering. In een 'ideaal scenario' is er slechts een regeringsamenstelling per legislatuur, maar bij ontslag van de Vlaamse Regering en ontbinding van het Vlaams Parlement moet een nieuwe regering samengesteld worden voor de resterende looptijd van legislatuur. In de data reflecteert dit zich als een nieuwe regeringsamenstelling-entiteit die een tijdspecialisatie is van dezelfde legislatuur als de vorige regeringsamenstelling. In de volksmond wordt dit meestal uitgedrukt aan de hand van een wijziging van de naam van de regering, zoals bijvoorbeeld Jambon I, Homans II, enz.
+  </p>
+  <p>
+    Als uitbreiding van <a href="https://data.vlaanderen.be/doc/applicatieprofiel/mandatendatabank/">het OSLO applicatieprofiel van de Mandatendatabank</a> worden mandatarissen die deel uitmaken van een regeringsamenstelling rechtstreeks gelinkt aan een regeringssamenstelling via het predicaat <code>prov:hadMember</code>.
+  </p>
+
+
+  <h4>Bestuursfuncties en mandaten</h4>
+  <p>
+    In de Vlaamse Regering kan men volgende drie bestuursfuncties (<code>org:Role</code>) uitoefenen:
+    <ol class="au-u-margin-left">
+      <li>Minister-president (<code>http://themis.vlaanderen.be/id/bestuursfunctie/5fed907ce6670526694a03de</code>)</li>
+      <li>Viceminister-president (<code>http://themis.vlaanderen.be/id/bestuursfunctie/5fed907ce6670526694a03df</code>)</li>
+      <li>Minister (<code>http://themis.vlaanderen.be/id/bestuursfunctie/5fed907ce6670526694a03e0</code>)</li>
+    </ol>
+  </p>
+
+  <p>
+    Elk van deze functies zijn een concept in het concept schema 'Bestuursfuncties' (<code>http://data.vlaanderen.be/id/conceptscheme/BestuursfunctieCode</code>).
+  </p>
+
+  <p>
+    Voor iedere legislatuur zijn er drie mandaten (<code>mandaat:Mandaat</code>), één per bestuursfunctie. Het mandaat is gelinkt aan de legislatuur (<code>besluit:Bestuursorgaan</code>) via het predicaat <code>org:hasPost</code>. Een mandaat stelt één of meerdere zetels voor en kan dus door meerdere mandatarissen ingevuld worden (<code>org:holds</code>).
+  </p>
+
+  <h4>Mandatarissen</h4>
+  <p>
+    Een mandataris is de representatie van het uitoefenen van een mandaat door een bepaalde persoon. Een mandataris is tijdsgebonden en heeft daarom een start- en einddatum. Deze datums stemmen niet noodzakelijk overeen met de datums van de legislatuur of de regeringsamenstelling. De bevoegdheden van een minister kunnen bijvoorbeeld wijzigen doorheen de tijd binnen dezelfde regeringsamentelling. Dit reflecteert zich in de data in een nieuwe mandataris-entiteit die nog steeds gelinkt is aan dezelfde regeringsamenstelling (<code>prov:hadMember</code>) en hetzelfde minister-mandaat (<code>org:holds</code>) als de vorige mandataris. Enkel de start- en einddatum en beleidsdomeinen van de mandataris zijn gewijzigd.
+  </p>
+  <p>
+    Om dus de exacte samenstelling van de regering op een specifiek tijdstip te bekomen, moet er een subset gemaakt worden van alle mandatarissen uit een regeringsamenstelling. De subset wordt gemaakt door te filteren op mandatarissen die een startdatum hebben vóór het specifieke tijdstip en een einddatum die ongedefinieerd is of valt na het specifieke tijdstip.
   </p>
 
   <h2 id="dossier-lifecycle">Levensboom van een dossier</h2>
@@ -210,7 +299,7 @@ WHERE {
         </tr>
 
         <tr>
-          <td class="org-left">Ministers</td>
+          <td class="org-left">Samenstelling van de Vlaamse Regering</td>
           <td class="org-left"><a href="http://themis.vlaanderen.be/id/concept/dataset-type/43c644d3-2171-4892-8dd7-3fd5eec15d09">http://themis.vlaanderen.be/id/concept/dataset-type/43c644d3-2171-4892-8dd7-3fd5eec15d09</a></td>
         </tr>
 

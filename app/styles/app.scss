@@ -1,3 +1,5 @@
+@import 'yasgui';
+
 /* ==================================
    #APPUNIVERSUM
    ================================== */
@@ -95,8 +97,6 @@
 @import "appuniversum/u-visible";
 @import "appuniversum/u-widths";
 
-@import 'yasgui';
-
 code {
   background-color: #f3f5f6;
   font-family: monospace;
@@ -126,4 +126,8 @@ body {counter-reset: h2}
   h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "}
 
   h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none }
+}
+
+ol {
+  list-style: decimal;
 }
