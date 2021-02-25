@@ -1,1 +1,25 @@
-My custom person template
+<div>My custom person template</div>
+
+<AuCard @flex={{true}} as |c|>
+  <c.header @badgeIcon="user-fill" @badgeSkin="brand">
+    <AuHeading @level="2" @skin="4">
+      {{this.model.firstname}} {{this.model.familyname}}
+    </AuHeading>
+  </c.header>
+  <c.content>
+    <AuHr @size="large" />
+
+    <br />
+    {{#each this.model.mandatees as |mandatee|}}
+      mandatee: {{mandatee.startdate}} {{mandatee.enddate}} {{mandatee.priority}} <br />
+      Beleidsfunctie: {{mandatee.mandate.governmentfunction.label}} <br />
+      Beleidsdomeinen:
+      {{#each mandatee.governmentfields as |governmentfield|}}
+        {{governmentfield.label}}
+      {{/each}}
+      <br />
+      Regering: {{mandatee.mandate.governmentbody.name}} <br />
+      <br />
+    {{/each}}
+  </c.content>
+</AuCard>

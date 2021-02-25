@@ -1,0 +1,57 @@
+<div>My custom government body template</div>
+
+<AuCard @flex={{true}} as |c|>
+  <c.header @badgeIcon="archive" @badgeSkin="brand">
+    <AuHeading @level="2" @skin="4">
+      {{this.model.name}}
+    </AuHeading>
+  </c.header>
+  <c.content>
+    <AuHr @size="large" />
+    {{#each this.model.governmentbodies as |governmentbody|}}
+      {{governmentbody.name}} <br />
+    {{/each}}
+
+    <AuDataTable @content={{this.model.mandatees}} @fields="title description" @noDataMessage="Geen mandatarissen"
+      @sort={{sort}} @size="small" as |t|>
+      <t.menu as |menu|>
+        <menu.general>
+          <AuToolbar class="au-o-box">
+            <AuToolbarGroup>
+              <AuHeading @skin="2">
+                Mandatarissen
+              </AuHeading>
+            </AuToolbarGroup>
+          </AuToolbar>
+        </menu.general>
+      </t.menu>
+      <t.content class="au-c-data-table__table--small" as |c|>
+        <c.header>
+          <AuDataTableThSortable @field="person.firstname" @currentSorting={{sort}} @label="Voornaam"
+            @class="data-table__header-title" />
+          <AuDataTableThSortable @field="person.familyName" @currentSorting={{sort}} @label="Familienaam"
+            @class="data-table__header-title" />
+          <AuDataTableThSortable @field="mandate.governmentfunction.label" @currentSorting={{sort}} @label="Functie"
+            @class="data-table__header-title" />
+          <AuDataTableThSortable @field="mandate.mandatee.governmentfields" @currentSorting={{sort}}
+            @label="Beleidsdomeinen" @class="data-table__header-title" />
+        </c.header>
+        <c.body as |row|>
+          <td>{{row.person.firstname}}</td>
+          <td>{{row.person.familyname}}</td>
+          <td>{{row.mandate.governmentfunction.label}}</td>
+          <td>{{join ', ' (map-by "label" row.governmentfields)}}</td>
+        </c.body>
+      </t.content>
+    </AuDataTable>
+
+    {{#each this.model.mandatees as |mandatee|}}
+      <strong>{{mandatee.person.firstname}} {{mandatee.person.familyname}}</strong> <br />
+      {{mandatee.mandate.governmentfunction.label}} <br />
+      {{#each mandatee.governmentfields as |governmentfield|}}
+        {{governmentfield.label}}
+      {{/each}}
+      <br /><br />
+    {{/each}}
+  </c.content>
+</AuCard>
