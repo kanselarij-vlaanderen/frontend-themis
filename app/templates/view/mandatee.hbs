@@ -3,16 +3,18 @@
 <AuCard @flex={{true}} as |c|>
   <c.header @badgeIcon="user" @badgeSkin="brand">
     <AuHeading @level="2" @skin="4">
-      {{this.model.person.firstname}} {{this.model.person.familyname}}
+      {{this.model.person.firstName}} {{this.model.person.familyName}}
     </AuHeading>
   </c.header>
   <c.content>
     <AuHr @size="large" />
-    Beleidsfunctie: {{this.model.mandate.governmentfunction.label}} <br />
-    Regering: {{this.model.mandate.governmentbody.name}} <br />
-    {{this.model.mandate.governmentbody.startdate.time}} {{this.model.mandate.governmentbody.enddate.time}} <br />
-    Legislatuur: {{this.model.mandate.governmentbody.istimespecializationof.name}}
-    {{this.model.mandate.governmentbody.istimespecializationof.startdate.time}}
-    {{this.model.mandate.governmentbody.istimespecializationof.enddate.time}} <br />
+    Beleidsfunctie: {{this.model.mandate.governmentFunction.label}} <br />
+    Beleidsdomeinen:{{#each this.model.governmentFields as |governmentField|}}
+    {{governmentField.label}}
+    {{/each}} <br />
+    Legislatuur: {{this.model.mandate.governmentBody.name}} <br />
+    Regering: {{this.model.governmentBody.name}}
+    {{this.model.governmentBody.startDate.time}}
+    {{this.model.governmentBody.endDate.time}} <br />
   </c.content>
 </AuCard>

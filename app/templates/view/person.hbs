@@ -1,9 +1,7 @@
-<div>My custom person template</div>
-
 <AuCard @flex={{true}} as |c|>
   <c.header @badgeIcon="user-fill" @badgeSkin="brand">
     <AuHeading @level="2" @skin="4">
-      {{this.model.firstname}} {{this.model.familyname}}
+      {{this.model.firstName}} {{this.model.familyName}}
     </AuHeading>
   </c.header>
   <c.content>
@@ -11,14 +9,14 @@
 
     <br />
     {{#each this.model.mandatees as |mandatee|}}
-      mandatee: {{mandatee.startdate}} {{mandatee.enddate}} {{mandatee.priority}} <br />
-      Beleidsfunctie: {{mandatee.mandate.governmentfunction.label}} <br />
+      mandatee: {{mandatee.startDate}} {{mandatee.endDate}} {{mandatee.priority}} <br />
+      Beleidsfunctie: {{mandatee.mandate.governmentFunction.label}} <br />
       Beleidsdomeinen:
-      {{#each mandatee.governmentfields as |governmentfield|}}
-        {{governmentfield.label}}
+      {{#each mandatee.governmentFields as |governmentField|}}
+        {{governmentField.label}}
       {{/each}}
       <br />
-      Regering: {{mandatee.mandate.governmentbody.name}} <br />
+      Legislatuur: {{mandatee.mandate.governmentBody.name}} <br />
       <br />
     {{/each}}
   </c.content>

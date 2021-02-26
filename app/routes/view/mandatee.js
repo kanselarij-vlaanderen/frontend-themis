@@ -12,7 +12,7 @@ export default class ViewMandateeRoute extends Route {
     const mandatee = this.store.query('mandatee',
     { filter:
       { ':uri:': resource},
-      include: 'person,mandate.governmentfunction,mandate.governmentbody,mandate.governmentbody.istimespecializationof,mandate.governmentbody.istimespecializationof.startdate,mandate.governmentbody.istimespecializationof.enddate' } )
+      include: 'person,mandate.government-function,mandate.government-body,government-body.start-date,government-body.end-date' } )
     .then(function (mandatees) {
       return mandatees.get('firstObject');
     });
