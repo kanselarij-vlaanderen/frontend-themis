@@ -22,7 +22,7 @@ Router.map(function() {
       class: 'http://data.vlaanderen.be/ns/mandaat#Mandataris'
     });
 
-    classRoute(this, 'governmentbody', {
+    classRoute(this, 'government-body', {
       class: 'http://data.vlaanderen.be/ns/besluit#Bestuursorgaan'
     });
   });

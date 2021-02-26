@@ -103,7 +103,8 @@
               </AuHeading>
               <ul>
                 {{#each mandate.mandatees as |mandatee|}}
-                  <li>{{mandatee.person.firstName}} {{mandatee.person.familyName}}
+                  <li>
+                    {{mandatee.person.firstName}} {{mandatee.person.familyName}}
                     {{moment-format mandatee.startDate 'DD/MM/YYYY'}} -
                     {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
                   </li>
