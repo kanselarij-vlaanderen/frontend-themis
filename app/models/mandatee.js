@@ -20,4 +20,5 @@ export default class MandateeModel extends Model {
       governmentfield: "http://data.vlaanderen.be/ns/mandaat#beleidsdomein"
     }
   }
+
 }

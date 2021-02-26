@@ -33,6 +33,55 @@
 <AuHr />
 
 {{#if this.model.isTimespecializationOf}}
+  {{#if this.model.mandateesByName}}
+    <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
+      Mandatarissen
+    </AuHeading>
+    <p class="au-u-margin-bottom">
+      Samenstelling van de regering {{this.model.name}}
+    </p>
+    <div class="au-o-grid">
+      {{#each this.model.mandateesByName as |name|}}
+        <div class="au-o-grid__item au-u-1-2">
+          <AuCard as |c|>
+            <c.header>
+              <AuHeading @level="2" @skin="4">
+                <LinkTo @route="view.person" @query={{hash resource=name.person.uri}}>
+                  {{name.person.firstName}} {{name.person.familyName}}
+                </LinkTo>
+              </AuHeading>
+              <AuHr />
+            </c.header>
+            <c.content>
+              {{#each (sort-by "startDate" name.mandatees) as |mandatee|}}
+                <AuHeading @level="6" @skin="6">
+                  <ThemisUri @uri={{mandatee.mandate.governmentFunction.uri}}>
+                    {{mandatee.mandate.governmentFunction.label}}
+                  </ThemisUri>
+                </AuHeading>
+                <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                  {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
+                  - {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                </LinkTo>
+                {{#if mandatee.governmentFields}}
+                  <p class="au-u-margin-top-small">
+                    van
+                    {{#each mandatee.governmentFields as |governmentField|}}
+                      <AuPill>
+                        <ThemisUri @uri={{governmentField.uri}}>
+                          {{governmentField.label}}
+                        </ThemisUri>
+                      </AuPill>
+                    {{/each}}
+                  </p>
+                {{/if}}
+              {{/each}}
+            </c.content>
+          </AuCard>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
   {{#if this.model.mandatees}}
     {{!-- bestuursorgaan niveau 3--}}
     <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
@@ -91,7 +140,7 @@
   {{else}}
     {{!-- bestuursorgaan niveau 2--}}
     <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
-      Regeringsamenstelling
+      Regeringssamenstelling
     </AuHeading>
     <div class="au-o-grid">
       {{#each (sort-by "startDate.time" this.model.governmentBodies)  as |governmentBody|}}

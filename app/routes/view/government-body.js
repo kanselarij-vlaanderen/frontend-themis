@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import groupBy from 'lodash/groupBy';
 
 export default class ViewGovernmentbodyRoute extends Route {
   queryParams = {
@@ -20,7 +21,7 @@ export default class ViewGovernmentbodyRoute extends Route {
         'mandatees.mandate.government-function',
         'mandatees.government-fields'
       ].join(',')
-    } )
+    } );
 
     return governmentbodies.get('firstObject');
   }
