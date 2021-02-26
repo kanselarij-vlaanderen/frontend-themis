@@ -1,57 +1,140 @@
-<div>My custom government body template</div>
-
-<AuCard @flex={{true}} as |c|>
-  <c.header @badgeIcon="archive" @badgeSkin="brand">
-    <AuHeading @level="2" @skin="4">
+{{#if this.model.isTimespecializationOf}}
+  {{#if this.model.mandatees}}
+    {{!-- bestuursorgaan niveau 3--}}
+    <AuHeading class="au-u-margin-bottom-large">
       {{this.model.name}}
     </AuHeading>
-  </c.header>
-  <c.content>
-    <AuHr @size="large" />
-    {{#each this.model.governmentbodies as |governmentbody|}}
-      {{governmentbody.name}} <br />
-    {{/each}}
+    <p class="au-u-h3 metis-u-text-gray-600">
+      Tijdspecialisatie van {{this.model.isTimespecializationOf.name}}
+    </p>
+  {{else}}
+    {{!-- bestuursorgaan niveau 2--}}
+    <AuHeading class="au-u-margin-bottom-large">
+      {{this.model.isTimespecializationOf.name}}
+    </AuHeading>
+    <p class="au-u-h3 metis-u-text-gray-600">
+      Legislatuur {{moment-format this.model.startDate.time 'DD/MM/YYYY'}} -
+      {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
+    </p>
+  {{/if}}
+{{else}}
+  {{!-- bestuursorgaan niveau 1--}}
+  <AuHeading class="au-u-margin-bottom-large">
+    {{this.model.name}}
+  </AuHeading>
+  <p class="au-u-h3 metis-u-text-gray-600">
+    {{this.model.classification.label}}
+  </p>
+{{/if}}
 
-    <AuDataTable @content={{this.model.mandatees}} @fields="title description" @noDataMessage="Geen mandatarissen"
-      @sort={{sort}} @size="small" as |t|>
-      <t.menu as |menu|>
-        <menu.general>
-          <AuToolbar class="au-o-box">
-            <AuToolbarGroup>
-              <AuHeading @skin="2">
-                Mandatarissen
+<AuHr />
+
+{{#if this.model.isTimespecializationOf}}
+  {{#if this.model.mandatees}}
+    {{!-- bestuursorgaan niveau 3--}}
+    <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
+      Mandatarissen
+    </AuHeading>
+    <p class="au-u-margin-bottom">
+      Samenstelling van de regering {{this.model.name}}
+    </p>
+    <div class="au-u-margin-bottom-large">
+      <div class="au-c-data-table">
+        <div class="au-c-data-table__wrapper">
+          <table class="au-c-data-table__table  au-c-data-table__table--small">
+            <thead>
+              <tr class="au-c-data-table__header">
+                <th class="data-table__header-title">Voornaam</th>
+                <th class="data-table__header-title">Familienaam</th>
+                <th class="data-table__header-title">Start</th>
+                <th class="data-table__header-title">Einde</th>
+                <th class="data-table__header-title">Bestuursfunctie</th>
+                <th class="data-table__header-title">Beleidsdomeinen</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each (sort-by "person.familyName" this.model.mandatees) as |row|}}
+                <tr>
+                  <td>{{row.person.firstName}}</td>
+                  <td>{{row.person.familyName}}</td>
+                  <td>{{moment-format row.startDate 'DD/MM/YYYY'}}</td>
+                  <td> {{if row.endDate (moment-format row.endDate 'DD/MM/YYYY') 'heden'}}</td>
+                  <td>{{row.mandate.governmentFunction.label}}</td>
+                  <td>{{join ', ' (map-by "label" row.governmentFields)}}</td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    {{!-- bestuursorgaan niveau 2--}}
+    <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
+      Regeringsamenstelling
+    </AuHeading>
+    <div class="au-o-grid">
+      {{#each (sort-by "startDate.time" this.model.governmentBodies)  as |governmentBody|}}
+        <div class="au-o-grid__item au-u-1-2">
+          <AuCard as |c|>
+            <c.header>
+              <AuHeading @level="2" @skin="4">
+                {{governmentBody.name}}
               </AuHeading>
-            </AuToolbarGroup>
-          </AuToolbar>
-        </menu.general>
-      </t.menu>
-      <t.content class="au-c-data-table__table--small" as |c|>
-        <c.header>
-          <AuDataTableThSortable @field="person.firstname" @currentSorting={{sort}} @label="Voornaam"
-            @class="data-table__header-title" />
-          <AuDataTableThSortable @field="person.familyName" @currentSorting={{sort}} @label="Familienaam"
-            @class="data-table__header-title" />
-          <AuDataTableThSortable @field="mandate.governmentfunction.label" @currentSorting={{sort}} @label="Functie"
-            @class="data-table__header-title" />
-          <AuDataTableThSortable @field="mandate.mandatee.governmentfields" @currentSorting={{sort}}
-            @label="Beleidsdomeinen" @class="data-table__header-title" />
-        </c.header>
-        <c.body as |row|>
-          <td>{{row.person.firstname}}</td>
-          <td>{{row.person.familyname}}</td>
-          <td>{{row.mandate.governmentfunction.label}}</td>
-          <td>{{join ', ' (map-by "label" row.governmentfields)}}</td>
-        </c.body>
-      </t.content>
-    </AuDataTable>
-
-    {{#each this.model.mandatees as |mandatee|}}
-      <strong>{{mandatee.person.firstname}} {{mandatee.person.familyname}}</strong> <br />
-      {{mandatee.mandate.governmentfunction.label}} <br />
-      {{#each mandatee.governmentfields as |governmentfield|}}
-        {{governmentfield.label}}
+              <p>
+                {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}} -
+                {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
+              </p>
+            </c.header>
+          </AuCard>
+        </div>
       {{/each}}
-      <br /><br />
+    </div>
+    <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
+      Mandaten
+    </AuHeading>
+    <div class="au-o-grid">
+      {{#each (sort-by "governmentFunction.label" this.model.mandates)  as |mandate|}}
+        <div class="au-o-grid__item au-u-1-2">
+          <AuCard as |c|>
+            <c.header>
+              <AuHeading @level="2" @skin="4">
+                {{mandate.governmentFunction.label}}
+              </AuHeading>
+              <ul>
+                {{#each mandate.mandatees as |mandatee|}}
+                  <li>{{mandatee.person.firstName}} {{mandatee.person.familyName}}
+                    {{moment-format mandatee.startDate 'DD/MM/YYYY'}} -
+                    {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                  </li>
+                {{/each}}
+              </ul>
+            </c.header>
+          </AuCard>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+{{else}}
+  {{!-- bestuursorgaan niveau 1--}}
+  <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
+    Legislaturen
+  </AuHeading>
+  <div class="au-o-grid">
+    {{#each (sort-by "startDate.time:desc" this.model.governmentBodies)  as |governmentBody|}}
+      <div class="au-o-grid__item au-u-1-2">
+        <AuCard as |c|>
+          <c.header>
+            <AuHeading @level="2" @skin="4">
+              {{governmentBody.isTimespecializationOf.name}}
+            </AuHeading>
+            <p>
+              {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}} -
+              {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
+            </p>
+          </c.header>
+        </AuCard>
+      </div>
     {{/each}}
-  </c.content>
-</AuCard>
+  </div>
+{{/if}}

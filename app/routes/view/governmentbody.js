@@ -6,13 +6,22 @@ export default class ViewGovernmentbodyRoute extends Route {
   }
 
   async model( { resource } ) {
-    const governmentbody = this.store.query('governmentbody',
-    { filter:
-      { ':uri:': resource}, include: 'mandatees,mandatees.person,mandatees.mandate.governmentfunction,mandatees.governmentfields' } )
-    .then(function (governmentbodies) {
-      return governmentbodies.get('firstObject');
-    });
+    const governmentbodies = await this.store.query('government-body',
+    {
+      filter: { ':uri:': resource },
+      include: [
+        'classification',
+        'government-bodies.classification',
+        'government-bodies.start-date',
+        'government-bodies.end-date',
+        'mandates.government-function',
+        'mandates.mandatees.person',
+        'mandatees.person',
+        'mandatees.mandate.government-function',
+        'mandatees.government-fields'
+      ].join(',')
+    } )
 
-    return governmentbody;
+    return governmentbodies.get('firstObject');
   }
 }

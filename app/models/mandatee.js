@@ -2,12 +2,12 @@ import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 export default class MandateeModel extends Model {
   @attr() priority;
-  @attr() startdate;
-  @attr() enddate;
-  @belongsTo('person', { inverse: 'mandatees' }) person;
-  @belongsTo('mandate', { inverse: null}) mandate;
-  @hasMany('governmentfield', { inverse: null }) governmentfields;
-  @belongsTo('governmentbody', { inverse: 'mandatees' }) governmentbody;
+  @attr() startDate;
+  @attr() endDate;
+  @belongsTo('person') person;
+  @belongsTo('mandate') mandate;
+  @hasMany('government-field') governmentFields;
+  @belongsTo('government-body') governmentBody;
 
   get rdfaBindings() {
     return { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects

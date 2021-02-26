@@ -1,6 +1,7 @@
-import Model, { belongsTo } from '@ember-data/model';
+import Model, { belongsTo, hasMany } from '@ember-data/model';
 
 export default class MandateModel extends Model {
-  @belongsTo('governmentfunction', { inverse: null}) governmentfunction;
-  @belongsTo('governmentbody', { inverse: 'mandates'}) governmentbody;
+  @belongsTo('government-function', { inverse: null} ) governmentFunction;
+  @belongsTo('government-body') governmentBody;
+  @hasMany('mandatees') mandatees;
 }

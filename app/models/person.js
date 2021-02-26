@@ -1,7 +1,7 @@
-import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class PersonModel extends Model {
-  @attr() familyname;
-  @attr() firstname;
-  @hasMany('mandatee', { inverse: 'person' }) mandatees;
+  @attr() familyName;
+  @attr() firstName;
+  @hasMany('mandatee') mandatees;
 }
