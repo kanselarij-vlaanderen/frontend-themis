@@ -5,7 +5,10 @@
       {{this.model.name}}
     </AuHeading>
     <p class="au-u-h3 metis-u-text-gray-600">
-      Tijdspecialisatie van {{this.model.isTimespecializationOf.name}}
+      Tijdspecialisatie van
+      <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
+        {{this.model.isTimespecializationOf.name}}
+      </LinkTo>
     </p>
   {{else}}
     {{!-- bestuursorgaan niveau 2--}}
@@ -44,10 +47,8 @@
           <table class="au-c-data-table__table  au-c-data-table__table--small">
             <thead>
               <tr class="au-c-data-table__header">
-                <th class="data-table__header-title">Voornaam</th>
-                <th class="data-table__header-title">Familienaam</th>
-                <th class="data-table__header-title">Start</th>
-                <th class="data-table__header-title">Einde</th>
+                <th class="data-table__header-title">Naam</th>
+                <th class="data-table__header-title">Periode</th>
                 <th class="data-table__header-title">Bestuursfunctie</th>
                 <th class="data-table__header-title">Beleidsdomeinen</th>
               </tr>
@@ -55,12 +56,31 @@
             <tbody>
               {{#each (sort-by "person.familyName" this.model.mandatees) as |row|}}
                 <tr>
-                  <td>{{row.person.firstName}}</td>
-                  <td>{{row.person.familyName}}</td>
-                  <td>{{moment-format row.startDate 'DD/MM/YYYY'}}</td>
-                  <td> {{if row.endDate (moment-format row.endDate 'DD/MM/YYYY') 'heden'}}</td>
-                  <td>{{row.mandate.governmentFunction.label}}</td>
-                  <td>{{join ', ' (map-by "label" row.governmentFields)}}</td>
+                  <td>
+                    <LinkTo @route="view.person" @query={{hash resource=row.person.uri}}>
+                      {{row.person.firstName}} {{row.person.familyName}}
+                    </LinkTo>
+                  </td>
+                  <td>
+                    <LinkTo @route="view.mandatee" @query={{hash resource=row.uri}}>
+                      {{moment-format row.startDate 'DD/MM/YYYY'}}
+                      - {{if row.endDate (moment-format row.endDate 'DD/MM/YYYY') 'heden'}}
+                    </LinkTo>
+                  </td>
+                  <td>
+                    <ThemisUri @uri={{row.mandate.governmentFunction.uri}}>
+                      {{row.mandate.governmentFunction.label}}
+                    </ThemisUri>
+                  </td>
+                  <td>
+                    {{#each row.governmentFields as |governmentField|}}
+                      <AuPill>
+                        <ThemisUri @uri={{governmentField.uri}}>
+                          {{governmentField.label}}
+                        </ThemisUri>
+                      </AuPill>
+                    {{/each}}
+                  </td>
                 </tr>
               {{/each}}
             </tbody>
@@ -79,7 +99,9 @@
           <AuCard as |c|>
             <c.header>
               <AuHeading @level="2" @skin="4">
-                {{governmentBody.name}}
+                <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
+                  {{governmentBody.name}}
+                </LinkTo>
               </AuHeading>
               <p>
                 {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}} -
@@ -104,9 +126,11 @@
               <ul>
                 {{#each mandate.mandatees as |mandatee|}}
                   <li>
-                    {{mandatee.person.firstName}} {{mandatee.person.familyName}}
-                    {{moment-format mandatee.startDate 'DD/MM/YYYY'}} -
-                    {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                    <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                      {{mandatee.person.firstName}} {{mandatee.person.familyName}}
+                      {{moment-format mandatee.startDate "DD/MM/YYYY"}} -
+                      {{if mandatee.endDate (moment-format mandatee.endDate "DD/MM/YYYY") "heden"}}
+                    </LinkTo>
                   </li>
                 {{/each}}
               </ul>
@@ -127,13 +151,25 @@
         <AuCard as |c|>
           <c.header>
             <AuHeading @level="2" @skin="4">
-              {{governmentBody.isTimespecializationOf.name}}
+              <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
+                {{governmentBody.isTimespecializationOf.name}}
+              </LinkTo>
             </AuHeading>
             <p>
               {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}} -
               {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
             </p>
           </c.header>
+          <c.content>
+            <AuHr />
+            {{#each governmentBody.governmentBodies as |governmentBodyL3|}}
+              <p>
+                <LinkTo @route="view.government-body" @query={{hash resource=governmentBodyL3.uri}}>
+                  {{governmentBodyL3.name}}
+                </LinkTo>
+              </p>
+            {{/each}}
+          </c.content>
         </AuCard>
       </div>
     {{/each}}

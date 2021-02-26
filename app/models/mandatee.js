@@ -4,6 +4,7 @@ export default class MandateeModel extends Model {
   @attr() priority;
   @attr() startDate;
   @attr() endDate;
+  @attr() uri;
   @belongsTo('person') person;
   @belongsTo('mandate') mandate;
   @hasMany('government-field') governmentFields;

@@ -1,20 +1,40 @@
-<div>My custom mandatee template</div>
-
-<AuCard @flex={{true}} as |c|>
-  <c.header @badgeIcon="user" @badgeSkin="brand">
+<AuHeading class="au-u-margin-bottom-large">
+  {{this.model.person.firstName}} {{this.model.person.familyName}}
+</AuHeading>
+<p class="au-u-h3 metis-u-text-gray-600">
+  {{this.model.mandate.governmentBody.name}}
+</p>
+<AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
+  Functie
+</AuHeading>
+<AuCard as |c|>
+  <c.header>
     <AuHeading @level="2" @skin="4">
-      {{this.model.person.firstName}} {{this.model.person.familyName}}
+      <ThemisUri @uri={{this.model.mandate.governmentFunction.uri}}>
+        {{this.model.mandate.governmentFunction.label}}
+      </ThemisUri>
     </AuHeading>
+    {{#if this.model.governmentFields}}
+      <p class="au-u-margin-top-small">
+        van
+        {{#each this.model.governmentFields as |governmentField|}}
+          <AuPill>
+            <ThemisUri @uri={{governmentField.uri}}>
+              {{governmentField.label}}
+            </ThemisUri>
+          </AuPill>
+        {{/each}}
+      </p>
+    {{/if}}
+    <p class="au-u-margin-top-small">
+      in regering
+      <LinkTo @route="view.government-body" @query={{hash resource=this.model.governmentBody.uri}}>
+        {{this.model.governmentBody.name}}
+      </LinkTo>
+    </p>
+    <p class="au-u-margin-top-small">
+      van {{moment-format this.model.startDate 'DD/MM/YYYY'}} -
+      {{if this.model.endDate (moment-format this.model.endDate 'DD/MM/YYYY') 'heden'}}
+    </p>
   </c.header>
-  <c.content>
-    <AuHr @size="large" />
-    Beleidsfunctie: {{this.model.mandate.governmentFunction.label}} <br />
-    Beleidsdomeinen:{{#each this.model.governmentFields as |governmentField|}}
-    {{governmentField.label}}
-    {{/each}} <br />
-    Legislatuur: {{this.model.mandate.governmentBody.name}} <br />
-    Regering: {{this.model.governmentBody.name}}
-    {{this.model.governmentBody.startDate.time}}
-    {{this.model.governmentBody.endDate.time}} <br />
-  </c.content>
 </AuCard>
