@@ -3,7 +3,7 @@ import Controller from '@ember/controller';
 export default class ViewGovernmentbodyController extends Controller {
   queryParams = ['resource'];
 
-  get mandateesByName() {
+  get mandateesByPerson() {
     const persons = [];
 
     this.model.mandatees.forEach(function(mandatee) {
@@ -19,6 +19,30 @@ export default class ViewGovernmentbodyController extends Controller {
       }
 
       person.mandatees.push(mandatee);
+   });
+
+   return persons;
+  }
+
+  get mandatesByPerson() {
+    const persons = [];
+
+    this.model.mandates.forEach(function(mandate) {
+      mandate.mandatees.forEach(function(mandatee) {
+        let person = persons.findBy('id', mandatee.person.get('id'));
+
+        if (!person) {
+          person = {
+              id: mandatee.person.get('id'),
+              mandatees: [],
+              person: mandatee.person
+           };
+           persons.push(person);
+        }
+
+        person.mandatees.push(mandatee);
+    });
+
    });
 
    return persons;

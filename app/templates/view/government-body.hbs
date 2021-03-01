@@ -53,7 +53,7 @@
       Samenstelling van de regering {{this.model.name}}
     </p>
     <div class="au-o-grid">
-      {{#each this.mandateesByName as |name|}}
+      {{#each (sort-by "person.familyName" this.mandateesByPerson) as |name|}}
         <div class="au-o-grid__item au-u-1-2">
           <AuCard as |c|>
             <c.header>
@@ -67,14 +67,10 @@
             <c.content>
               {{#each (sort-by "startDate" name.mandatees) as |mandatee|}}
                 <AuHeading @level="6" @skin="6">
-                  <ThemisUri @uri={{mandatee.mandate.governmentFunction.uri}}>
+                  <ThemisUri @uri={{mandatee.mandate.uri}}>
                     {{mandatee.mandate.governmentFunction.label}}
                   </ThemisUri>
                 </AuHeading>
-                <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
-                  {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
-                  - {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
-                </LinkTo>
                 {{#if mandatee.governmentFields}}
                   <p class="au-u-margin-top-small">
                     van
@@ -87,13 +83,17 @@
                     {{/each}}
                   </p>
                 {{/if}}
+                <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                  {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
+                  - {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                </LinkTo>
               {{/each}}
             </c.content>
           </AuCard>
         </div>
       {{/each}}
     </div>
-  {{else}}
+  {{else if this.mandatesByPerson}}
     {{!-- bestuursorgaan niveau 2--}}
     <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
       Regeringsamenstelling
@@ -120,26 +120,44 @@
     <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
       Mandaten
     </AuHeading>
+
     <div class="au-o-grid">
-      {{#each (sort-by "governmentFunction.label" this.model.mandates)  as |mandate|}}
+      {{#each (sort-by "person.familyName" this.mandatesByPerson) as |name|}}
         <div class="au-o-grid__item au-u-1-2">
           <AuCard as |c|>
             <c.header>
               <AuHeading @level="2" @skin="4">
-                {{mandate.governmentFunction.label}}
+                <LinkTo @route="view.person" @query={{hash resource=name.person.uri}}>
+                  {{name.person.firstName}} {{name.person.familyName}}
+                </LinkTo>
               </AuHeading>
-              <ul>
-                {{#each mandate.mandatees as |mandatee|}}
-                  <li>
-                    <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
-                      {{mandatee.person.firstName}} {{mandatee.person.familyName}}
-                      {{moment-format mandatee.startDate "DD/MM/YYYY"}} -
-                      {{if mandatee.endDate (moment-format mandatee.endDate "DD/MM/YYYY") "heden"}}
-                    </LinkTo>
-                  </li>
-                {{/each}}
-              </ul>
+              <AuHr />
             </c.header>
+            <c.content>
+              {{#each (sort-by "startDate" name.mandatees) as |mandatee|}}
+                <AuHeading @level="6" @skin="6">
+                  <ThemisUri @uri={{mandatee.mandate.uri}}>
+                    {{mandatee.mandate.governmentFunction.label}}
+                  </ThemisUri>
+                </AuHeading>
+                {{#if mandatee.governmentFields}}
+                  <p class="au-u-margin-top-small">
+                    van
+                    {{#each mandatee.governmentFields as |governmentField|}}
+                      <AuPill>
+                        <ThemisUri @uri={{governmentField.uri}}>
+                          {{governmentField.label}}
+                        </ThemisUri>
+                      </AuPill>
+                    {{/each}}
+                  </p>
+                {{/if}}
+                <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                  {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
+                  - {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                </LinkTo>
+              {{/each}}
+            </c.content>
           </AuCard>
         </div>
       {{/each}}
