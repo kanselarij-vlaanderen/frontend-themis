@@ -44,7 +44,7 @@
 <AuHr />
 
 {{#if this.model.isTimespecializationOf}}
-  {{#if this.mandateesByName}}
+  {{#if this.mandateesByPerson}}
     {{!-- bestuursorgaan niveau 3--}}
     <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
       Mandatarissen
@@ -53,19 +53,19 @@
       Samenstelling van de regering {{this.model.name}}
     </p>
     <div class="au-o-grid">
-      {{#each (sort-by "person.familyName" this.mandateesByPerson) as |name|}}
+      {{#each (sort-by "person.familyName" this.mandateesByPerson) as |person|}}
         <div class="au-o-grid__item au-u-1-2">
           <AuCard as |c|>
             <c.header>
               <AuHeading @level="2" @skin="4">
-                <LinkTo @route="view.person" @query={{hash resource=name.person.uri}}>
-                  {{name.person.firstName}} {{name.person.familyName}}
+                <LinkTo @route="view.person" @query={{hash resource=person.person.uri}}>
+                  {{person.person.firstName}} {{person.person.familyName}}
                 </LinkTo>
               </AuHeading>
               <AuHr />
             </c.header>
             <c.content>
-              {{#each (sort-by "startDate" name.mandatees) as |mandatee|}}
+              {{#each (sort-by "startDate" person.mandatees) as |mandatee|}}
                 <AuHeading @level="6" @skin="6">
                   <ThemisUri @uri={{mandatee.mandate.uri}}>
                     {{mandatee.mandate.governmentFunction.label}}
