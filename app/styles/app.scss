@@ -33,7 +33,7 @@
 // GENERIC
 @import "appuniversum/g-reset";
 @import "appuniversum/g-box-sizing";
-// @import "appuniversum/g-font"; // (BREAKING CHANGE | CONFLICT IN FONT WEIGHTS)
+@import "appuniversum/g-font";
 
 // ELEMENTS
 @import "appuniversum/e-page";
@@ -44,10 +44,6 @@
 @import "appuniversum/o-grid";
 @import "appuniversum/o-layout";
 @import "appuniversum/o-region";
-
-// WU COMPONENTS (DEPRECATED)
-// @import 'ember-vo-webuniversum-data-table';
-// @import 'ember-vo-webuniversum';
 
 // COMPONENTS
 @import "ember-appuniversum/c-alert";

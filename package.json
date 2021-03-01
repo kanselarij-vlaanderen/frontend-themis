@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@appuniversum/appuniversum": "0.0.14",
-    "@appuniversum/ember-appuniversum": "0.0.35",
+    "@appuniversum/ember-appuniversum": "0.1.7",
     "@ember/optional-features": "^2.0.0",
     "@glimmer/component": "^1.0.1",
     "@glimmer/tracking": "^1.0.1",
