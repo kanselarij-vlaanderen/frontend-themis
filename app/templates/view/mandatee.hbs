@@ -1,16 +1,16 @@
 <AuHeading class="au-u-margin-bottom-large">
-  {{this.model.person.firstName}} {{this.model.person.familyName}}
+  Mandataris {{this.model.person.firstName}} {{this.model.person.familyName}}
 </AuHeading>
 <p class="au-u-h3 metis-u-text-gray-600">
   {{this.model.mandate.governmentBody.name}}
 </p>
 <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
-  Functie
+  Mandaat
 </AuHeading>
 <AuCard as |c|>
   <c.header>
     <AuHeading @level="2" @skin="4">
-      <ThemisUri @uri={{this.model.mandate.governmentFunction.uri}}>
+      <ThemisUri @uri={{this.model.mandate.uri}}>
         {{this.model.mandate.governmentFunction.label}}
       </ThemisUri>
     </AuHeading>

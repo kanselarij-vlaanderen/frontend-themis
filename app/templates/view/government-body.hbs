@@ -13,11 +13,14 @@
   {{else}}
     {{!-- bestuursorgaan niveau 2--}}
     <AuHeading class="au-u-margin-bottom-large">
-      {{this.model.isTimespecializationOf.name}}
-    </AuHeading>
-    <p class="au-u-h3 metis-u-text-gray-600">
       Legislatuur {{moment-format this.model.startDate.time 'DD/MM/YYYY'}} -
       {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
+    </AuHeading>
+    <p class="au-u-h3 metis-u-text-gray-600">
+      Tijdspecialisatie van
+      <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
+        {{this.model.isTimespecializationOf.name}}
+      </LinkTo>
     </p>
   {{/if}}
 {{else}}
@@ -26,7 +29,15 @@
     {{this.model.name}}
   </AuHeading>
   <p class="au-u-h3 metis-u-text-gray-600">
-    {{this.model.classification.label}}
+    <ThemisUri @uri={{this.model.classification.uri}}>
+      {{this.model.classification.label}}
+    </ThemisUri>
+  </p>
+  <p class="au-u-h3 metis-u-text-gray-600">
+    van
+    <ThemisUri @uri={{this.model.governmentUnit.uri}}>
+      {{this.model.governmentUnit.name}}
+    </ThemisUri>
   </p>
 {{/if}}
 
@@ -34,6 +45,7 @@
 
 {{#if this.model.isTimespecializationOf}}
   {{#if this.mandateesByName}}
+    {{!-- bestuursorgaan niveau 3--}}
     <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
       Mandatarissen
     </AuHeading>
@@ -81,66 +93,10 @@
         </div>
       {{/each}}
     </div>
-  {{/if}}
-  {{#if this.model.mandatees}}
-    {{!-- bestuursorgaan niveau 3--}}
-    <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
-      Mandatarissen
-    </AuHeading>
-    <p class="au-u-margin-bottom">
-      Samenstelling van de regering {{this.model.name}}
-    </p>
-    <div class="au-u-margin-bottom-large">
-      <div class="au-c-data-table">
-        <div class="au-c-data-table__wrapper">
-          <table class="au-c-data-table__table  au-c-data-table__table--small">
-            <thead>
-              <tr class="au-c-data-table__header">
-                <th class="data-table__header-title">Naam</th>
-                <th class="data-table__header-title">Periode</th>
-                <th class="data-table__header-title">Bestuursfunctie</th>
-                <th class="data-table__header-title">Beleidsdomeinen</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each (sort-by "person.familyName" this.model.mandatees) as |row|}}
-                <tr>
-                  <td>
-                    <LinkTo @route="view.person" @query={{hash resource=row.person.uri}}>
-                      {{row.person.firstName}} {{row.person.familyName}}
-                    </LinkTo>
-                  </td>
-                  <td>
-                    <LinkTo @route="view.mandatee" @query={{hash resource=row.uri}}>
-                      {{moment-format row.startDate 'DD/MM/YYYY'}}
-                      - {{if row.endDate (moment-format row.endDate 'DD/MM/YYYY') 'heden'}}
-                    </LinkTo>
-                  </td>
-                  <td>
-                    <ThemisUri @uri={{row.mandate.governmentFunction.uri}}>
-                      {{row.mandate.governmentFunction.label}}
-                    </ThemisUri>
-                  </td>
-                  <td>
-                    {{#each row.governmentFields as |governmentField|}}
-                      <AuPill>
-                        <ThemisUri @uri={{governmentField.uri}}>
-                          {{governmentField.label}}
-                        </ThemisUri>
-                      </AuPill>
-                    {{/each}}
-                  </td>
-                </tr>
-              {{/each}}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
   {{else}}
     {{!-- bestuursorgaan niveau 2--}}
     <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
-      Regeringssamenstelling
+      Regeringsamenstelling
     </AuHeading>
     <div class="au-o-grid">
       {{#each (sort-by "startDate.time" this.model.governmentBodies)  as |governmentBody|}}
@@ -214,7 +170,7 @@
             {{#each governmentBody.governmentBodies as |governmentBodyL3|}}
               <p>
                 <LinkTo @route="view.government-body" @query={{hash resource=governmentBodyL3.uri}}>
-                  {{governmentBodyL3.name}}
+                  Regering {{governmentBodyL3.name}}
                 </LinkTo>
               </p>
             {{/each}}

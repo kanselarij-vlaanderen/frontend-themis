@@ -7,6 +7,7 @@ export default class GovernmentBodyModel extends Model {
   @belongsTo('version') startDate;
   @belongsTo('version') endDate;
   @belongsTo('concept') classification;
+  @belongsTo('government-unit') governmentUnit;
   @hasMany('government-body', { inverse: 'isTimespecializationOf' }) governmentBodies;
   @hasMany('mandates') mandates;
   @hasMany('mandatees', { inverse: 'governmentBody' }) mandatees;

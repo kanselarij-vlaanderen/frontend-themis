@@ -8,8 +8,10 @@ export default class ThemisUriComponent extends Component {
   }
 
   get localBasePath() {
-    const uri = this.args.uri || "";
-
-    return uri.slice(this.config.metis.baseUrl.length);
+    if (!this.args.uri) {
+      return null;
+    } else {
+      return this.args.uri.slice(this.config.metis.baseUrl.length);
+    }
   }
 }
