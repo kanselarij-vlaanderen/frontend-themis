@@ -33,7 +33,7 @@
 <AuHr />
 
 {{#if this.model.isTimespecializationOf}}
-  {{#if this.model.mandateesByName}}
+  {{#if this.mandateesByName}}
     <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
       Mandatarissen
     </AuHeading>
@@ -41,7 +41,7 @@
       Samenstelling van de regering {{this.model.name}}
     </p>
     <div class="au-o-grid">
-      {{#each this.model.mandateesByName as |name|}}
+      {{#each this.mandateesByName as |name|}}
         <div class="au-o-grid__item au-u-1-2">
           <AuCard as |c|>
             <c.header>

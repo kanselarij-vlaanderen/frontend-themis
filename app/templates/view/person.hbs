@@ -33,8 +33,11 @@
             </LinkTo>
           </p>
           <p class="au-u-margin-top-small">
-            van {{moment-format mandatee.startDate 'DD/MM/YYYY'}} -
-            {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+            van
+            <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+              {{moment-format mandatee.startDate 'DD/MM/YYYY'}} -
+              {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+            </LinkTo>
           </p>
         </c.header>
 
