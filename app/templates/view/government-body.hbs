@@ -1,0 +1,215 @@
+{{#if this.model.isTimespecializationOf}}
+  {{#if this.model.mandatees}}
+    {{!-- bestuursorgaan niveau 3--}}
+    <AuHeading class="au-u-margin-bottom-large">
+      {{this.model.name}} {{moment-format this.model.startDate.time 'DD/MM/YYYY'}} -
+      {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
+    </AuHeading>
+    <p class="au-u-h3 metis-u-text-gray-600">
+      Tijdspecialisatie van
+      <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
+        {{this.model.isTimespecializationOf.name}}
+      </LinkTo>
+    </p>
+  {{else}}
+    {{!-- bestuursorgaan niveau 2--}}
+    <AuHeading class="au-u-margin-bottom-large">
+      Legislatuur {{moment-format this.model.startDate.time 'DD/MM/YYYY'}} -
+      {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
+    </AuHeading>
+    <p class="au-u-h3 metis-u-text-gray-600">
+      Tijdspecialisatie van
+      <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
+        {{this.model.isTimespecializationOf.name}}
+      </LinkTo>
+    </p>
+  {{/if}}
+{{else}}
+  {{!-- bestuursorgaan niveau 1--}}
+  <AuHeading class="au-u-margin-bottom-large">
+    {{this.model.name}}
+  </AuHeading>
+  <p class="au-u-h3 metis-u-text-gray-600">
+    <ThemisUri @uri={{this.model.classification.uri}}>
+      {{this.model.classification.label}}
+    </ThemisUri>
+  </p>
+  <p class="au-u-h3 metis-u-text-gray-600">
+    van
+    <ThemisUri @uri={{this.model.governmentUnit.uri}}>
+      {{this.model.governmentUnit.name}}
+    </ThemisUri>
+  </p>
+{{/if}}
+
+<AuHr />
+
+{{#if this.model.isTimespecializationOf}}
+  {{#if this.mandateesByPerson}}
+    {{!-- bestuursorgaan niveau 3--}}
+    <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
+      Mandatarissen
+    </AuHeading>
+    <p class="au-u-margin-bottom">
+      Samenstelling van de regering {{this.model.name}}
+    </p>
+    <div class="au-o-grid">
+      {{#each (sort-by "person.familyName" this.mandateesByPerson) as |person|}}
+        <div class="au-o-grid__item au-u-1-2">
+          <AuCard as |c|>
+            <c.header>
+              <AuHeading @level="2" @skin="4">
+                <LinkTo @route="view.person" @query={{hash resource=person.person.uri}}>
+                  {{person.person.firstName}} {{person.person.familyName}}
+                </LinkTo>
+              </AuHeading>
+              <AuHr />
+            </c.header>
+            <c.content>
+              {{#each (sort-by "startDate" person.mandatees) as |mandatee|}}
+                <AuHeading @level="6" @skin="6">
+                  <ThemisUri @uri={{mandatee.mandate.uri}}>
+                    {{mandatee.mandate.governmentFunction.label}}
+                  </ThemisUri>
+                </AuHeading>
+                {{#if mandatee.governmentFields}}
+                  <p class="au-u-margin-top-small">
+                    van
+                    {{#each mandatee.governmentFields as |governmentField|}}
+                      <AuPill>
+                        <ThemisUri @uri={{governmentField.uri}}>
+                          {{governmentField.label}}
+                        </ThemisUri>
+                      </AuPill>
+                    {{/each}}
+                  </p>
+                  <p class="au-u-margin-top-small">met rangorde {{mandatee.priority}}</p>
+                {{/if}}
+                <p class="au-u-margin-top-small">
+                  van
+                  <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                    {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
+                    tot {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                  </LinkTo>
+                </p>
+                <AuHr />
+              {{/each}}
+            </c.content>
+          </AuCard>
+        </div>
+      {{/each}}
+    </div>
+  {{else if this.mandatesByPerson}}
+    {{!-- bestuursorgaan niveau 2--}}
+    <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
+      Regeringsamenstelling
+    </AuHeading>
+    <div class="au-o-grid">
+      {{#each (sort-by "startDate.time" this.model.governmentBodies)  as |governmentBody|}}
+        <div class="au-o-grid__item au-u-1-2">
+          <AuCard as |c|>
+            <c.header>
+              <AuHeading @level="2" @skin="4">
+                <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
+                  {{governmentBody.name}}
+                </LinkTo>
+              </AuHeading>
+              <p>
+                {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}} -
+                {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
+              </p>
+            </c.header>
+          </AuCard>
+        </div>
+      {{/each}}
+    </div>
+    <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
+      Mandaten
+    </AuHeading>
+
+    <div class="au-o-grid">
+      {{#each (sort-by "person.familyName" this.mandatesByPerson) as |name|}}
+        <div class="au-o-grid__item au-u-1-2">
+          <AuCard as |c|>
+            <c.header>
+              <AuHeading @level="2" @skin="4">
+                <LinkTo @route="view.person" @query={{hash resource=name.person.uri}}>
+                  {{name.person.firstName}} {{name.person.familyName}}
+                </LinkTo>
+              </AuHeading>
+              <AuHr />
+            </c.header>
+            <c.content>
+              {{#each (sort-by "startDate" name.mandatees) as |mandatee|}}
+                <AuHeading @level="6" @skin="6">
+                  <ThemisUri @uri={{mandatee.mandate.uri}}>
+                    {{mandatee.mandate.governmentFunction.label}}
+                  </ThemisUri>
+                </AuHeading>
+
+                {{#if mandatee.governmentFields}}
+                  <p class="au-u-margin-top-small">
+                    van
+                    {{#each mandatee.governmentFields as |governmentField|}}
+                      <AuPill>
+                        <ThemisUri @uri={{governmentField.uri}}>
+                          {{governmentField.label}}
+                        </ThemisUri>
+                      </AuPill>
+                    {{/each}}
+                  </p>
+                  <p class="au-u-margin-top-small">met rangorde {{mandatee.priority}}</p>
+                {{/if}}
+                <p class="au-u-margin-top-small">
+                  van
+                  <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                    {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
+                    tot {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                  </LinkTo>
+                </p>
+                <AuHr />
+              {{/each}}
+            </c.content>
+          </AuCard>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+{{else}}
+  {{!-- bestuursorgaan niveau 1--}}
+  <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
+    Legislaturen
+  </AuHeading>
+  <div class="au-o-grid">
+    {{#each (sort-by "startDate.time:desc" this.model.governmentBodies)  as |governmentBody|}}
+      <div class="au-o-grid__item au-u-1-2">
+        <AuCard as |c|>
+          <c.header>
+            <AuHeading @level="2" @skin="4">
+              <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
+                {{governmentBody.isTimespecializationOf.name}}
+              </LinkTo>
+            </AuHeading>
+            <p>
+              {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}} -
+              {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
+            </p>
+          </c.header>
+          <c.content>
+            <AuHr />
+            {{#each (sort-by "startDate.time:desc" governmentBody.governmentBodies) as |governmentBodyL3|}}
+              <p>
+                <LinkTo @route="view.government-body" @query={{hash resource=governmentBodyL3.uri}}>
+                  Regering {{governmentBodyL3.name}}
+                </LinkTo>
+              <p>{{moment-format governmentBodyL3.startDate.time 'DD/MM/YYYY'}} -
+                {{if governmentBodyL3.endDate (moment-format governmentBodyL3.endDate.time 'DD/MM/YYYY') 'heden'}}
+              </p>
+              </p>
+            {{/each}}
+          </c.content>
+        </AuCard>
+      </div>
+    {{/each}}
+  </div>
+{{/if}}

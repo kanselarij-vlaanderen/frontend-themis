@@ -18,6 +18,13 @@ Router.map(function() {
     classRoute(this, 'person', {
       class: 'http://www.w3.org/ns/person#Person'
     });
+    classRoute(this, 'mandatee', {
+      class: 'http://data.vlaanderen.be/ns/mandaat#Mandataris'
+    });
+
+    classRoute(this, 'government-body', {
+      class: 'http://data.vlaanderen.be/ns/besluit#Bestuursorgaan'
+    });
   });
   metisFallbackRoute(this);
 });
