@@ -1,6 +1,10 @@
 <AuHeading class="au-u-margin-bottom-large">
   Mandataris {{this.model.person.firstName}} {{this.model.person.familyName}}
+  <LinkTo @route="view.person" @query={{hash resource=this.model.person.uri}}>
+    <AuHeading @level="6" @skin="6">[Open]</AuHeading>
+  </LinkTo>
 </AuHeading>
+
 <p class="au-u-h3 metis-u-text-gray-600">
   {{this.model.mandate.governmentBody.name}}
 </p>
@@ -14,6 +18,7 @@
         {{this.model.mandate.governmentFunction.label}}
       </ThemisUri>
     </AuHeading>
+    <p>Rangorde {{this.model.priority}}</p>
     {{#if this.model.governmentFields}}
       <p class="au-u-margin-top-small">
         van

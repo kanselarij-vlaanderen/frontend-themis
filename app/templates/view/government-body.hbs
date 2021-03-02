@@ -2,7 +2,8 @@
   {{#if this.model.mandatees}}
     {{!-- bestuursorgaan niveau 3--}}
     <AuHeading class="au-u-margin-bottom-large">
-      {{this.model.name}}
+      {{this.model.name}} {{moment-format this.model.startDate.time 'DD/MM/YYYY'}} -
+      {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
     </AuHeading>
     <p class="au-u-h3 metis-u-text-gray-600">
       Tijdspecialisatie van
@@ -71,6 +72,7 @@
                     {{mandatee.mandate.governmentFunction.label}}
                   </ThemisUri>
                 </AuHeading>
+                <p>Rangorde {{mandatee.priority}}</p>
                 {{#if mandatee.governmentFields}}
                   <p class="au-u-margin-top-small">
                     van
@@ -140,6 +142,7 @@
                     {{mandatee.mandate.governmentFunction.label}}
                   </ThemisUri>
                 </AuHeading>
+                <p>Rangorde {{mandatee.priority}}</p>
                 {{#if mandatee.governmentFields}}
                   <p class="au-u-margin-top-small">
                     van
@@ -156,6 +159,7 @@
                   {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
                   - {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
                 </LinkTo>
+                <AuHr />
               {{/each}}
             </c.content>
           </AuCard>
@@ -185,11 +189,14 @@
           </c.header>
           <c.content>
             <AuHr />
-            {{#each governmentBody.governmentBodies as |governmentBodyL3|}}
+            {{#each (sort-by "startDate.time:desc" governmentBody.governmentBodies) as |governmentBodyL3|}}
               <p>
                 <LinkTo @route="view.government-body" @query={{hash resource=governmentBodyL3.uri}}>
                   Regering {{governmentBodyL3.name}}
                 </LinkTo>
+              <p>{{moment-format governmentBodyL3.startDate.time 'DD/MM/YYYY'}} -
+                {{if governmentBodyL3.endDate (moment-format governmentBodyL3.endDate.time 'DD/MM/YYYY') 'heden'}}
+              </p>
               </p>
             {{/each}}
           </c.content>
