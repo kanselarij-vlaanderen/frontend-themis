@@ -14,5 +14,10 @@ Router.map(function() {
     this.route('publication');
     this.route('catalogs');
   });
+  this.route('view', function() {
+    classRoute(this, 'person', {
+      class: 'http://www.w3.org/ns/person#Person'
+    });
+  });
   metisFallbackRoute(this);
 });

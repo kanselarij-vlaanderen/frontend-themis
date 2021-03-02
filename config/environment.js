@@ -7,12 +7,7 @@ module.exports = function(environment) {
     rootURL: '/',
     locationType: 'auto',
     metis: {
-      routes: {},
-      baseUrl: "http://themis.vlaanderen.be/",
-      pageSize: {
-        directed: 500,
-        inverse: 500
-      }
+      baseUrl: "http://themis.vlaanderen.be/"
     },
     yasgui: {
       // NOTE: look at app/modifiers/yasgui.js when changing this variable
