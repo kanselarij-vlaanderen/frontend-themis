@@ -5,7 +5,7 @@
   Uitgeoefende mandaten
 </AuHeading>
 <div class="au-o-grid">
-  {{#each this.model.mandatees as |mandatee|}}
+  {{#each (sort-by "startDate" this.model.mandatees) as |mandatee|}}
     <div class="au-o-grid__item au-u-1-2">
       <AuCard as |c|>
         <c.header>
@@ -14,7 +14,6 @@
               {{mandatee.mandate.governmentFunction.label}}
             </ThemisUri>
           </AuHeading>
-          <p>Rangorde {{mandatee.priority}}</p>
           {{#if mandatee.governmentFields}}
             <p class="au-u-margin-top-small">
               van
@@ -26,6 +25,7 @@
                 </AuPill>
               {{/each}}
             </p>
+            <p class="au-u-margin-top-small">met rangorde {{mandatee.priority}}</p>
           {{/if}}
           <p class="au-u-margin-top-small">
             in regering
@@ -36,7 +36,7 @@
           <p class="au-u-margin-top-small">
             van
             <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
-              {{moment-format mandatee.startDate 'DD/MM/YYYY'}} -
+              {{moment-format mandatee.startDate 'DD/MM/YYYY'}} tot
               {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
             </LinkTo>
           </p>

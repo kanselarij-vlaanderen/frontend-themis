@@ -18,7 +18,6 @@
         {{this.model.mandate.governmentFunction.label}}
       </ThemisUri>
     </AuHeading>
-    <p>Rangorde {{this.model.priority}}</p>
     {{#if this.model.governmentFields}}
       <p class="au-u-margin-top-small">
         van
@@ -30,6 +29,7 @@
           </AuPill>
         {{/each}}
       </p>
+      <p class="au-u-margin-top-small">met rangorde {{this.model.priority}}</p>
     {{/if}}
     <p class="au-u-margin-top-small">
       in regering
@@ -38,7 +38,7 @@
       </LinkTo>
     </p>
     <p class="au-u-margin-top-small">
-      van {{moment-format this.model.startDate 'DD/MM/YYYY'}} -
+      van {{moment-format this.model.startDate 'DD/MM/YYYY'}} tot
       {{if this.model.endDate (moment-format this.model.endDate 'DD/MM/YYYY') 'heden'}}
     </p>
   </c.header>

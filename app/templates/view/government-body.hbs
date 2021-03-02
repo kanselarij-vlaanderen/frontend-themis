@@ -72,7 +72,6 @@
                     {{mandatee.mandate.governmentFunction.label}}
                   </ThemisUri>
                 </AuHeading>
-                <p>Rangorde {{mandatee.priority}}</p>
                 {{#if mandatee.governmentFields}}
                   <p class="au-u-margin-top-small">
                     van
@@ -84,11 +83,16 @@
                       </AuPill>
                     {{/each}}
                   </p>
+                  <p class="au-u-margin-top-small">met rangorde {{mandatee.priority}}</p>
                 {{/if}}
-                <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
-                  {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
-                  - {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
-                </LinkTo>
+                <p class="au-u-margin-top-small">
+                  van
+                  <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                    {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
+                    tot {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                  </LinkTo>
+                </p>
+                <AuHr />
               {{/each}}
             </c.content>
           </AuCard>
@@ -142,7 +146,7 @@
                     {{mandatee.mandate.governmentFunction.label}}
                   </ThemisUri>
                 </AuHeading>
-                <p>Rangorde {{mandatee.priority}}</p>
+
                 {{#if mandatee.governmentFields}}
                   <p class="au-u-margin-top-small">
                     van
@@ -154,11 +158,15 @@
                       </AuPill>
                     {{/each}}
                   </p>
+                  <p class="au-u-margin-top-small">met rangorde {{mandatee.priority}}</p>
                 {{/if}}
-                <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
-                  {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
-                  - {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
-                </LinkTo>
+                <p class="au-u-margin-top-small">
+                  van
+                  <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                    {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
+                    tot {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                  </LinkTo>
+                </p>
                 <AuHr />
               {{/each}}
             </c.content>
