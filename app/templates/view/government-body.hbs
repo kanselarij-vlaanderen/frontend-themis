@@ -182,33 +182,40 @@
   </AuHeading>
   <div class="au-o-grid">
     {{#each (sort-by "startDate.time:desc" this.model.governmentBodies)  as |governmentBody|}}
-      <div class="au-o-grid__item au-u-1-2">
-        <AuCard as |c|>
-          <c.header>
-            <AuHeading @level="2" @skin="4">
-              <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
-                {{governmentBody.isTimespecializationOf.name}}
-              </LinkTo>
-            </AuHeading>
-            <p>
-              {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}} -
-              {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
-            </p>
-          </c.header>
-          <c.content>
-            <AuHr />
-            {{#each (sort-by "startDate.time:desc" governmentBody.governmentBodies) as |governmentBodyL3|}}
-              <p>
-                <LinkTo @route="view.government-body" @query={{hash resource=governmentBodyL3.uri}}>
-                  Regering {{governmentBodyL3.name}}
-                </LinkTo>
-              <p>{{moment-format governmentBodyL3.startDate.time 'DD/MM/YYYY'}} -
-                {{if governmentBodyL3.endDate (moment-format governmentBodyL3.endDate.time 'DD/MM/YYYY') 'heden'}}
-              </p>
-              </p>
-            {{/each}}
-          </c.content>
-        </AuCard>
+      <div class="au-o-grid__item">
+        <table class="card-table-wrapper">
+          <tr>
+            <td>
+              <table class="card-table">
+                <tr>
+                  <td class="card-table-cell title">
+                    <AuHeading @level="2" @skin="4">
+                      <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
+                        {{governmentBody.isTimespecializationOf.name}}
+                      </LinkTo>
+                    </AuHeading>
+                    <p>
+                      {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}} -
+                      {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
+                    </p>
+                  </td>
+                  <td class="card-table-cell">
+                    {{#each (sort-by "startDate.time:desc" governmentBody.governmentBodies) as |governmentBodyL3|}}
+                      <div class="au-u-margin-top-small au-u-margin-left-large">
+                        <LinkTo @route="view.government-body" @query={{hash resource=governmentBodyL3.uri}}>
+                          Regering {{governmentBodyL3.name}}
+                        </LinkTo>
+                        <p>{{moment-format governmentBodyL3.startDate.time 'DD/MM/YYYY'}} -
+                          {{if governmentBodyL3.endDate (moment-format governmentBodyL3.endDate.time 'DD/MM/YYYY') 'heden'}}
+                        </p>
+                      </div>
+                    {{/each}}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
       </div>
     {{/each}}
   </div>
