@@ -18,25 +18,29 @@
  * OBJECTS: OOCSS unstyled objects (namespace: '.au-o-...')
  * COMPONENTS: Components (namespace: '.au-c-...')
  * UTILITIES: Single function helper classes (namespace: '.au-u-...')
- * SHAME: Temporary hacks and quickfixes
  */
 
+
 // VARIABLES
-@import "appuniversum/s-colors";
+@import "appuniversum/s-colors.scss";
 @import "appuniversum/s-global";
 @import "appuniversum/s-utilities";
+
 
 // MIXINS
 @import "appuniversum/t-font-size";
 @import "appuniversum/t-sass-mq";
+
 
 // GENERIC
 @import "appuniversum/g-reset";
 @import "appuniversum/g-box-sizing";
 @import "appuniversum/g-font";
 
+
 // ELEMENTS
 @import "appuniversum/e-page";
+
 
 // OBJECTS
 @import "appuniversum/o-box";
@@ -44,6 +48,7 @@
 @import "appuniversum/o-grid";
 @import "appuniversum/o-layout";
 @import "appuniversum/o-region";
+
 
 // COMPONENTS
 @import "ember-appuniversum/c-alert";
@@ -80,12 +85,18 @@
 @import "ember-appuniversum/c-textarea";
 @import "ember-appuniversum/c-toolbar";
 
+
+// PLUGINS
+@import "ember-appuniversum/p-ember-power-select";
+@import "ember-appuniversum/p-duet-datepicker";
+
+
 // UTILITIES
 @import "appuniversum/u-align-text";
-@import "appuniversum/u-font-family";
-@import "appuniversum/u-font-weights";
 @import "appuniversum/u-headings";
 @import "appuniversum/u-hide";
+@import "appuniversum/u-font-family";
+@import "appuniversum/u-font-weights";
 @import "appuniversum/u-paragraphs";
 @import "appuniversum/u-print";
 @import "appuniversum/u-responsive-spacings";
@@ -148,4 +159,11 @@ ol {
 .title {
   width: 25%;
   border-right: thin solid #A9A9A9;
+}
+
+.au-c-intro {
+  @include au-font-size($au-h4);
+  font-weight: $au-light;
+  color: $au-gray-800;
+  max-width: 60ch;
 }

@@ -6,17 +6,18 @@ export default class ViewMandateeRoute extends Route {
   }
 
   async model( { resource } ) {
-    console.log(resource);
-
-
-    const mandatee = this.store.query('mandatee',
+    const mandatees = await this.store.query('mandatee',
     { filter:
       { ':uri:': resource},
-      include: 'person,mandate.government-function,mandate.government-body,government-body.start-date,government-body.end-date' } )
-    .then(function (mandatees) {
-      return mandatees.get('firstObject');
+      include: [
+        'person',
+        'mandate.government-function',
+        'mandate.government-body',
+        'government-body.start-date',
+        'government-body.end-date'
+      ].join(',')
     });
 
-    return mandatee;
+    return mandatees.get('firstObject');
   }
 }
