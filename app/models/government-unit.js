@@ -7,7 +7,7 @@ export default class Bestuurseenheid extends Model {
 
   get rdfaBindings() {
     return { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects
-      class: "http://data.vlaanderen.be/ns/mandaat#Mandaat",
+      class: "http://data.vlaanderen.be/ns/besluit#Bestuurseenheid",
       name: "http://www.w3.org/2004/02/skos/core#prefLabel",
       governmentBody: "http://data.vlaanderen.be/ns/besluit#bestuurt"
     }

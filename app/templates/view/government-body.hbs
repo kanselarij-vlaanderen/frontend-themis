@@ -1,59 +1,87 @@
-<div resource={{this.model.uri}} typeof={{this.model.rdfaBindings.class}}>
-  {{#if this.model.isTimespecializationOf}}
-    {{#if this.model.mandatees}}
-      {{!-- bestuursorgaan niveau 3--}}
-      <AuHeading class="au-u-margin-bottom-large">
+{{#if this.model.isTimespecializationOf}}
+  {{#if this.model.mandatees}}
+    {{!-- bestuursorgaan niveau 3--}}
+
+    <AuHeading class="au-u-margin-bottom-large">
+      <span resource={{this.model.uri}} typeof={{this.model.rdfaBindings.class}}>
         <span property={{this.model.rdfaBindings.name}}>
           {{this.model.name}}
         </span>
+      </span>
+      <span resource={{this.model.startDate.uri}} typeof={{this.model.startDate.rdfaBindings.class}}>
         <span property={{this.model.startDate.rdfaBindings.time}} datatype="xsd:date">
           {{moment-format this.model.startDate.time 'DD/MM/YYYY'}}
         </span>
-        -
+      </span>
+      -
+      <span resource={{this.model.endDate.uri}} typeof={{this.model.endDate.rdfaBindings.class}}>
         <span property={{this.model.endDate.rdfaBindings.time}} datatype="xsd:date">
           {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
         </span>
-      </AuHeading>
-      <p class="au-u-h3 metis-u-text-gray-600">
-        Tijdspecialisatie van
-        <span property={{this.model.isTimespecializationOf.rdfaBindings.name}}>
-          <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
-            {{this.model.isTimespecializationOf.name}}
-          </LinkTo>
-        </span>
-      </p>
-    {{else}}
-      {{!-- bestuursorgaan niveau 2--}}
-      <AuHeading class="au-u-margin-bottom-large">
-        Legislatuur {{moment-format this.model.startDate.time 'DD/MM/YYYY'}} -
-        {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
-      </AuHeading>
-      <p class="au-u-h3 metis-u-text-gray-600">
-        Tijdspecialisatie van
+      </span>
+    </AuHeading>
+    <p class="au-u-h3 metis-u-text-gray-600" resource={{this.model.isTimespecializationOf.uri}}
+      typeof={{this.model.isTimespecializationOf.rdfaBindings.class}}>
+      Tijdspecialisatie van
+      <span property={{this.model.isTimespecializationOf.rdfaBindings.name}}>
         <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
           {{this.model.isTimespecializationOf.name}}
         </LinkTo>
-      </p>
-    {{/if}}
-  {{else}}
-    {{!-- bestuursorgaan niveau 1--}}
+      </span>
+    </p>
+  {{else}} {{!-- bestuursorgaan niveau 2--}}
     <AuHeading class="au-u-margin-bottom-large">
-      {{this.model.name}}
+      Legislatuur
+      <span resource={{this.model.startDate.uri}} typeof={{this.model.startDate.rdfaBindings.class}}>
+        <span property={{this.model.startDate.rdfaBindings.time}} datatype="xsd:date">
+          {{moment-format this.model.startDate.time 'DD/MM/YYYY'}}
+        </span>
+      </span>
+      -
+      <span resource={{this.model.endDate.uri}} typeof={{this.model.endDate.rdfaBindings.class}}>
+        <span property={{this.model.endDate.rdfaBindings.time}} datatype="xsd:date">
+          {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
+        </span>
+      </span>
     </AuHeading>
-    <p class="au-u-h3 metis-u-text-gray-600">
+    <p class="au-u-h3 metis-u-text-gray-600" resource={{this.model.isTimespecializationOf.uri}}
+      typeof={{this.model.isTimespecializationOf.rdfaBindings.class}}>
+      Tijdspecialisatie van
+      <span property={{this.model.isTimespecializationOf.rdfaBindings.name}}>
+        <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
+          {{this.model.isTimespecializationOf.name}}
+        </LinkTo>
+      </span>
+    </p>
+  {{/if}}
+{{else}}
+  {{!-- bestuursorgaan niveau 1--}}
+  <AuHeading class="au-u-margin-bottom-large">
+    <span resource={{this.model.uri}} typeof={{this.model.rdfaBindings.class}}>
+      <span property={{this.model.rdfaBindings.name}}>
+        {{this.model.name}}
+      </span>
+    </span>
+  </AuHeading>
+  <p class="au-u-h3 metis-u-text-gray-600" resource={{this.model.classification.uri}}
+    typeof={{this.model.classification.rdfaBindings.class}}>
+    <span property={{this.model.classification.rdfaBindings.label}}>
       <ThemisUri @uri={{this.model.classification.uri}}>
         {{this.model.classification.label}}
       </ThemisUri>
-    </p>
-    <p class="au-u-h3 metis-u-text-gray-600">
-      van
+    </span>
+  </p>
+  <p class="au-u-h3 metis-u-text-gray-600" resource={{this.model.governmentUnit.uri}}
+    typeof={{this.model.governmentUnit.rdfaBindings.class}}>
+    van
+    <span property={{this.model.governmentUnit.rdfaBindings.name}}>
       <ThemisUri @uri={{this.model.governmentUnit.uri}}>
         {{this.model.governmentUnit.name}}
       </ThemisUri>
-    </p>
+    </span>
+  </p>
 
-  {{/if}}
-</div>
+{{/if}}
 
 <AuHr />
 
@@ -63,17 +91,25 @@
     <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
       Mandatarissen
     </AuHeading>
-    <p class="au-u-margin-bottom">
-      Samenstelling van de regering {{this.model.name}}
+    <p class="au-u-margin-bottom" resource={{this.model.uri}} typeof={{this.model.rdfaBindings.class}}>
+      Samenstelling van de regering
+      <span property={{this.model.rdfaBindings.name}}>
+        {{this.model.name}}
+      </span>
     </p>
     <div class="au-o-grid">
       {{#each (sort-by "person.familyName" this.mandateesByPerson) as |person|}}
-        <div class="au-o-grid__item au-u-1-2">
+        <div class="au-o-grid__item au-u-1-2" resource={{person.uri}} typeof={{person.rdfaBindings.class}}>
           <AuCard as |c|>
             <c.header>
               <AuHeading @level="2" @skin="4">
                 <LinkTo @route="view.person" @query={{hash resource=person.person.uri}}>
-                  {{person.person.firstName}} {{person.person.familyName}}
+                  <span property={{person.rdfaBindings.firstName}}>
+                    {{person.person.firstName}}
+                  </span>
+                  <span property={{person.rdfaBindings.firstName}}>
+                    {{person.person.familyName}}
+                  </span>
                 </LinkTo>
               </AuHeading>
               <AuHr />
@@ -81,28 +117,52 @@
             <c.content>
               {{#each (sort-by "startDate" person.mandatees) as |mandatee|}}
                 <AuHeading @level="6" @skin="6">
-                  <ThemisUri @uri={{mandatee.mandate.uri}}>
-                    {{mandatee.mandate.governmentFunction.label}}
-                  </ThemisUri>
+                  <span resource={{mandatee.mandate.governmentFunction.uri}}
+                    typeof={{mandatee.mandate.governmentFunction.rdfaBindings.class}}>
+                    <span property={{mandatee.mandate.governmentFunction.rdfaBindings.label}}>
+                      <ThemisUri @uri={{mandatee.mandate.uri}}>
+                        {{mandatee.mandate.governmentFunction.label}}
+                      </ThemisUri>
+                    </span>
+                  </span>
                 </AuHeading>
                 {{#if mandatee.governmentFields}}
-                  <p class="au-u-margin-top-small">
+                  <p>
                     van
                     {{#each mandatee.governmentFields as |governmentField|}}
-                      <AuPill>
-                        <ThemisUri @uri={{governmentField.uri}}>
-                          {{governmentField.label}}
-                        </ThemisUri>
-                      </AuPill>
+                      <span class="au-u-margin-top-small" resource={{governmentField.uri}}
+                        typeof={{governmentField.rdfaBindings.class}}>
+                        <AuPill>
+                          <span property={{governmentField.rdfaBindings.label}}>
+                            <ThemisUri @uri={{governmentField.uri}}>
+                              {{governmentField.label}}
+                            </ThemisUri>
+                          </span>
+                        </AuPill>
+                      </span>
                     {{/each}}
                   </p>
-                  <p class="au-u-margin-top-small">met rangorde {{mandatee.priority}}</p>
+                  <p class="au-u-margin-top-small" resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
+                    met rangorde
+                    <span property={{mandatee.rdfaBindings.priority}}>
+                      {{mandatee.priority}}
+                    </span>
+                  </p>
                 {{/if}}
                 <p class="au-u-margin-top-small">
                   van
                   <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
-                    {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
-                    tot {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                    <span resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
+                      <span property={{mandatee.rdfaBindings.startDate}}>
+                        {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
+                      </span>
+                    </span>
+                    tot
+                    <span resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
+                      <span property={{mandatee.rdfaBindings.endDate}}>
+                        {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                      </span>
+                    </span>
                   </LinkTo>
                 </p>
                 <AuHr />
@@ -123,13 +183,26 @@
           <AuCard as |c|>
             <c.header>
               <AuHeading @level="2" @skin="4">
-                <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
-                  {{governmentBody.name}}
-                </LinkTo>
+                <span resource={{governmentBody.uri}} typeof={{governmentBody.rdfaBindings.class}}>
+                  <span property={{governmentBody.rdfaBindings.name}}>
+                    <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
+                      {{governmentBody.name}}
+                    </LinkTo>
+                  </span>
+                </span>
               </AuHeading>
               <p>
-                {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}} -
-                {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
+                <span resource={{governmentBody.startDate.uri}} typeof={{governmentBody.startDate.rdfaBindings.class}}>
+                  <span property={{governmentBody.startDate.rdfaBindings.time}} datatype="xsd:date">
+                    {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}}
+                  </span>
+                </span>
+                -
+                <span resource={{governmentBody.endDate.uri}} typeof={{governmentBody.endDate.rdfaBindings.class}}>
+                  <span property={{governmentBody.endDate.rdfaBindings.time}} datatype="xsd:date">
+                    {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
+                  </span>
+                </span>
               </p>
             </c.header>
           </AuCard>
@@ -147,7 +220,14 @@
             <c.header>
               <AuHeading @level="2" @skin="4">
                 <LinkTo @route="view.person" @query={{hash resource=name.person.uri}}>
-                  {{name.person.firstName}} {{name.person.familyName}}
+                  <span resource={{name.person.uri}} typeof={{name.person.rdfaBindings.class}}>
+                    <span property={{name.person.rdfaBindings.firstName}}>
+                      {{name.person.firstName}}
+                    </span>
+                    <span property={{name.person.rdfaBindings.familyName}}>
+                      {{name.person.familyName}}
+                    </span>
+                  </span>
                 </LinkTo>
               </AuHeading>
               <AuHr />
@@ -155,9 +235,14 @@
             <c.content>
               {{#each (sort-by "startDate" name.mandatees) as |mandatee|}}
                 <AuHeading @level="6" @skin="6">
-                  <ThemisUri @uri={{mandatee.mandate.uri}}>
-                    {{mandatee.mandate.governmentFunction.label}}
-                  </ThemisUri>
+                  <span resource={{mandatee.mandate.governmentFunction.uri}}
+                    typeof={{mandatee.mandate.governmentFunction.rdfaBindings.class}}>
+                    <span property={{mandatee.mandate.governmentFunction.rdfaBindings.label}}>
+                      <ThemisUri @uri={{mandatee.mandate.uri}}>
+                        {{mandatee.mandate.governmentFunction.label}}
+                      </ThemisUri>
+                    </span>
+                  </span>
                 </AuHeading>
 
                 {{#if mandatee.governmentFields}}
@@ -165,19 +250,37 @@
                     van
                     {{#each mandatee.governmentFields as |governmentField|}}
                       <AuPill>
-                        <ThemisUri @uri={{governmentField.uri}}>
-                          {{governmentField.label}}
-                        </ThemisUri>
+                        <span resource={{governmentField.uri}} typeof={{governmentField.rdfaBindings.class}}>
+                          <span property={{governmentField.rdfaBindings.label}}>
+                            <ThemisUri @uri={{governmentField.uri}}>
+                              {{governmentField.label}}
+                            </ThemisUri>
+                          </span>
+                        </span>
                       </AuPill>
                     {{/each}}
                   </p>
-                  <p class="au-u-margin-top-small">met rangorde {{mandatee.priority}}</p>
+                  <p class="au-u-margin-top-small" resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
+                    met rangorde
+                    <span property={{mandatee.rdfaBindings.priority}}>
+                      {{mandatee.priority}}
+                    </span>
+                  </p>
                 {{/if}}
                 <p class="au-u-margin-top-small">
                   van
                   <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
-                    {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
-                    tot {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                    <span resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
+                      <span property={{mandatee.rdfaBindings.startDate}}>
+                        {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
+                      </span>
+                    </span>
+                    tot
+                    <span resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
+                      <span property={{mandatee.rdfaBindings.endDate}}>
+                        {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
+                      </span>
+                    </span>
                   </LinkTo>
                 </p>
                 <AuHr />
@@ -203,23 +306,55 @@
                 <tr>
                   <td class="card-table-cell title">
                     <AuHeading @level="2" @skin="4">
-                      <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
-                        {{governmentBody.isTimespecializationOf.name}}
-                      </LinkTo>
+                      <span resource={{governmentBody.uri}} typeof={{governmentBody.rdfaBindings.class}}>
+                        <span property={{governmentBody.rdfaBindings.name}}>
+                          <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
+                            {{governmentBody.isTimespecializationOf.name}}
+                          </LinkTo>
+                        </span>
+                      </span>
                     </AuHeading>
                     <p>
-                      {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}} -
-                      {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
+                      <span resource={{governmentBody.startDate.uri}}
+                        typeof={{governmentBody.startDate.rdfaBindings.class}}>
+                        <span property={{governmentBody.startDate.rdfaBindings.time}}>
+                          {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}}
+                        </span>
+                      </span>
+                      -
+                      <span resource={{governmentBody.endDate.uri}}
+                        typeof={{governmentBody.endDate.rdfaBindings.class}}>
+                        <span property={{governmentBody.endDate.rdfaBindings.time}}>
+                          {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
+                        </span>
+                      </span>
                     </p>
                   </td>
                   <td class="card-table-cell">
                     {{#each (sort-by "startDate.time:desc" governmentBody.governmentBodies) as |governmentBodyL3|}}
                       <div class="au-u-margin-top-small au-u-margin-left-large">
                         <LinkTo @route="view.government-body" @query={{hash resource=governmentBodyL3.uri}}>
-                          Regering {{governmentBodyL3.name}}
+                          Regering
+                          <span resource={{governmentBodyL3.uri}} typeof={{governmentBodyL3.rdfaBindings.class}}>
+                            <span property={{governmentBodyL3.rdfaBindings.name}}>
+                              {{governmentBodyL3.name}}
+                            </span>
+                          </span>
                         </LinkTo>
-                        <p>{{moment-format governmentBodyL3.startDate.time 'DD/MM/YYYY'}} -
-                          {{if governmentBodyL3.endDate (moment-format governmentBodyL3.endDate.time 'DD/MM/YYYY') 'heden'}}
+                        <p>
+                          <span resource={{governmentBodyL3.startDate.uri}}
+                            typeof={{governmentBodyL3.startDate.rdfaBindings.class}}>
+                            <span property={{governmentBodyL3.startDate.rdfaBindings.time}}>
+                              {{moment-format governmentBodyL3.startDate.time 'DD/MM/YYYY'}}
+                            </span>
+                          </span>
+                          -
+                          <span resource={{governmentBodyL3.endDate.uri}}
+                            typeof={{governmentBodyL3.endDate.rdfaBindings.class}}>
+                            <span property={{governmentBodyL3.endDate.rdfaBindings.time}}>
+                              {{if governmentBodyL3.endDate (moment-format governmentBodyL3.endDate.time 'DD/MM/YYYY') 'heden'}}
+                            </span>
+                          </span>
                         </p>
                       </div>
                     {{/each}}
