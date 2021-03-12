@@ -1,46 +1,59 @@
-{{#if this.model.isTimespecializationOf}}
-  {{#if this.model.mandatees}}
-    {{!-- bestuursorgaan niveau 3--}}
-    <AuHeading class="au-u-margin-bottom-large">
-      {{this.model.name}} {{moment-format this.model.startDate.time 'DD/MM/YYYY'}} -
-      {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
-    </AuHeading>
-    <p class="au-u-h3 metis-u-text-gray-600">
-      Tijdspecialisatie van
-      <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
-        {{this.model.isTimespecializationOf.name}}
-      </LinkTo>
-    </p>
+<div resource={{this.model.uri}} typeof={{this.model.rdfaBindings.class}}>
+  {{#if this.model.isTimespecializationOf}}
+    {{#if this.model.mandatees}}
+      {{!-- bestuursorgaan niveau 3--}}
+      <AuHeading class="au-u-margin-bottom-large">
+        <span property={{this.model.rdfaBindings.name}}>
+          {{this.model.name}}
+        </span>
+        <span property={{this.model.startDate.rdfaBindings.time}} datatype="xsd:date">
+          {{moment-format this.model.startDate.time 'DD/MM/YYYY'}}
+        </span>
+        -
+        <span property={{this.model.endDate.rdfaBindings.time}} datatype="xsd:date">
+          {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
+        </span>
+      </AuHeading>
+      <p class="au-u-h3 metis-u-text-gray-600">
+        Tijdspecialisatie van
+        <span property={{this.model.isTimespecializationOf.rdfaBindings.name}}>
+          <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
+            {{this.model.isTimespecializationOf.name}}
+          </LinkTo>
+        </span>
+      </p>
+    {{else}}
+      {{!-- bestuursorgaan niveau 2--}}
+      <AuHeading class="au-u-margin-bottom-large">
+        Legislatuur {{moment-format this.model.startDate.time 'DD/MM/YYYY'}} -
+        {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
+      </AuHeading>
+      <p class="au-u-h3 metis-u-text-gray-600">
+        Tijdspecialisatie van
+        <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
+          {{this.model.isTimespecializationOf.name}}
+        </LinkTo>
+      </p>
+    {{/if}}
   {{else}}
-    {{!-- bestuursorgaan niveau 2--}}
+    {{!-- bestuursorgaan niveau 1--}}
     <AuHeading class="au-u-margin-bottom-large">
-      Legislatuur {{moment-format this.model.startDate.time 'DD/MM/YYYY'}} -
-      {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
+      {{this.model.name}}
     </AuHeading>
     <p class="au-u-h3 metis-u-text-gray-600">
-      Tijdspecialisatie van
-      <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
-        {{this.model.isTimespecializationOf.name}}
-      </LinkTo>
+      <ThemisUri @uri={{this.model.classification.uri}}>
+        {{this.model.classification.label}}
+      </ThemisUri>
     </p>
+    <p class="au-u-h3 metis-u-text-gray-600">
+      van
+      <ThemisUri @uri={{this.model.governmentUnit.uri}}>
+        {{this.model.governmentUnit.name}}
+      </ThemisUri>
+    </p>
+
   {{/if}}
-{{else}}
-  {{!-- bestuursorgaan niveau 1--}}
-  <AuHeading class="au-u-margin-bottom-large">
-    {{this.model.name}}
-  </AuHeading>
-  <p class="au-u-h3 metis-u-text-gray-600">
-    <ThemisUri @uri={{this.model.classification.uri}}>
-      {{this.model.classification.label}}
-    </ThemisUri>
-  </p>
-  <p class="au-u-h3 metis-u-text-gray-600">
-    van
-    <ThemisUri @uri={{this.model.governmentUnit.uri}}>
-      {{this.model.governmentUnit.name}}
-    </ThemisUri>
-  </p>
-{{/if}}
+</div>
 
 <AuHr />
 

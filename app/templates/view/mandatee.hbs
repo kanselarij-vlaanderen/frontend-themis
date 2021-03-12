@@ -1,12 +1,23 @@
 <AuHeading class="au-u-margin-bottom-large">
-  Mandataris {{this.model.person.firstName}} {{this.model.person.familyName}}
-  <LinkTo @route="view.person" @query={{hash resource=this.model.person.uri}}>
-    <AuHeading @level="6" @skin="6">[Open]</AuHeading>
-  </LinkTo>
+  Mandataris
+  <span resource={{this.model.person.uri}} typeof={{this.model.person.rdfaBindings.class}}>
+    <span property={{this.model.person.rdfaBindings.firstName}}>
+      {{this.model.person.firstName}}</span>
+    <span property={{this.model.person.rdfaBindings.familyName}}>
+      {{this.model.person.familyName}}
+    </span>
+
+    <LinkTo @route="view.person" @query={{hash resource=this.model.person.uri}}>
+      <AuHeading @level="6" @skin="6">[Open]</AuHeading>
+    </LinkTo>
+  </span>
 </AuHeading>
 
-<p class="au-u-h3 metis-u-text-gray-600">
-  {{this.model.mandate.governmentBody.name}}
+<p class="au-u-h3 metis-u-text-gray-600" resource={{this.model.mandate.governmentBody.uri}}
+  typeof={{this.model.mandate.governmentBody.rdfaBindings.class}}>
+  <span property={{this.model.mandate.governmentBody.rdfaBindings.name}}>
+    {{this.model.mandate.governmentBody.name}}
+  </span>
 </p>
 <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
   Mandaat
@@ -14,32 +25,57 @@
 <AuCard as |c|>
   <c.header>
     <AuHeading @level="2" @skin="4">
-      <ThemisUri @uri={{this.model.mandate.uri}}>
-        {{this.model.mandate.governmentFunction.label}}
-      </ThemisUri>
+      <div resource={{this.model.mandate.governmentFunction.uri}}
+        typeof={{this.model.mandate.governmentFunction.rdfaBindings.class}}>
+        <span property={{this.model.mandate.governmentFunction.rdfaBindings.label}}>
+          <ThemisUri @uri={{this.model.mandate.uri}}>
+            {{this.model.mandate.governmentFunction.label}}
+          </ThemisUri>
+        </span>
+      </div>
     </AuHeading>
     {{#if this.model.governmentFields}}
       <p class="au-u-margin-top-small">
         van
         {{#each this.model.governmentFields as |governmentField|}}
           <AuPill>
-            <ThemisUri @uri={{governmentField.uri}}>
-              {{governmentField.label}}
-            </ThemisUri>
+            <span resource={{governmentField.uri}} typeof={{governmentField.rdfaBindings.class}}>
+              <span property={{governmentField.rdfaBindings.label}}>
+                <ThemisUri @uri={{governmentField.uri}}>
+                  {{governmentField.label}}
+                </ThemisUri>
+              </span>
+            </span>
           </AuPill>
         {{/each}}
       </p>
-      <p class="au-u-margin-top-small">met rangorde {{this.model.priority}}</p>
+      <p class="au-u-margin-top-small">
+        met rangorde
+        <span resource={{this.model.uri}} typeof={{this.model.rdfaBindings.class}}>
+          <span property={{this.model.rdfaBindings.priority}}>
+            {{this.model.priority}}
+          </span>
+        </span>
+      </p>
     {{/if}}
     <p class="au-u-margin-top-small">
       in regering
-      <LinkTo @route="view.government-body" @query={{hash resource=this.model.governmentBody.uri}}>
-        {{this.model.governmentBody.name}}
-      </LinkTo>
+      <span resource={{this.model.governmentBody.uri}} typeof={{this.model.governmentBody.rdfaBindings.class}}>
+        <span property={{this.model.governmentBody.rdfaBindings.name}}>
+          <LinkTo @route="view.government-body" @query={{hash resource=this.model.governmentBody.uri}}>
+            {{this.model.governmentBody.name}}
+          </LinkTo>
+        </span>
+      </span>
     </p>
-    <p class="au-u-margin-top-small">
-      van {{moment-format this.model.startDate 'DD/MM/YYYY'}} tot
-      {{if this.model.endDate (moment-format this.model.endDate 'DD/MM/YYYY') 'heden'}}
+    <p class="au-u-margin-top-small" resource={{this.model.uri}} typeof={{this.model.rdfaBindings.class}}>
+      van
+      <span property={{this.model.rdfaBindings.startDate}} datatype="xsd:date">
+        {{moment-format this.model.startDate 'DD/MM/YYYY'}}</span>
+      tot
+      <span property={{this.model.rdfaBindings.endDate}} datatype="xsd:date">
+        {{if this.model.endDate (moment-format this.model.endDate 'DD/MM/YYYY') 'heden'}}
+      </span>
     </p>
   </c.header>
 </AuCard>

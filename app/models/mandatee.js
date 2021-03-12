@@ -14,10 +14,12 @@ export default class MandateeModel extends Model {
     return { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects
       class: "http://data.vlaanderen.be/ns/mandaat#Mandataris",
       priority: "http://data.vlaanderen.be/ns/mandaat#rangorde",
-      startdate: "http://data.vlaanderen.be/ns/mandaat#start",
-      enddate: "http://data.vlaanderen.be/ns/mandaat#einde",
+      startDate: "http://data.vlaanderen.be/ns/mandaat#start",
+      endDate: "http://data.vlaanderen.be/ns/mandaat#einde",
       person: "http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan",
-      governmentfield: "http://data.vlaanderen.be/ns/mandaat#beleidsdomein"
+      mandate: "http://data.vlaanderen.be/ns/mandaat#beleidsdomein",
+      governmentFields: "http://data.vlaanderen.be/ns/mandaat#beleidsdomein",
+      governmentBody: "http://www.w3.org/ns/prov#hadMember"
     }
   }
 

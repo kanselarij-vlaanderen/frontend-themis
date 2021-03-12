@@ -7,10 +7,8 @@ export default class IndexRoute extends Route {
   async model() {
     const concepts = await this.store.query('concept',
       {
-       filter: { 'in-scheme': { ':uri:': datasetTypesConceptSchemeUri }},
-        include: [
-          'in-scheme'
-        ].join(',')
+        filter: { 'in-scheme': { ':uri:': datasetTypesConceptSchemeUri } },
+        include: 'in-scheme'
       }
     );
 
