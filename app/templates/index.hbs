@@ -6,29 +6,6 @@
   <AuHr @size="large" />
   <div class="au-o-region-large">
     <AuHeading @level="3" @skin="3">
-      Dataset types
-    </AuHeading>
-    <p class="au-c-intro au-u-margin-top-small au-u-margin-bottom-small">
-      Themis bevat datasets met volgende types:
-    </p>
-    <div class="au-o-grid">
-      {{#each (sort-by "label" this.model.concepts)  as |datasetType|}}
-        <div class="au-o-grid__item au-u-1-2">
-          <AuCard as |c|>
-            <c.header>
-              <a href={{datasetType.uri}}>
-                {{datasetType.label}}</a>
-            </c.header>
-            <c.content>
-              {{datasetType.definition}}
-            </c.content>
-          </AuCard>
-        </div>
-      {{/each}}
-    </div>
-  </div>
-  <div class="au-o-region-large">
-    <AuHeading @level="3" @skin="3">
       Ontdek de data
     </AuHeading>
     <p class="au-c-intro au-u-margin-top-small au-u-margin-bottom-small">
@@ -84,6 +61,30 @@
           </AuCard>
         </div>
       {{/if}}
+    </div>
+    <div class="au-o-region-large">
+      <AuHeading @level="3" @skin="3">
+        Datasets
+      </AuHeading>
+      <p class="au-c-intro au-u-margin-top-small au-u-margin-bottom-small">
+        Soorten datasets op het data portaal
+      </p>
+      <div class="au-o-grid">
+        {{#each (sort-by "label" this.model.concepts)  as |datasetType|}}
+          <div class="au-o-grid__item au-u-1-2">
+            <AuCard as |c|>
+              <c.header>
+                <ThemisUri @uri={{datasetType.uri}}>
+                  {{datasetType.label}}
+                </ThemisUri>
+              </c.header>
+              <c.content>
+                {{datasetType.definition}}
+              </c.content>
+            </AuCard>
+          </div>
+        {{/each}}
+      </div>
     </div>
     <div class="au-o-region-large">
       <div>
