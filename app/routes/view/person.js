@@ -11,7 +11,6 @@ export default class ViewPersonRoute extends Route {
       filter: { ':uri:': resource },
       include: [
         'mandatees',
-        'mandatees.government-fields',
         'mandatees.mandate',
         'mandatees.mandate.government-function',
         'mandatees.mandate.government-body'

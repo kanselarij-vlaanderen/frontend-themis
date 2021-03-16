@@ -15,36 +15,25 @@
       <div class="au-o-grid__item au-u-1-2" resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
         <AuCard as |c|>
           <c.header>
-            <AuHeading @level="2" @skin="4">
-              <span resource={{mandatee.mandate.governmentFunction.uri}}
-                typeof={{mandatee.mandate.governmentFunction.rdfaBindings.class}}>
-                <span property={{mandatee.mandate.governmentFunction.rdfaBindings.label}}>
-                  <ThemisUri @uri={{mandatee.mandate.uri}}>
-                    {{mandatee.mandate.governmentFunction.label}}
-                  </ThemisUri>
-                </span>
-              </span>
-            </AuHeading>
-            {{#if mandatee.governmentFields}}
+            {{#if mandatee.title}}
               <p class="au-u-margin-top-small">
-                van
-                {{#each mandatee.governmentFields as |governmentField|}}
-                  <AuPill>
-                    <span resource={{governmentField.uri}} typeof={{governmentField.rdfaBindings.class}}>
-                      <span property={{mandatee.mandate.governmentFunction.rdfaBindings.label}}>
-                        <ThemisUri @uri={{governmentField.uri}}>
-                          {{governmentField.label}}
-                        </ThemisUri>
-                      </span>
-                    </span>
-                  </AuPill>
-                {{/each}}
+                <span property={{mandatee.rdfaBindings.title}}>
+                  <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                    {{mandatee.title}}
+                  </LinkTo>
+                </span>
               </p>
               <p class="au-u-margin-top-small">met rangorde
                 <span property={{mandatee.rdfaBindings.priority}}>
                   {{mandatee.priority}}
                 </span>
               </p>
+            {{else}}
+              <span property={{this.model.rdfaBindings.mandatees}}>
+                <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                  {{mandatee.mandate.governmentFunction.label}}
+                </LinkTo>
+              </span>
             {{/if}}
             <p class="au-u-margin-top-small">
               in regering
@@ -58,22 +47,19 @@
             </p>
             <p class="au-u-margin-top-small">
               van
-              <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
-                <span resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
-                  <span property={{mandatee.rdfaBindings.startDate}} datatype="xsd:date">
-                    {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
-                  </span>
+              <span resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
+                <span property={{mandatee.rdfaBindings.startDate}} datatype="xsd:date">
+                  {{moment-format mandatee.startDate 'DD/MM/YYYY'}}
                 </span>
-                tot
-                <span resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
-                  <span property={{mandatee.rdfaBindings.endDate}} datatype="xsd:date">
-                    {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
-                  </span>
+              </span>
+              tot
+              <span resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
+                <span property={{mandatee.rdfaBindings.endDate}} datatype="xsd:date">
+                  {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
                 </span>
-              </LinkTo>
+              </span>
             </p>
           </c.header>
-
         </AuCard>
       </div>
     {{/each}}

@@ -4,11 +4,13 @@
     Ontdek gestructureerde informatie over de besluitvorming van de Vlaamse regering.
   </AuHeading>
   <AuHr @size="large" />
-  <div class="au-o-region-small">
+  <div class="au-o-region-large">
     <AuHeading @level="3" @skin="3">
       Dataset types
     </AuHeading>
-    <p class="au-c-intro">Themis bevat de volgende dataset types:</p>
+    <p class="au-c-intro au-u-margin-top-small au-u-margin-bottom-small">
+      Themis bevat datasets met volgende types:
+    </p>
     <div class="au-o-grid">
       {{#each (sort-by "label" this.model.concepts)  as |datasetType|}}
         <div class="au-o-grid__item au-u-1-2">
@@ -25,37 +27,74 @@
       {{/each}}
     </div>
   </div>
-  <div class="au-o-region-small">
+  <div class="au-o-region-large">
     <AuHeading @level="3" @skin="3">
       Ontdek de data
     </AuHeading>
-    <div>
-      Start hier om de historische data en ministers van de Vlaamse regering te bekijken:
+    <p class="au-c-intro au-u-margin-top-small au-u-margin-bottom-small">
+      Bekijk de data of ga zelf op zoek
+    </p>
+    <div class="au-o-grid">
+      <div class="au-o-grid__item au-u-1-2">
+        <AuCard as |c|>
+          <c.header>
+            <LinkTo @route="view.government-body" @query={{hash
+              resource="http://themis.vlaanderen.be/id/bestuursorgaan/7f2c82aa-75ac-40f8-a6c3-9fe539163025" }}>
+              Bestuursorgaan Vlaamse Regering</LinkTo>
+          </c.header>
+          <c.content>
+            Bekijk alle legislaturen en regeringssamenstellingen
+          </c.content>
+        </AuCard>
+      </div>
+      <div class="au-o-grid__item au-u-1-2">
+        <AuCard as |c|>
+          <c.header>
+            <LinkTo @route="view.government-body" @query={{hash resource=this.model.currentGovernment.uri}}>
+              Regering {{this.model.currentGovernment.name}}
+            </LinkTo>
+          </c.header>
+          <c.content>
+            Bekijk de samenstelling van de huidige Vlaamse regering
+          </c.content>
+        </AuCard>
+      </div>
+      <div class="au-o-grid__item au-u-1-2">
+        <AuCard as |c|>
+          <c.header>
+            <LinkTo @route="sparql">SPARQL Endpoint</LinkTo>
+          </c.header>
+          <c.content>
+            Ga zelf aan de slag om de data op te zoeken
+          </c.content>
+        </AuCard>
+      </div>
+      {{#if this.model.mostRecentDataset.meeting}}
+        <div class="au-o-grid__item au-u-1-2">
+          <AuCard as |c|>
+            <c.header>
+              <ThemisUri @uri={{this.model.mostRecentDataset.dataset.uri}}>
+                Dataset van de ministerraad van
+                {{moment-format this.model.mostRecentDataset.meeting.plannedStart 'DD/MM/YYYY'}}
+              </ThemisUri>
+            </c.header>
+            <c.content>
+              Bekijk de meest recente ministerraad
+            </c.content>
+          </AuCard>
+        </div>
+      {{/if}}
     </div>
-    <div>
-      Bekijk alle legislaturen van de Vlaamse regering:
-    </div>
-    <LinkTo @route="view.government-body" @query={{hash
-      resource="http://themis.vlaanderen.be/id/bestuursorgaan/7f2c82aa-75ac-40f8-a6c3-9fe539163025" }}>
-      Bestuursorgaan Vlaamse Regering</LinkTo>
-    <div>
-      Bekijk de samenstelling van de huidge Vlaamse regering:
-    </div>
-  </div>
-  <div class="au-o-region-small">
-    <AuHeading @level="3" @skin="3">
-      Query
-    </AuHeading>
-    Query zelf de data via het <LinkTo @route="sparql">SPARQL Endpoint</LinkTo>
-  </div>
-  <div class="au-o-region-small">
-    <div>
-      <AuHeading @level="3" @skin="3">
-        Documentatie
-      </AuHeading>
-      Lees meer over de data ontsluiting en besluitvormingscatalogus in de
-      <LinkTo @route="docs">Themis documentatie</LinkTo>
-
+    <div class="au-o-region-large">
+      <div>
+        <AuHeading @level="3" @skin="3">
+          Documentatie
+        </AuHeading>
+        <p class="au-u-margin-top-small au-u-margin-bottom-small">
+          Lees meer over de data ontsluiting en besluitvormingscatalogus in de
+          <LinkTo @route="docs">Themis documentatie</LinkTo>
+        </p>
+      </div>
     </div>
   </div>
 </div>

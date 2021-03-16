@@ -4,10 +4,10 @@ export default class MandateeModel extends Model {
   @attr() priority;
   @attr() startDate;
   @attr() endDate;
+  @attr() title;
   @attr() uri;
   @belongsTo('person') person;
   @belongsTo('mandate') mandate;
-  @hasMany('government-field') governmentFields;
   @belongsTo('government-body') governmentBody;
 
   get rdfaBindings() {
@@ -16,9 +16,9 @@ export default class MandateeModel extends Model {
       priority: "http://data.vlaanderen.be/ns/mandaat#rangorde",
       startDate: "http://data.vlaanderen.be/ns/mandaat#start",
       endDate: "http://data.vlaanderen.be/ns/mandaat#einde",
+      title: "http://purl.org/dc/terms/title",
       person: "http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan",
       mandate: "http://data.vlaanderen.be/ns/mandaat#beleidsdomein",
-      governmentFields: "http://data.vlaanderen.be/ns/mandaat#beleidsdomein",
       governmentBody: "http://www.w3.org/ns/prov#hadMember"
     }
   }

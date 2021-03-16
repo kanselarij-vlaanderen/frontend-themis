@@ -13,12 +13,20 @@
   </span>
 </AuHeading>
 
-<p class="au-u-h3 metis-u-text-gray-600" resource={{this.model.mandate.governmentBody.uri}}
-  typeof={{this.model.mandate.governmentBody.rdfaBindings.class}}>
-  <span property={{this.model.mandate.governmentBody.rdfaBindings.name}}>
-    {{this.model.mandate.governmentBody.name}}
+<div class="au-u-h3 metis-u-text-gray-600">
+  {{#if this.model.title}}
+    <div property={{this.model.rdfaBindings.title}}>
+      {{this.model.title}}
+    </div>
+    in de
+  {{/if}}
+  <span resource={{this.model.mandate.governmentBody.uri}}
+    typeof={{this.model.mandate.governmentBody.rdfaBindings.class}}>
+    <span property={{this.model.mandate.governmentBody.rdfaBindings.name}}>
+      {{this.model.mandate.governmentBody.name}}
+    </span>
   </span>
-</p>
+</div>
 <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
   Mandaat
 </AuHeading>
@@ -34,21 +42,7 @@
         </span>
       </div>
     </AuHeading>
-    {{#if this.model.governmentFields}}
-      <p class="au-u-margin-top-small">
-        van
-        {{#each this.model.governmentFields as |governmentField|}}
-          <AuPill>
-            <span resource={{governmentField.uri}} typeof={{governmentField.rdfaBindings.class}}>
-              <span property={{governmentField.rdfaBindings.label}}>
-                <ThemisUri @uri={{governmentField.uri}}>
-                  {{governmentField.label}}
-                </ThemisUri>
-              </span>
-            </span>
-          </AuPill>
-        {{/each}}
-      </p>
+    {{#if this.model.priority}}
       <p class="au-u-margin-top-small">
         met rangorde
         <span resource={{this.model.uri}} typeof={{this.model.rdfaBindings.class}}>

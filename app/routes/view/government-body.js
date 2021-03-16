@@ -19,7 +19,6 @@ export default class ViewGovernmentbodyRoute extends Route {
         'mandates.mandatees.person',
         'mandatees.person',
         'mandatees.mandate.government-function',
-        'mandatees.government-fields',
         'government-unit'
       ].join(',')
     } );
