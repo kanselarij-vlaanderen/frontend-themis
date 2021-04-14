@@ -99,15 +99,16 @@
     </p>
     <div class="au-o-grid">
       {{#each (sort-by "person.familyName" this.mandateesByPerson) as |person|}}
-        <div class="au-o-grid__item au-u-1-2" resource={{person.uri}} typeof={{person.rdfaBindings.class}}>
+        <div class="au-o-grid__item au-u-1-2" resource={{person.person.uri}}
+          typeof={{person.person.rdfaBindings.class}}>
           <AuCard as |c|>
             <c.header>
               <AuHeading @level="2" @skin="4">
                 <LinkTo @route="view.person" @query={{hash resource=person.person.uri}}>
-                  <span property={{person.rdfaBindings.firstName}}>
+                  <span property={{person.person.rdfaBindings.firstName}}>
                     {{person.person.firstName}}
                   </span>
-                  <span property={{person.rdfaBindings.firstName}}>
+                  <span property={{person.person.rdfaBindings.firstName}}>
                     {{person.person.familyName}}
                   </span>
                 </LinkTo>
