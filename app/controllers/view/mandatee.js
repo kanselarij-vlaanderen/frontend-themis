@@ -4,7 +4,6 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency-decorators';
 import { tracked } from '@glimmer/tracking';
 
-
 export default class ViewMandateeController extends Controller {
   queryParams = ['resource', 'page', 'size'];
 
@@ -22,20 +21,20 @@ export default class ViewMandateeController extends Controller {
 
   @task
   *getNewsItems() {
-    console.log(this.queryParams);
-    this.newsItems = yield this.store.query('news-item',
-      { filter:
-        {
-          mandatees: {
-            ':uri:': this.resource
-          }
-        },
-      sort: '-date',
-      page: {
-        size: this.size,
-        number: this.page
-      }});
-      console.log(this.newsItems)
+    if (this.resource) {
+      this.newsItems = yield this.store.query('news-item',
+        { filter:
+          {
+            mandatees: {
+              ':uri:': this.resource
+            }
+          },
+        sort: '-date',
+        page: {
+          size: this.size,
+          number: this.page
+        }});
+    }
   }
 
   @action
