@@ -9,6 +9,7 @@ export default class MandateeModel extends Model {
   @belongsTo('person') person;
   @belongsTo('mandate') mandate;
   @belongsTo('government-body') governmentBody;
+  @hasMany('news-items') newsItems;
 
   get rdfaBindings() {
     return { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects
@@ -19,7 +20,8 @@ export default class MandateeModel extends Model {
       title: "http://purl.org/dc/terms/title",
       person: "http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan",
       mandate: "http://data.vlaanderen.be/ns/mandaat#beleidsdomein",
-      governmentBody: "http://www.w3.org/ns/prov#hadMember"
+      governmentBody: "http://www.w3.org/ns/prov#hadMember",
+      newsItems: "http://www.w3.org/ns/prov#qualifiedAssociation"
     }
   }
 

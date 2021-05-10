@@ -7,8 +7,7 @@ export default class ViewMandateeRoute extends Route {
 
   async model( { resource } ) {
     const mandatees = await this.store.query('mandatee',
-    { filter:
-      { ':uri:': resource},
+    { filter: { ':uri:': resource },
       include: [
         'person',
         'mandate.government-function',

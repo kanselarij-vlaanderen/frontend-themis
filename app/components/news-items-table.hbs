@@ -1,0 +1,40 @@
+{{#if this.getNewsItems.isRunning}}
+Aan het laden...
+{{else}}
+  <div class="au-u-margin-bottom-large">
+    <div class="au-c-data-table">
+      <div class="au-c-data-table__wrapper">
+        <table class="au-c-data-table__table  au-c-data-table__table--small">
+          <thead>
+            <tr class="au-c-data-table__header">
+              <th class="data-table__header-title">Datum</th>
+              <th class="data-table__header-title">Titel</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each this.newsItems as |row|}}
+              <tr>
+                <td>
+                  {{moment-format row.date 'DD/MM/YYYY'}}
+                </td>
+                <td>
+                  <ThemisUri @uri={{row.uri}}>
+                    {{row.shortTitle}}
+                  </ThemisUri>
+                </td>
+              </tr>
+            {{else}}
+              <tr>
+                <td colspan="2">Geen nieuwsberichten</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        {{#if this.newsItems}}
+          <Metis::Pagination @count={{this.newsItems.meta.count}} @size={{this.size}}
+                  @page={{this.page}} @selectPage={{this.selectPage}} />
+        {{/if}}
+      </div>
+    </div>
+  </div>
+{{/if}}
