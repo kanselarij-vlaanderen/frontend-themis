@@ -272,69 +272,73 @@
     {{#each (sort-by "startDate.time:desc" this.model.governmentBodies)  as |governmentBody|}}
       <div class="au-o-grid__item">
         <table class="card-table-wrapper">
-          <tr>
-            <td>
-              <table class="card-table">
-                <tr>
-                  <td class="card-table-cell title">
-                    <AuHeading @level="2" @skin="4">
-                      <span resource={{governmentBody.uri}} typeof={{governmentBody.rdfaBindings.class}}>
-                        <span property={{governmentBody.rdfaBindings.name}}>
-                          <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
-                            {{governmentBody.isTimespecializationOf.name}}
-                          </LinkTo>
-                        </span>
-                      </span>
-                    </AuHeading>
-                    <p>
-                      <span resource={{governmentBody.startDate.uri}}
-                        typeof={{governmentBody.startDate.rdfaBindings.class}}>
-                        <span property={{governmentBody.startDate.rdfaBindings.time}}>
-                          {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}}
-                        </span>
-                      </span>
-                      -
-                      <span resource={{governmentBody.endDate.uri}}
-                        typeof={{governmentBody.endDate.rdfaBindings.class}}>
-                        <span property={{governmentBody.endDate.rdfaBindings.time}}>
-                          {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
-                        </span>
-                      </span>
-                    </p>
-                  </td>
-                  <td class="card-table-cell">
-                    {{#each (sort-by "startDate.time:desc" governmentBody.governmentBodies) as |governmentBodyL3|}}
-                      <div class="au-u-margin-top-small au-u-margin-left-large">
-                        <LinkTo @route="view.government-body" @query={{hash resource=governmentBodyL3.uri}}>
-                          Regering
-                          <span resource={{governmentBodyL3.uri}} typeof={{governmentBodyL3.rdfaBindings.class}}>
-                            <span property={{governmentBodyL3.rdfaBindings.name}}>
-                              {{governmentBodyL3.name}}
+          <tbody>
+            <tr>
+              <td>
+                <table class="card-table">
+                  <tbody>
+                    <tr>
+                      <td class="card-table-cell title">
+                        <AuHeading @level="2" @skin="4">
+                          <span resource={{governmentBody.uri}} typeof={{governmentBody.rdfaBindings.class}}>
+                            <span property={{governmentBody.rdfaBindings.name}}>
+                              <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
+                                {{governmentBody.isTimespecializationOf.name}}
+                              </LinkTo>
                             </span>
                           </span>
-                        </LinkTo>
+                        </AuHeading>
                         <p>
-                          <span resource={{governmentBodyL3.startDate.uri}}
-                            typeof={{governmentBodyL3.startDate.rdfaBindings.class}}>
-                            <span property={{governmentBodyL3.startDate.rdfaBindings.time}}>
-                              {{moment-format governmentBodyL3.startDate.time 'DD/MM/YYYY'}}
+                          <span resource={{governmentBody.startDate.uri}}
+                            typeof={{governmentBody.startDate.rdfaBindings.class}}>
+                            <span property={{governmentBody.startDate.rdfaBindings.time}}>
+                              {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}}
                             </span>
                           </span>
                           -
-                          <span resource={{governmentBodyL3.endDate.uri}}
-                            typeof={{governmentBodyL3.endDate.rdfaBindings.class}}>
-                            <span property={{governmentBodyL3.endDate.rdfaBindings.time}}>
-                              {{if governmentBodyL3.endDate (moment-format governmentBodyL3.endDate.time 'DD/MM/YYYY') 'heden'}}
+                          <span resource={{governmentBody.endDate.uri}}
+                            typeof={{governmentBody.endDate.rdfaBindings.class}}>
+                            <span property={{governmentBody.endDate.rdfaBindings.time}}>
+                              {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
                             </span>
                           </span>
                         </p>
-                      </div>
-                    {{/each}}
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+                      </td>
+                      <td class="card-table-cell">
+                        {{#each (sort-by "startDate.time:desc" governmentBody.governmentBodies) as |governmentBodyL3|}}
+                          <div class="au-u-margin-top-small au-u-margin-left-large">
+                            <LinkTo @route="view.government-body" @query={{hash resource=governmentBodyL3.uri}}>
+                              Regering
+                              <span resource={{governmentBodyL3.uri}} typeof={{governmentBodyL3.rdfaBindings.class}}>
+                                <span property={{governmentBodyL3.rdfaBindings.name}}>
+                                  {{governmentBodyL3.name}}
+                                </span>
+                              </span>
+                            </LinkTo>
+                            <p>
+                              <span resource={{governmentBodyL3.startDate.uri}}
+                                typeof={{governmentBodyL3.startDate.rdfaBindings.class}}>
+                                <span property={{governmentBodyL3.startDate.rdfaBindings.time}}>
+                                  {{moment-format governmentBodyL3.startDate.time 'DD/MM/YYYY'}}
+                                </span>
+                              </span>
+                              -
+                              <span resource={{governmentBodyL3.endDate.uri}}
+                                typeof={{governmentBodyL3.endDate.rdfaBindings.class}}>
+                                <span property={{governmentBodyL3.endDate.rdfaBindings.time}}>
+                                  {{if governmentBodyL3.endDate (moment-format governmentBodyL3.endDate.time 'DD/MM/YYYY') 'heden'}}
+                                </span>
+                              </span>
+                            </p>
+                          </div>
+                        {{/each}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     {{/each}}
