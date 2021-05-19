@@ -306,7 +306,8 @@
                       </td>
                       <td class="card-table-cell">
                         {{#each (sort-by "startDate.time:desc" governmentBody.governmentBodies) as |governmentBodyL3|}}
-                          <div class="au-u-margin-top-small au-u-margin-left-large">
+                          <div class="au-u-margin-top-small au-u-margin-left-large" about={{governmentBodyL3.uri}}
+                            typeof={{governmentBodyL3.rdfaBindings.class}}>
                             <LinkTo @route="view.government-body" @query={{hash resource=governmentBodyL3.uri}}>
                               Regering
                               <span resource={{governmentBodyL3.uri}} typeof={{governmentBodyL3.rdfaBindings.class}}>
@@ -316,14 +317,16 @@
                               </span>
                             </LinkTo>
                             <p>
-                              <span resource={{governmentBodyL3.startDate.uri}}
+                              <span rel={{governmentBodyL3.rdfaBindings.startDate}}
+                                resource={{governmentBodyL3.startDate.uri}}
                                 typeof={{governmentBodyL3.startDate.rdfaBindings.class}}>
                                 <span property={{governmentBodyL3.startDate.rdfaBindings.time}}>
                                   {{moment-format governmentBodyL3.startDate.time 'DD/MM/YYYY'}}
                                 </span>
                               </span>
                               -
-                              <span resource={{governmentBodyL3.endDate.uri}}
+                              <span rel={{governmentBodyL3.rdfaBindings.endDate}}
+                                resource={{governmentBodyL3.endDate.uri}}
                                 typeof={{governmentBodyL3.endDate.rdfaBindings.class}}>
                                 <span property={{governmentBodyL3.endDate.rdfaBindings.time}}>
                                   {{if governmentBodyL3.endDate (moment-format governmentBodyL3.endDate.time 'DD/MM/YYYY') 'heden'}}
