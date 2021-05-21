@@ -12,7 +12,7 @@ export default class PersonModel extends Model {
       class: "http://www.w3.org/ns/person#Person",
       familyName: "http://xmlns.com/foaf/0.1/familyName",
       firstName: "https://data.vlaanderen.be/ns/persoon#gebruikteVoornaam",
-      mandatees: "http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan",
+      mandatees: "http://data.vlaanderen.be/ns/mandaat#isAangesteldAls",
       newsItems: "http://www.w3.org/ns/prov#qualifiedAssociation"
     }
   }

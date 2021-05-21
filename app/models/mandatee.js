@@ -19,7 +19,7 @@ export default class MandateeModel extends Model {
       endDate: "http://data.vlaanderen.be/ns/mandaat#einde",
       title: "http://purl.org/dc/terms/title",
       person: "http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan",
-      mandate: "http://data.vlaanderen.be/ns/mandaat#beleidsdomein",
+      mandate: "http://www.w3.org/ns/org#holds",
       governmentBody: "http://www.w3.org/ns/prov#hadMember",
       newsItems: "http://www.w3.org/ns/prov#qualifiedAssociation"
     }
