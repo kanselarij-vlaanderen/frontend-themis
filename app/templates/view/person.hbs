@@ -12,7 +12,8 @@
   </AuHeading>
   <div class="au-o-grid">
     {{#each (sort-by "startDate" this.model.mandatees) as |mandatee|}}
-      <div class="au-o-grid__item au-u-1-2" resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
+      <div class="au-o-grid__item au-u-1-2" rev={{mandatee.rdfaBindings.person}} resource={{mandatee.uri}}
+        typeof={{mandatee.rdfaBindings.class}}>
         <AuCard as |c|>
           <c.header>
             {{#if mandatee.title}}
@@ -29,15 +30,23 @@
                 </span>
               </p>
             {{else}}
-              <span property={{this.model.rdfaBindings.mandatees}}>
-                <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
-                  {{mandatee.mandate.governmentFunction.label}}
-                </LinkTo>
-              </span>
+              <div rel={{mandatee.rdfaBindings.mandate}} resource={{mandatee.mandate.uri}}
+                typeof={{mandatee.mandate.rdfaBindings.class}}>
+                <div rel={{mandatee.mandate.rdfaBindings.governmentFunction}}
+                  resource={{mandatee.mandate.governmentFunction.uri}}
+                  typeof={{mandatee.mandate.governmentFunction.rdfaBindings.class}}>
+                  <span property={{mandatee.mandate.governmentFunction.rdfaBindings.label}}>
+                    <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                      {{mandatee.mandate.governmentFunction.label}}
+                    </LinkTo>
+                  </span>
+                </div>
+              </div>
             {{/if}}
             <p class="au-u-margin-top-small">
               in regering
-              <span resource={{mandatee.governmentBody.uri}} typeof={{mandatee.governmentBody.rdfaBindings.class}}>
+              <span rev={{mandatee.governmentBody.rdfaBindings.mandatees}} resource={{mandatee.governmentBody.uri}}
+                typeof={{mandatee.governmentBody.rdfaBindings.class}}>
                 <span property={{mandatee.governmentBody.rdfaBindings.name}}>
                   <LinkTo @route="view.government-body" @query={{hash resource=mandatee.governmentBody.uri}}>
                     {{mandatee.governmentBody.name}}
@@ -68,4 +77,4 @@
 <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
   Nieuwsberichten
 </AuHeading>
-<NewsItemsTable @person={{this.resource}}/>
+<NewsItemsTable @person={{this.resource}} />
