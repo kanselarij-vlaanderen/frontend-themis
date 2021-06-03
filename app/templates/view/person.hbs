@@ -18,11 +18,11 @@
           <c.header>
             {{#if mandatee.title}}
               <p class="au-u-margin-top-small">
-                <span property={{mandatee.rdfaBindings.title}}>
-                  <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                <ThemisUri @uri={{mandatee.uri}}>
+                  <span property={{mandatee.rdfaBindings.title}}>
                     {{mandatee.title}}
-                  </LinkTo>
-                </span>
+                  </span>
+                </ThemisUri>
               </p>
               <p class="au-u-margin-top-small">met rangorde
                 <span property={{mandatee.rdfaBindings.priority}}>
@@ -30,28 +30,28 @@
                 </span>
               </p>
             {{else}}
-              <div rel={{mandatee.rdfaBindings.mandate}} resource={{mandatee.mandate.uri}}
-                typeof={{mandatee.mandate.rdfaBindings.class}}>
-                <div rel={{mandatee.mandate.rdfaBindings.governmentFunction}}
-                  resource={{mandatee.mandate.governmentFunction.uri}}
-                  typeof={{mandatee.mandate.governmentFunction.rdfaBindings.class}}>
-                  <span property={{mandatee.mandate.governmentFunction.rdfaBindings.label}}>
-                    <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+              <ThemisUri @uri={{mandatee.uri}}>
+                <span property={{mandatee.rdfaBindings.mandate}} resource={{mandatee.mandate.uri}}
+                  typeof={{mandatee.mandate.rdfaBindings.class}}>
+                  <span property={{mandatee.mandate.rdfaBindings.governmentFunction}}
+                    resource={{mandatee.mandate.governmentFunction.uri}}
+                    typeof={{mandatee.mandate.governmentFunction.rdfaBindings.class}}>
+                    <span property={{mandatee.mandate.governmentFunction.rdfaBindings.label}}>
                       {{mandatee.mandate.governmentFunction.label}}
-                    </LinkTo>
+                    </span>
                   </span>
-                </div>
-              </div>
+                </span>
+              </ThemisUri>
             {{/if}}
             <p class="au-u-margin-top-small">
               in regering
               <span rev={{mandatee.governmentBody.rdfaBindings.mandatees}} resource={{mandatee.governmentBody.uri}}
                 typeof={{mandatee.governmentBody.rdfaBindings.class}}>
-                <span property={{mandatee.governmentBody.rdfaBindings.name}}>
-                  <LinkTo @route="view.government-body" @query={{hash resource=mandatee.governmentBody.uri}}>
+                <ThemisUri @uri={{mandatee.governmentBody.uri}}>
+                  <span property={{mandatee.governmentBody.rdfaBindings.name}}>
                     {{mandatee.governmentBody.name}}
-                  </LinkTo>
-                </span>
+                  </span>
+                </ThemisUri>
               </span>
             </p>
             <p class="au-u-margin-top-small">

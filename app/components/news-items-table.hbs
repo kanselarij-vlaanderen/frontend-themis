@@ -3,7 +3,7 @@
 {{else}}
   <div class="au-u-margin-bottom-large">
     <div class="au-c-data-table">
-      <div class="au-c-data-table__wrapper">
+      <div class="au-c-data-table__wrapper" about={{if @mandatee @mandatee}}>
         <table class="au-c-data-table__table au-c-data-table__table--small">
           <thead>
             <tr class="au-c-data-table__header">
@@ -13,19 +13,18 @@
           </thead>
           <tbody>
             {{#each this.newsItems as |row|}}
-              <tr resource={{row.uri}} typeof={{row.rdfaBindings.class}}>
+              <tr property={{if @mandatee row.rdfaBindings.mandatees}}
+                resource={{row.uri}} typeof={{row.rdfaBindings.class}}>
                 <td property={{row.rdfaBindings.date}}>
                   {{moment-format row.date "DD/MM/YYYY"}}
                 </td>
-                <td property={{row.rdfaBindings.shortTitle}}>
+                <td>
                   <ThemisUri @uri={{row.uri}}>
-                    {{row.shortTitle}}
+                    <span property={{row.rdfaBindings.shortTitle}}>
+                      {{row.shortTitle}}
+                    </span>
                   </ThemisUri>
                 </td>
-                {{!-- Only for RDFa purposes: Link news item to mandatee --}}
-                {{#if @mandatee}}
-                  <div rel={{row.rdfaBindings.mandatees}} resource={{@mandatee}} />
-                {{/if}}
               </tr>
             {{else}}
               <tr>
@@ -35,7 +34,10 @@
           </tbody>
         </table>
         {{#if this.newsItems}}
-          <Metis::Pagination @count={{this.newsItems.meta.count}} @size={{this.size}} @page={{this.page}}
+          <Metis::Pagination
+            @count={{this.newsItems.meta.count}}
+            @size={{this.size}}
+            @page={{this.page}}
             @selectPage={{this.selectPage}} />
         {{/if}}
       </div>

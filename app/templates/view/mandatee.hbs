@@ -1,7 +1,7 @@
 <div resource={{this.model.uri}} typeof={{this.model.rdfaBindings.class}}>
   <AuHeading class="au-u-margin-bottom-large">
     Mandataris
-    <span rel={{this.model.rdfaBindings.person}} resource={{this.model.person.uri}}
+    <span property={{this.model.rdfaBindings.person}} resource={{this.model.person.uri}}
       typeof={{this.model.person.rdfaBindings.class}}>
       <span property={{this.model.person.rdfaBindings.firstName}}>
         {{this.model.person.firstName}}</span>
@@ -9,9 +9,9 @@
         {{this.model.person.familyName}}
       </span>
 
-      <LinkTo @route="view.person" @query={{hash resource=this.model.person.uri}}>
-        <AuHeading @level="6" @skin="6">[Open]</AuHeading>
-      </LinkTo>
+      <ThemisUri @uri={{this.model.person.uri}}>
+        <AuHeading @level="6" @skin="6">[Ga naar persoon]</AuHeading>
+      </ThemisUri>
     </span>
   </AuHeading>
 
@@ -22,7 +22,7 @@
       </div>
       in de
     {{/if}}
-    <div rel={{this.model.rdfaBindings.mandate}} resource={{this.model.mandate.uri}}
+    <div property={{this.model.rdfaBindings.mandate}} resource={{this.model.mandate.uri}}
       typeof={{this.model.mandate.rdfaBindings.class}}>
       <span rev={{this.model.mandate.governmentBody.rdfaBindings.mandates}}
         resource={{this.model.mandate.governmentBody.uri}}
@@ -39,17 +39,15 @@
   <AuCard as |c|>
     <c.header>
       <AuHeading @level="2" @skin="4">
-        <div resource={{this.model.mandate.uri}}>
-          <div rel={{this.model.mandate.rdfaBindings.governmentFunction}}
+        <ThemisUri @uri={{this.model.mandate.uri}}>
+          <span property={{this.model.mandate.rdfaBindings.governmentFunction}}
             resource={{this.model.mandate.governmentFunction.uri}}
             typeof={{this.model.mandate.governmentFunction.rdfaBindings.class}}>
             <span property={{this.model.mandate.governmentFunction.rdfaBindings.label}}>
-              <ThemisUri @uri={{this.model.mandate.uri}}>
-                {{this.model.mandate.governmentFunction.label}}
-              </ThemisUri>
+              {{this.model.mandate.governmentFunction.label}}
             </span>
-          </div>
-        </div>
+          </span>
+        </ThemisUri>
       </AuHeading>
       {{#if this.model.priority}}
         <p class="au-u-margin-top-small">
@@ -65,13 +63,13 @@
         in regering
         <span rev={{this.model.governmentBody.rdfaBindings.mandatees}} resource={{this.model.governmentBody.uri}}
           typeof={{this.model.governmentBody.rdfaBindings.class}}>
-          <span property={{this.model.governmentBody.rdfaBindings.name}}>
-            <LinkTo @route="view.government-body" @query={{hash resource=this.model.governmentBody.uri}}>
+          <ThemisUri @uri={{this.model.governmentBody.uri}}>
+            <span property={{this.model.governmentBody.rdfaBindings.name}}>
               {{this.model.governmentBody.name}}
-            </LinkTo>
-          </span>
+            </span>
+          </ThemisUri>
           {{!-- Only for RDFa purposes: Link governments which are time specialisations of one another --}}
-          <div rel={{this.model.governmentBody.rdfaBindings.isTimespecializationOf}}
+          <span property={{this.model.governmentBody.rdfaBindings.isTimespecializationOf}}
             resource={{this.model.mandate.governmentBody.uri}} />
         </span>
       </p>

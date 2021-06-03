@@ -26,11 +26,11 @@
         resource={{this.model.isTimespecializationOf.uri}}
         typeof={{this.model.isTimespecializationOf.rdfaBindings.class}}>
         Tijdspecialisatie van
-        <span property={{this.model.isTimespecializationOf.rdfaBindings.name}}>
-          <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
+        <ThemisUri @uri={{this.model.isTimespecializationOf.uri}}>
+          <span property={{this.model.isTimespecializationOf.rdfaBindings.name}}>
             {{this.model.isTimespecializationOf.name}}
-          </LinkTo>
-        </span>
+          </span>
+        </ThemisUri>
       </p>
       <AuHr />
       <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
@@ -49,16 +49,14 @@
             <AuCard as |c|>
               <c.header>
                 <AuHeading @level="2" @skin="4">
-                  <LinkTo @route="view.person" @query={{hash resource=person.person.uri}}>
-                    <div resource={{person.person.uri}}>
-                      <span property={{person.person.rdfaBindings.firstName}}>
-                        {{person.person.firstName}}
-                      </span>
-                      <span property={{person.person.rdfaBindings.firstName}}>
-                        {{person.person.familyName}}
-                      </span>
-                    </div>
-                  </LinkTo>
+                  <ThemisUri @uri={{person.person.uri}}>
+                    <span property={{person.person.rdfaBindings.firstName}}>
+                      {{person.person.firstName}}
+                    </span>
+                    <span property={{person.person.rdfaBindings.firstName}}>
+                      {{person.person.familyName}}
+                    </span>
+                  </ThemisUri>
                 </AuHeading>
                 <AuHr />
               </c.header>
@@ -68,11 +66,11 @@
                     typeof={{mandatee.rdfaBindings.class}}>
                     {{#if mandatee.title}}
                       <p>
-                        <span property={{mandatee.rdfaBindings.title}}>
-                          <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                        <ThemisUri @uri={{mandatee.uri}}>
+                          <span property={{mandatee.rdfaBindings.title}}>
                             {{mandatee.title}}
-                          </LinkTo>
-                        </span>
+                          </span>
+                        </ThemisUri>
                       </p>
                       <p class="au-u-margin-top-small" resource={{mandatee.uri}} typeof={{mandatee.rdfaBindings.class}}>
                         met rangorde
@@ -81,18 +79,18 @@
                         </span>
                       </p>
                     {{else}}
-                      <div rel={{mandatee.rdfaBindings.mandate}} resource={{mandatee.mandate.uri}}
-                        typeof={{mandatee.mandate.rdfaBindings.class}}>
-                        <div rel={{mandatee.mandate.rdfaBindings.governmentFunction}}
-                          resource={{mandatee.mandate.governmentFunction.uri}}
-                          typeof={{mandatee.mandate.governmentFunction.rdfaBindings.class}}>
-                          <span property={{mandatee.mandate.governmentFunction.rdfaBindings.label}}>
-                            <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                      <ThemisUri @uri={{mandatee.uri}}>
+                        <span property={{mandatee.rdfaBindings.mandate}} resource={{mandatee.mandate.uri}}
+                          typeof={{mandatee.mandate.rdfaBindings.class}}>
+                          <span property={{mandatee.mandate.rdfaBindings.governmentFunction}}
+                            resource={{mandatee.mandate.governmentFunction.uri}}
+                            typeof={{mandatee.mandate.governmentFunction.rdfaBindings.class}}>
+                            <span property={{mandatee.mandate.governmentFunction.rdfaBindings.label}}>
                               {{mandatee.mandate.governmentFunction.label}}
-                            </LinkTo>
+                            </span>
                           </span>
-                        </div>
-                      </div>
+                        </span>
+                      </ThemisUri>
                     {{/if}}
                     <p class="au-u-margin-top-small">
                       van
@@ -104,7 +102,6 @@
                         <span property={{mandatee.rdfaBindings.endDate}}>
                           {{if mandatee.endDate (moment-format mandatee.endDate 'DD/MM/YYYY') 'heden'}}
                         </span>
-                        {{!-- <span resource={{person.uri}} property={{mandatee.rdfaBindings.person}}></span> --}}
                       </span>
                     </p>
                     {{!-- Only for RDFa purposes: Link to government via mandate --}}
@@ -123,29 +120,29 @@
     <div resource={{this.model.uri}} typeof={{this.model.rdfaBindings.class}}>
       <AuHeading class="au-u-margin-bottom-large">
         Legislatuur
-        <span rel={{this.model.rdfaBindings.startDate}} resource={{this.model.startDate.uri}}
+        <span property={{this.model.rdfaBindings.startDate}} resource={{this.model.startDate.uri}}
           typeof={{this.model.startDate.rdfaBindings.class}}>
           <span property={{this.model.startDate.rdfaBindings.time}} datatype="xsd:date">
             {{moment-format this.model.startDate.time 'DD/MM/YYYY'}}
           </span>
         </span>
         -
-        <span rel={{this.model.rdfaBindings.endDate}} resource={{this.model.endDate.uri}}
+        <span property={{this.model.rdfaBindings.endDate}} resource={{this.model.endDate.uri}}
           typeof={{this.model.endDate.rdfaBindings.class}}>
           <span property={{this.model.endDate.rdfaBindings.time}} datatype="xsd:date">
             {{if this.model.endDate (moment-format this.model.endDate.time 'DD/MM/YYYY') 'heden'}}
           </span>
         </span>
       </AuHeading>
-      <p class="au-u-h3 metis-u-text-gray-600" rel={{this.model.rdfaBindings.isTimespecializationOf}}
+      <p class="au-u-h3 metis-u-text-gray-600" property={{this.model.rdfaBindings.isTimespecializationOf}}
         resource={{this.model.isTimespecializationOf.uri}}
         typeof={{this.model.isTimespecializationOf.rdfaBindings.class}}>
         Tijdspecialisatie van
-        <span property={{this.model.isTimespecializationOf.rdfaBindings.name}}>
-          <LinkTo @route="view.government-body" @query={{hash resource=this.model.isTimespecializationOf.uri}}>
+        <ThemisUri @uri={{this.model.isTimespecializationOf.uri}}>
+          <span property={{this.model.isTimespecializationOf.rdfaBindings.name}}>
             {{this.model.isTimespecializationOf.name}}
-          </LinkTo>
-        </span>
+          </span>
+        </ThemisUri>
       </p>
       <AuHr />
       <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
@@ -158,23 +155,21 @@
             <AuCard as |c|>
               <c.header>
                 <AuHeading @level="2" @skin="4">
-                  <span>
+                  <ThemisUri @uri={{governmentBody.uri}}>
                     <span property={{governmentBody.rdfaBindings.name}}>
-                      <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
-                        {{governmentBody.name}}
-                      </LinkTo>
+                      {{governmentBody.name}}
                     </span>
-                  </span>
+                  </ThemisUri>
                 </AuHeading>
                 <p>
-                  <span rel={{governmentBody.rdfaBindings.startDate}} resource={{governmentBody.startDate.uri}}
+                  <span property={{governmentBody.rdfaBindings.startDate}} resource={{governmentBody.startDate.uri}}
                     typeof={{governmentBody.startDate.rdfaBindings.class}}>
                     <span property={{governmentBody.startDate.rdfaBindings.time}} datatype="xsd:date">
                       {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}}
                     </span>
                   </span>
                   -
-                  <span rel={{governmentBody.rdfaBindings.endDate}} resource={{governmentBody.endDate.uri}}
+                  <span property={{governmentBody.rdfaBindings.endDate}} resource={{governmentBody.endDate.uri}}
                     typeof={{governmentBody.endDate.rdfaBindings.class}}>
                     <span property={{governmentBody.endDate.rdfaBindings.time}} datatype="xsd:date">
                       {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
@@ -197,16 +192,14 @@
             <AuCard as |c|>
               <c.header>
                 <AuHeading @level="2" @skin="4">
-                  <LinkTo @route="view.person" @query={{hash resource=person.person.uri}}>
-                    <div resource={{person.person.uri}}>
-                      <span property={{person.person.rdfaBindings.firstName}}>
-                        {{person.person.firstName}}
-                      </span>
-                      <span property={{person.person.rdfaBindings.familyName}}>
-                        {{person.person.familyName}}
-                      </span>
-                    </div>
-                  </LinkTo>
+                  <ThemisUri @uri={{person.person.uri}}>
+                    <span property={{person.person.rdfaBindings.firstName}}>
+                      {{person.person.firstName}}
+                    </span>
+                    <span property={{person.person.rdfaBindings.firstName}}>
+                      {{person.person.familyName}}
+                    </span>
+                  </ThemisUri>
                 </AuHeading>
                 <AuHr />
               </c.header>
@@ -217,11 +210,11 @@
                     {{#if mandatee.title}}
                       <div>
                         <p class="au-u-margin-top-small">
-                          <span property={{mandatee.rdfaBindings.title}}>
-                            <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                          <ThemisUri @uri={{mandatee.uri}}>
+                            <span property={{mandatee.rdfaBindings.title}}>
                               {{mandatee.title}}
-                            </LinkTo>
-                          </span>
+                            </span>
+                          </ThemisUri>
                         </p>
                         <p class="au-u-margin-top-small">
                           met rangorde
@@ -231,25 +224,25 @@
                         </p>
                       </div>
                       {{!-- Only for RDFa purposes: Link to government via mandate --}}
-                      <div rel={{mandatee.rdfaBindings.mandate}} resource={{mandatee.mandate.uri}}
+                      <div property={{mandatee.rdfaBindings.mandate}} resource={{mandatee.mandate.uri}}
                         typeof={{mandatee.mandate.rdfaBindings.class}}>
                         <div rev={{this.model.rdfaBindings.mandates}} resource={{this.model.uri}} />
                       </div>
                     {{else}}
-                      <div rel={{mandatee.rdfaBindings.mandate}} resource={{mandatee.mandate.uri}}
-                        typeof={{mandatee.mandate.rdfaBindings.class}}>
-                        <span rel={{mandatee.mandate.rdfaBindings.governmentFunction}}
-                          resource={{mandatee.mandate.governmentFunction.uri}}
-                          typeof={{mandatee.mandate.governmentFunction.rdfaBindings.class}}>
-                          <div property={{mandatee.mandate.governmentFunction.rdfaBindings.label}}>
-                            <LinkTo @route="view.mandatee" @query={{hash resource=mandatee.uri}}>
+                      <ThemisUri @uri={{mandatee.uri}}>
+                        <span property={{mandatee.rdfaBindings.mandate}} resource={{mandatee.mandate.uri}}
+                          typeof={{mandatee.mandate.rdfaBindings.class}}>
+                          {{!-- Only for RDFa purposes: Link to government via mandate --}}
+                          <span rev={{this.model.rdfaBindings.mandates}} resource={{this.model.uri}} />
+                          <span property={{mandatee.mandate.rdfaBindings.governmentFunction}}
+                            resource={{mandatee.mandate.governmentFunction.uri}}
+                            typeof={{mandatee.mandate.governmentFunction.rdfaBindings.class}}>
+                            <span property={{mandatee.mandate.governmentFunction.rdfaBindings.label}}>
                               {{mandatee.mandate.governmentFunction.label}}
-                            </LinkTo>
-                          </div>
+                            </span>
+                          </span>
                         </span>
-                        {{!-- Only for RDFa purposes: Link to government via mandate --}}
-                        <div rev={{this.model.rdfaBindings.mandates}} resource={{this.model.uri}} />
-                      </div>
+                      </ThemisUri>
                     {{/if}}
                     <p class="au-u-margin-top-small">
                       van
@@ -285,7 +278,7 @@
         </span>
       </span>
     </AuHeading>
-    <p class="au-u-h3 metis-u-text-gray-600" rel={{this.model.rdfaBindings.classification}}
+    <p class="au-u-h3 metis-u-text-gray-600" property={{this.model.rdfaBindings.classification}}
       resource={{this.model.classification.uri}} typeof={{this.model.classification.rdfaBindings.class}}>
       <span property={{this.model.classification.rdfaBindings.label}}>
         <ThemisUri @uri={{this.model.classification.uri}}>
@@ -293,7 +286,7 @@
         </ThemisUri>
       </span>
     </p>
-    <p class="au-u-h3 metis-u-text-gray-600" rel={{this.model.rdfaBindings.governmentUnit}}
+    <p class="au-u-h3 metis-u-text-gray-600" property={{this.model.rdfaBindings.governmentUnit}}
       resource={{this.model.governmentUnit.uri}} typeof={{this.model.governmentUnit.rdfaBindings.class}}>
       van
       <span property={{this.model.governmentUnit.rdfaBindings.name}}>
@@ -320,18 +313,14 @@
                           <td class="card-table-cell title" rev={{governmentBody.rdfaBindings.isTimespecializationOf}}
                             resource={{governmentBody.uri}} typeof={{governmentBody.rdfaBindings.class}}>
                             <AuHeading @level="2" @skin="4">
-                              <span>
+                              <ThemisUri @uri={{governmentBody.uri}}>
                                 <span property={{governmentBody.rdfaBindings.name}}>
-                                  <LinkTo @route="view.government-body" @query={{hash resource=governmentBody.uri}}>
-                                    <div resource={{governmentBody.uri}} typeof={{governmentBody.rdfaBindings.class}}>
-                                      {{governmentBody.isTimespecializationOf.name}}
-                                    </div>
-                                  </LinkTo>
+                                  {{governmentBody.isTimespecializationOf.name}}
                                 </span>
-                              </span>
+                              </ThemisUri>
                             </AuHeading>
                             <p>
-                              <span rel={{governmentBody.rdfaBindings.startDate}}
+                              <span property={{governmentBody.rdfaBindings.startDate}}
                                 resource={{governmentBody.startDate.uri}}
                                 typeof={{governmentBody.startDate.rdfaBindings.class}}>
                                 <span property={{governmentBody.startDate.rdfaBindings.time}}>
@@ -339,7 +328,7 @@
                                 </span>
                               </span>
                               -
-                              <span rel={{governmentBody.rdfaBindings.endDate}} resource={{governmentBody.endDate.uri}}
+                              <span property={{governmentBody.rdfaBindings.endDate}} resource={{governmentBody.endDate.uri}}
                                 typeof={{governmentBody.endDate.rdfaBindings.class}}>
                                 <span property={{governmentBody.endDate.rdfaBindings.time}}>
                                   {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
@@ -352,17 +341,14 @@
                               <div class="au-u-margin-top-small au-u-margin-left-large"
                                 rev={{governmentBodyL3.rdfaBindings.isTimespecializationOf}}
                                 resource={{governmentBodyL3.uri}} typeof={{governmentBodyL3.rdfaBindings.class}}>
-                                <LinkTo @route="view.government-body" @query={{hash resource=governmentBodyL3.uri}}>
+                                <ThemisUri @uri={{governmentBodyL3.uri}}>
                                   Regering
-                                  <span resource={{governmentBodyL3.uri}}
-                                    typeof={{governmentBodyL3.rdfaBindings.class}}>
-                                    <span property={{governmentBodyL3.rdfaBindings.name}}>
-                                      {{governmentBodyL3.name}}
-                                    </span>
+                                  <span property={{governmentBodyL3.rdfaBindings.name}}>
+                                    {{governmentBodyL3.name}}
                                   </span>
-                                </LinkTo>
+                                </ThemisUri>
                                 <p>
-                                  <span rel={{governmentBodyL3.rdfaBindings.startDate}}
+                                  <span property={{governmentBodyL3.rdfaBindings.startDate}}
                                     resource={{governmentBodyL3.startDate.uri}}
                                     typeof={{governmentBodyL3.startDate.rdfaBindings.class}}>
                                     <span property={{governmentBodyL3.startDate.rdfaBindings.time}}>
@@ -370,7 +356,7 @@
                                     </span>
                                   </span>
                                   -
-                                  <span rel={{governmentBodyL3.rdfaBindings.endDate}}
+                                  <span property={{governmentBodyL3.rdfaBindings.endDate}}
                                     resource={{governmentBodyL3.endDate.uri}}
                                     typeof={{governmentBodyL3.endDate.rdfaBindings.class}}>
                                     <span property={{governmentBodyL3.endDate.rdfaBindings.time}}>
