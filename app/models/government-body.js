@@ -6,8 +6,8 @@ export default class GovernmentBodyModel extends Model {
   @belongsTo('government-body', { inverse: 'governmentBodies' }) isTimespecializationOf;
   @belongsTo('version') startDate;
   @belongsTo('version') endDate;
-  @belongsTo('concept') classification;
-  @belongsTo('government-unit') governmentUnit;
+  @hasMany('concept') classifications;
+  @hasMany('government-unit') governmentUnits;
   @hasMany('government-body', { inverse: 'isTimespecializationOf' }) governmentBodies;
   @hasMany('mandates') mandates;
   @hasMany('mandatees', { inverse: 'governmentBody' }) mandatees;
@@ -19,8 +19,8 @@ export default class GovernmentBodyModel extends Model {
       isTimespecializationOf: "https://data.vlaanderen.be/ns/generiek#isTijdspecialisatieVan",
       startDate: "http://www.w3.org/ns/prov#qualifiedGeneration",
       endDate: "http://www.w3.org/ns/prov#qualifiedInvalidation",
-      classification: "http://www.w3.org/ns/org#classification",
-      governmentUnit: "http://data.vlaanderen.be/ns/besluit#bestuurt",
+      classifications: "http://www.w3.org/ns/org#classification",
+      governmentUnits: "http://data.vlaanderen.be/ns/besluit#bestuurt",
       governmentBodies: "https://data.vlaanderen.be/ns/generiek#isTijdspecialisatieVan",
       mandates: "http://www.w3.org/ns/org#hasPost",
       mandatees: "http://www.w3.org/ns/prov#hadMember"

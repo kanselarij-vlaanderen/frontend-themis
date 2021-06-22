@@ -11,15 +11,15 @@ export default class ViewGovernmentbodyRoute extends Route {
     {
       filter: { ':uri:': resource },
       include: [
-        'classification',
-        'government-bodies.classification',
+        'classifications',
+        'government-bodies.classifications',
         'government-bodies.start-date',
         'government-bodies.end-date',
         'mandates.government-function',
         'mandates.mandatees.person',
         'mandatees.person',
         'mandatees.mandate.government-function',
-        'government-unit'
+        'government-units'
       ].join(',')
     } );
 

@@ -278,22 +278,30 @@
         </span>
       </span>
     </AuHeading>
-    <p class="au-u-h3 metis-u-text-gray-600" property={{this.model.rdfaBindings.classification}}
-      resource={{this.model.classification.uri}} typeof={{this.model.classification.rdfaBindings.class}}>
-      <span property={{this.model.classification.rdfaBindings.label}}>
-        <ThemisUri @uri={{this.model.classification.uri}}>
-          {{this.model.classification.label}}
-        </ThemisUri>
+    {{#each this.model.classifications as |classification|}}
+      <span class="au-u-h3 metis-u-text-gray-600" property={{this.model.rdfaBindings.classifications}}
+        resource={{this.model.classifications.uri}} typeof={{this.model.classifications.rdfaBindings.class}}>
+        <span property={{this.model.classifications.rdfaBindings.label}}>
+          <ThemisUri @uri={{classification.uri}}>
+            {{classification.label}}
+          </ThemisUri>
+        </span>
+        {{#unless (eq classification this.model.classifications.lastObject)}},{{/unless}}
       </span>
-    </p>
-    <p class="au-u-h3 metis-u-text-gray-600" property={{this.model.rdfaBindings.governmentUnit}}
-      resource={{this.model.governmentUnit.uri}} typeof={{this.model.governmentUnit.rdfaBindings.class}}>
-      van
-      <span property={{this.model.governmentUnit.rdfaBindings.name}}>
-        <ThemisUri @uri={{this.model.governmentUnit.uri}}>
-          {{this.model.governmentUnit.name}}
-        </ThemisUri>
-      </span>
+    {{/each}}
+     <p class="au-u-h3 metis-u-text-gray-600">van
+      {{#each this.model.governmentUnits as |governmentUnit|}}
+        <span class="au-u-h3 metis-u-text-gray-600" property={{this.model.rdfaBindings.governmentUnits}}
+          resource={{this.model.governmentUnits.uri}} typeof={{this.model.governmentUnits.rdfaBindings.class}}>
+
+          <span property={{this.model.governmentUnits.rdfaBindings.name}}>
+            <ThemisUri @uri={{governmentUnit.uri}}>
+              {{governmentUnit.name}}
+            </ThemisUri>
+          </span>
+          {{#unless (eq governmentUnit this.model.governmentUnits.lastObject)}},{{/unless}}
+        </span>
+      {{/each}}
     </p>
     <AuHr />
     <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
@@ -314,9 +322,7 @@
                             resource={{governmentBody.uri}} typeof={{governmentBody.rdfaBindings.class}}>
                             <AuHeading @level="2" @skin="4">
                               <ThemisUri @uri={{governmentBody.uri}}>
-                                <span property={{governmentBody.rdfaBindings.name}}>
-                                  {{governmentBody.isTimespecializationOf.name}}
-                                </span>
+                                Legislatuur
                               </ThemisUri>
                             </AuHeading>
                             <p>
