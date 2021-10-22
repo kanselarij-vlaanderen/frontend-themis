@@ -1,11 +1,21 @@
 import Controller from '@ember/controller';
+import ENV from 'frontend-themis/config/environment';
 
 export default class ApplicationController extends Controller {
   get hasExternallySourcedHeader() {
-    return Boolean(this.VO_HEADER_WIDGET_URL);
+    try {
+      new URL(ENV.VO_HEADER_WIDGET_URL);
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 
   get hasExternallySourcedFooter() {
-    return Boolean(this.VO_FOOTER_WIDGET_URL);
-  }
+    try {
+      new URL(ENV.VO_FOOTER_WIDGET_URL);
+      return true;
+    } catch (_) {
+      return false;
+    }  }
 }
