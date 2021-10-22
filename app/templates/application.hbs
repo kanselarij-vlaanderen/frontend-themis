@@ -1,12 +1,16 @@
-<HeadLayout />
-
-{{#unless this.hasExternallySourcedHeader}}
+{{#if this.hasExternallySourcedHeader}}
+  {{!--
+    "aangeraden de widget zo dicht mogelijk bij het begin van de body-tag te plaatsen" according to
+    https://vlaamseoverheid.atlassian.net/wiki/spaces/IKPubliek/pages/2327449182/Technische+documentatie+Widget-platform#Widgets-toevoegen-aan-een-webpagina
+  --}}
+  <script src={{this.VO_HEADER_WIDGET_URL}}></script>
+{{else}}
   <AuMainHeader
     @brandLink="https://www.vlaanderen.be/nl"
     @homeRoute="index"
     @appTitle="Themis &mdash; Ontdek gestructureerde informatie over de besluitvorming van de Vlaamse Regering.">
   </AuMainHeader>
-{{/unless}}
+{{/if}}
 
 <main id="main" class="au-c-main-container">
   <div class="au-c-main-container__content au-c-main-container__content--scroll" id="content">
@@ -25,3 +29,6 @@
     {{/unless}}
   </div>
 </main>
+{{#if this.hasExternallySourcedFooter}}
+  <script src={{this.VO_FOOTER_WIDGET_URL}}></script>
+{{/if}}
