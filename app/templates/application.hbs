@@ -1,22 +1,25 @@
-<AuMainHeader
-  @brandLink="https://www.vlaanderen.be/nl"
-  @homeRoute="index"
-  @appTitle="Themis &mdash; Ontdek gestructureerde informatie over de besluitvorming van de Vlaamse Regering.">
-</AuMainHeader>
-
+{{#unless this.hasExternallySourcedHeader}}
+  <AuMainHeader
+    @brandLink="https://www.vlaanderen.be/nl"
+    @homeRoute="index"
+    @appTitle="Themis &mdash; Ontdek gestructureerde informatie over de besluitvorming van de Vlaamse Regering.">
+  </AuMainHeader>
+{{/unless}}
 
 <main id="main" class="au-c-main-container">
   <div class="au-c-main-container__content au-c-main-container__content--scroll" id="content">
     <div>
       {{outlet}}
     </div>
-    <AuMainFooter>
-      <AuHeading @level="3" @skin="4">
-       Themis
-      </AuHeading>
-      <AuContent @skin="small">
-        <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-bestuur-buitenlandse-zaken-en-justitie/departement-kanselarij-en-buitenlandse-zaken">Departement Kanselarij en Buitenlandse Zaken</a></p>
-      </AuContent>
-    </AuMainFooter>
+    {{#unless this.hasExternallySourcedFooter}}
+      <AuMainFooter>
+        <AuHeading @level="3" @skin="4">
+         Themis
+        </AuHeading>
+        <AuContent @skin="small">
+          <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-bestuur-buitenlandse-zaken-en-justitie/departement-kanselarij-en-buitenlandse-zaken">Departement Kanselarij en Buitenlandse Zaken</a></p>
+        </AuContent>
+      </AuMainFooter>
+    {{/unless}}
   </div>
 </main>
