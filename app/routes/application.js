@@ -11,8 +11,7 @@ export default class ApplicationRoute extends Route {
         type: 'script',
         tagId: 'vo-header-widget',
         attrs: {
-          name: 'src',
-          content: ENV.VO_HEADER_WIDGET_URL
+          src: ENV.VO_HEADER_WIDGET_URL
         }
       });
     } catch (_) {} // eslint-disable-line no-empty
@@ -22,8 +21,7 @@ export default class ApplicationRoute extends Route {
         type: 'script',
         tagId: 'vo-footer-widget',
         attrs: {
-          name: 'src',
-          content: ENV.VO_FOOTER_WIDGET_URL
+          src: ENV.VO_FOOTER_WIDGET_URL
         }
       });
     } catch (_) {} // eslint-disable-line no-empty
