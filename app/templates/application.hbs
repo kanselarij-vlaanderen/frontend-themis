@@ -1,10 +1,12 @@
-{{#unless this.hasExternallySourcedHeader}}
+{{#if this.hasExternallySourcedHeader}}
+  <div {{vl-widget this.VO_HEADER_WIDGET_URL}}></div>
+{{else}}
   <AuMainHeader
     @brandLink="https://www.vlaanderen.be/nl"
     @homeRoute="index"
     @appTitle="Themis &mdash; Ontdek gestructureerde informatie over de besluitvorming van de Vlaamse Regering.">
   </AuMainHeader>
-{{/unless}}
+{{/if}}
 
 <main id="main" class="au-c-main-container">
   <div class="au-c-main-container__content au-c-main-container__content--scroll" id="content">
@@ -23,3 +25,7 @@
     {{/unless}}
   </div>
 </main>
+
+{{#if this.hasExternallySourcedFooter}}
+  <div {{vl-widget this.VO_FOOTER_WIDGET_URL}}></div>
+{{/if}}
