@@ -32,5 +32,13 @@ module.exports = function(defaults) {
 
   app.import('node_modules/@triply/yasgui/build/yasgui.min.css');
 
+  // https://vlaamseoverheid.atlassian.net/wiki/spaces/IKPubliek/pages/2327449182/Technische+documentatie+Widget-platform#Browser-Polyfills
+  // (visted on 25/10/2021)
+  // This dependency has been disabled because it causes issues by using browser api in fastboot.
+  // Most of what the widgets need is probably polyfilled by our Babel setup anyway.
+  // Since the @govflanders-sources are undisclosed, we're unsure what exactly is being polyfilled.
+  // app.import('node_modules/@govflanders/vl-widget-polyfill/dist/index.js');
+  app.import('node_modules/@govflanders/vl-widget-client/dist/index.js');
+
   return app.toTree();
 };
