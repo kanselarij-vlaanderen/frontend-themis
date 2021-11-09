@@ -43,7 +43,7 @@
         </span>
       </p>
       <div class="au-o-grid">
-        {{#each (sort-by "person.familyName" this.mandateesByPerson) as |person|}}
+        {{#each (sort-by "meanMandateePriority" this.mandateesByPerson) as |person|}}
           <div class="au-o-grid__item au-u-1-2" resource={{person.person.uri}}
             typeof={{person.person.rdfaBindings.class}}>
             <AuCard as |c|>
@@ -186,7 +186,7 @@
       </AuHeading>
 
       <div class="au-o-grid">
-        {{#each (sort-by "person.familyName" this.mandatesByPerson) as |person|}}
+        {{#each (sort-by "meanMandateePriority" this.mandatesByPerson) as |person|}}
           <div class="au-o-grid__item au-u-1-2" resource={{person.person.uri}}
             typeof={{person.person.rdfaBindings.class}}>
             <AuCard as |c|>
