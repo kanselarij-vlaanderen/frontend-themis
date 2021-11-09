@@ -1,22 +1,33 @@
-<AuMainHeader
-  @brandLink="https://www.vlaanderen.be/nl"
-  @homeRoute="index"
-  @appTitle="Themis &mdash; Ontdek gestructureerde informatie over de besluitvorming van de Vlaamse Regering.">
-</AuMainHeader>
-
+{{#if this.hasExternallySourcedHeader}}
+  <div class="l-external-header">
+    <div class="l-external-header__placeholder">
+      <header {{vl-widget this.VO_HEADER_WIDGET_URL}}></header>
+    </div>
+  </div>
+{{else}}
+  <AuMainHeader
+    @brandLink="https://www.vlaanderen.be/nl"
+    @homeRoute="index"
+    @appTitle="Themis &mdash; Ontdek gestructureerde informatie over de besluitvorming van de Vlaamse Regering.">
+  </AuMainHeader>
+{{/if}}
 
 <main id="main" class="au-c-main-container">
   <div class="au-c-main-container__content au-c-main-container__content--scroll" id="content">
     <div>
       {{outlet}}
     </div>
-    <AuMainFooter>
-      <AuHeading @level="3" @skin="4">
-       Themis
-      </AuHeading>
-      <AuContent @skin="small">
-        <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-bestuur-buitenlandse-zaken-en-justitie/departement-kanselarij-en-buitenlandse-zaken">Departement Kanselarij en Buitenlandse Zaken</a></p>
-      </AuContent>
-    </AuMainFooter>
+    {{#if this.hasExternallySourcedFooter}}
+      <footer {{vl-widget this.VO_FOOTER_WIDGET_URL}}></footer>
+    {{else}}
+      <AuMainFooter>
+        <AuHeading @level="3" @skin="4">
+        Themis
+        </AuHeading>
+        <AuContent @skin="small">
+          <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-bestuur-buitenlandse-zaken-en-justitie/departement-kanselarij-en-buitenlandse-zaken">Departement Kanselarij en Buitenlandse Zaken</a></p>
+        </AuContent>
+      </AuMainFooter>
+    {{/if}}
   </div>
 </main>

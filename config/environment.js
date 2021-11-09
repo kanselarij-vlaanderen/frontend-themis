@@ -27,6 +27,8 @@ module.exports = function(environment) {
         Date: false
       }
     },
+    VO_HEADER_WIDGET_URL: "{{VO_HEADER_WIDGET_URL}}",
+    VO_FOOTER_WIDGET_URL: "{{VO_FOOTER_WIDGET_URL}}",
 
     APP: {
       // Here you can pass flags/options to your application instance

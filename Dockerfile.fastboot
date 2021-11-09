@@ -9,6 +9,9 @@ RUN npm install
 COPY . .
 RUN ember build --environment production
 
-FROM redpencil/fastboot-app-server
+FROM redpencil/fastboot-app-server:1.0.0
 
 COPY --from=builder /app/dist /app
+
+ENV EMBER_VO_HEADER_WIDGET_URL=""
+ENV EMBER_VO_FOOTER_WIDGET_URL=""
