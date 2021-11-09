@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'frontend-themis',
     environment,
@@ -24,8 +24,8 @@ module.exports = function(environment) {
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
     VO_HEADER_WIDGET_URL: "{{VO_HEADER_WIDGET_URL}}",
     VO_FOOTER_WIDGET_URL: "{{VO_FOOTER_WIDGET_URL}}",
@@ -33,7 +33,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
   };
 
   if (environment === 'development') {
