@@ -1,5 +1,9 @@
 {{#if this.hasExternallySourcedHeader}}
-  <header {{vl-widget this.VO_HEADER_WIDGET_URL}}></header>
+  <div class="l-external-header">
+    <div class="l-external-header__placeholder">
+      <header {{vl-widget this.VO_HEADER_WIDGET_URL}}></header>
+    </div>
+  </div>
 {{else}}
   <AuMainHeader
     @brandLink="https://www.vlaanderen.be/nl"
@@ -18,7 +22,7 @@
     {{else}}
       <AuMainFooter>
         <AuHeading @level="3" @skin="4">
-         Themis
+        Themis
         </AuHeading>
         <AuContent @skin="small">
           <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-bestuur-buitenlandse-zaken-en-justitie/departement-kanselarij-en-buitenlandse-zaken">Departement Kanselarij en Buitenlandse Zaken</a></p>
