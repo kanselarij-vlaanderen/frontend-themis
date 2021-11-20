@@ -1,0 +1,14 @@
+/*
+Extract adapted from
+https://vlaamseoverheid.atlassian.net/wiki/spaces/IKPubliek/pages/2604728345/Tools+om+de+header+en+branding+te+previewen
+*/
+
+/* TEKST "HULP NODIG" */
+
+.vlw .vlw__contact--primary .vlw__contact__toggle::after, .vlw .vlw__contact--secondary .vlw__contact__toggle::after, .vlw .vlw__contact--tertiary .vlw__contact__toggle::after {
+    border-right: $au-white !important;
+}
+
+.vlw .vlw__contact--primary .vlw__contact__toggle, .vlw .vlw__contact--secondary .vlw__contact__toggle, .vlw .vlw__contact--tertiary .vlw__contact__toggle {
+    background: $au-white !important;
+}
