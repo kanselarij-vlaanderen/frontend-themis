@@ -14,53 +14,52 @@ export default class ViewGovernmentbodyController extends Controller {
   get mandateesByPerson() {
     const persons = [];
 
-    this.model.mandatees.forEach(function(mandatee) {
+    this.model.mandatees.forEach(function (mandatee) {
       let person = persons.findBy('id', mandatee.person.get('id'));
 
       if (!person) {
         person = {
-            id: mandatee.person.get('id'),
-            mandatees: [],
-            person: mandatee.person
-         };
-         persons.push(person);
+          id: mandatee.person.get('id'),
+          mandatees: [],
+          person: mandatee.person,
+        };
+        persons.push(person);
       }
 
       person.mandatees.push(mandatee);
-   });
+    });
 
-   persons.forEach(function (person) {
-     person.meanMandateePriority = person.mandatees.map(m => m.priority);
-   });
+    persons.forEach(function (person) {
+      person.meanMandateePriority = person.mandatees.map((m) => m.priority);
+    });
 
-   return persons;
+    return persons;
   }
 
   get mandatesByPerson() {
     const persons = [];
 
-    this.model.mandates.forEach(function(mandate) {
-      mandate.mandatees.forEach(function(mandatee) {
+    this.model.mandates.forEach(function (mandate) {
+      mandate.mandatees.forEach(function (mandatee) {
         let person = persons.findBy('id', mandatee.person.get('id'));
 
         if (!person) {
           person = {
-              id: mandatee.person.get('id'),
-              mandatees: [],
-              person: mandatee.person
-           };
-           persons.push(person);
+            id: mandatee.person.get('id'),
+            mandatees: [],
+            person: mandatee.person,
+          };
+          persons.push(person);
         }
 
         person.mandatees.push(mandatee);
+      });
     });
 
-   });
+    persons.forEach(function (person) {
+      person.meanMandateePriority = person.mandatees.map((m) => m.priority);
+    });
 
-   persons.forEach(function (person) {
-     person.meanMandateePriority = person.mandatees.map(m => m.priority);
-   });
-
-   return persons;
+    return persons;
   }
 }

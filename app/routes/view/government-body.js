@@ -3,12 +3,11 @@ import groupBy from 'lodash/groupBy';
 
 export default class ViewGovernmentbodyRoute extends Route {
   queryParams = {
-    resource: { refreshModel: true }
-  }
+    resource: { refreshModel: true },
+  };
 
-  async model( { resource } ) {
-    const governmentbodies = await this.store.query('government-body',
-    {
+  async model({ resource }) {
+    const governmentbodies = await this.store.query('government-body', {
       filter: { ':uri:': resource },
       include: [
         'classifications',
@@ -19,9 +18,9 @@ export default class ViewGovernmentbodyRoute extends Route {
         'mandates.mandatees.person',
         'mandatees.person',
         'mandatees.mandate.government-function',
-        'government-units'
-      ].join(',')
-    } );
+        'government-units',
+      ].join(','),
+    });
 
     return governmentbodies.get('firstObject');
   }

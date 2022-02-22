@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import { getOwner } from '@ember/application';
 export default class ThemisUriComponent extends Component {
-
   constructor() {
     super(...arguments);
     this.config = getOwner(this).resolveRegistration('config:environment');

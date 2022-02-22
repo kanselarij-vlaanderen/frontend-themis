@@ -20,5 +20,6 @@ export default class ApplicationController extends Controller {
       return true;
     } catch (_) {
       return false;
-    }  }
+    }
+  }
 }

@@ -5,7 +5,6 @@ import { task } from 'ember-concurrency-decorators';
 import { tracked } from '@glimmer/tracking';
 
 export default class NewsItemsTableComponent extends Component {
-
   @service store;
 
   @tracked newsItems;
@@ -23,21 +22,20 @@ export default class NewsItemsTableComponent extends Component {
     if (this.args.person) {
       filter['mandatees'] = {
         person: {
-          ':uri:': this.args.person
-        }
-      }
+          ':uri:': this.args.person,
+        },
+      };
     } else if (this.args.mandatee) {
-      filter['mandatees'] = { ':uri:': this.args.mandatee }
+      filter['mandatees'] = { ':uri:': this.args.mandatee };
     }
 
-    this.newsItems = yield this.store.query('news-item',
-    {
-      filter: filter ,
+    this.newsItems = yield this.store.query('news-item', {
+      filter: filter,
       sort: '-date',
       page: {
         size: this.size,
-        number: this.page
-      }
+        number: this.page,
+      },
     });
   }
 
@@ -47,4 +45,3 @@ export default class NewsItemsTableComponent extends Component {
     this.getNewsItems.perform();
   }
 }
-

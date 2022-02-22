@@ -8,22 +8,22 @@ export default class Router extends EmberRouter {
   rootURL = config.rootURL;
 }
 
-Router.map(function() {
+Router.map(function () {
   this.route('sparql');
-  this.route('docs', function() {
+  this.route('docs', function () {
     this.route('publication');
     this.route('catalogs');
   });
-  this.route('view', function() {
+  this.route('view', function () {
     classRoute(this, 'person', {
-      class: 'http://www.w3.org/ns/person#Person'
+      class: 'http://www.w3.org/ns/person#Person',
     });
     classRoute(this, 'mandatee', {
-      class: 'http://data.vlaanderen.be/ns/mandaat#Mandataris'
+      class: 'http://data.vlaanderen.be/ns/mandaat#Mandataris',
     });
 
     classRoute(this, 'government-body', {
-      class: 'http://data.vlaanderen.be/ns/besluit#Bestuursorgaan'
+      class: 'http://data.vlaanderen.be/ns/besluit#Bestuursorgaan',
     });
   });
   metisFallbackRoute(this);
