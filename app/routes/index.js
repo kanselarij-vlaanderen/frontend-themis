@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
 const datasetTypeMeeting =
   'http://themis.vlaanderen.be/id/concept/dataset-type/9119805f-9ee6-4ef1-9ef7-ad8dccc2bf2d';
@@ -6,6 +7,8 @@ const datasetTypesConceptSchemeUri =
   'http://themis.vlaanderen.be/id/concept-scheme/e93481b2-342d-468b-8def-2d629232d3a5';
 
 export default class IndexRoute extends Route {
+  @service store;
+
   async model() {
     const concepts = await this.store.query('concept', {
       filter: { 'in-scheme': { ':uri:': datasetTypesConceptSchemeUri } },
