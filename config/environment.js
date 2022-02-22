@@ -6,6 +6,9 @@ module.exports = function (environment) {
     environment,
     rootURL: '/',
     locationType: 'auto',
+    moment: {
+      allowEmpty: true,
+    },
     metis: {
       baseUrl: 'http://themis.vlaanderen.be/',
     },
