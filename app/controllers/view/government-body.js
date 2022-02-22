@@ -1,13 +1,5 @@
 import Controller from '@ember/controller';
 
-function sum(previousValue, currentValue) {
-  return previousValue + currentValue;
-}
-
-function mean(values) {
-  return values.reduce(sum) / values.length;
-}
-
 export default class ViewGovernmentbodyController extends Controller {
   queryParams = ['resource'];
 

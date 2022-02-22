@@ -286,7 +286,7 @@
             {{classification.label}}
           </ThemisUri>
         </span>
-        {{#unless (eq classification this.model.classifications.lastObject)}},{{/unless}}
+        {{#if (not-eq classification this.model.classifications.lastObject)}},{{/if}}
       </span>
     {{/each}}
      <p class="au-u-h3 metis-u-text-gray-600">van
@@ -299,7 +299,7 @@
               {{governmentUnit.name}}
             </ThemisUri>
           </span>
-          {{#unless (eq governmentUnit this.model.governmentUnits.lastObject)}},{{/unless}}
+          {{#if (not-eq governmentUnit this.model.governmentUnits.lastObject)}},{{/if}}
         </span>
       {{/each}}
     </p>

@@ -1,5 +1,4 @@
 import Route from '@ember/routing/route';
-import groupBy from 'lodash/groupBy';
 
 export default class ViewGovernmentbodyRoute extends Route {
   queryParams = {
