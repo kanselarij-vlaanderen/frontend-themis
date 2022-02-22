@@ -15,7 +15,7 @@ module.exports = function (environment) {
       extraPrefixes: 'EMBER_YASGUI_EXTRA_PREFIXES',
     },
     fastboot: {
-      hostWhitelist: [/^localhost(:[0-9]*)?/, "localhost",  /^.*$/ ] //TODO: this is potentialy a danger, FIX THIS
+      hostWhitelist: ['localhost', 'localhost:4200', '{{FASTBOOT_HOST}}'],
     },
     EmberENV: {
       FEATURES: {
