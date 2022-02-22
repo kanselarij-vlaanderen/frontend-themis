@@ -7,12 +7,12 @@ module.exports = function (environment) {
     rootURL: '/',
     locationType: 'auto',
     metis: {
-      baseUrl: "http://themis.vlaanderen.be/"
+      baseUrl: 'http://themis.vlaanderen.be/',
     },
     yasgui: {
       // NOTE: look at app/modifiers/yasgui.js when changing this variable
-      defaultQuery: "EMBER_YASGUI_DEFAULT_QUERY",
-      extraPrefixes: "EMBER_YASGUI_EXTRA_PREFIXES"
+      defaultQuery: 'EMBER_YASGUI_DEFAULT_QUERY',
+      extraPrefixes: 'EMBER_YASGUI_EXTRA_PREFIXES',
     },
     fastboot: {
       hostWhitelist: [/^localhost(:[0-9]*)?/, "localhost",  /^.*$/ ] //TODO: this is potentialy a danger, FIX THIS
@@ -27,8 +27,8 @@ module.exports = function (environment) {
         Date: false,
       },
     },
-    VO_HEADER_WIDGET_URL: "{{VO_HEADER_WIDGET_URL}}",
-    VO_FOOTER_WIDGET_URL: "{{VO_FOOTER_WIDGET_URL}}",
+    VO_HEADER_WIDGET_URL: '{{VO_HEADER_WIDGET_URL}}',
+    VO_FOOTER_WIDGET_URL: '{{VO_FOOTER_WIDGET_URL}}',
 
     APP: {
       // Here you can pass flags/options to your application instance
@@ -37,11 +37,11 @@ module.exports = function (environment) {
   };
 
   if (environment === 'development') {
-     // ENV.APP.LOG_RESOLVER = true;
-     // ENV.APP.LOG_ACTIVE_GENERATION = true;
-     // ENV.APP.LOG_TRANSITIONS = true;
-     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    // ENV.APP.LOG_RESOLVER = true;
+    // ENV.APP.LOG_ACTIVE_GENERATION = true;
+    // ENV.APP.LOG_TRANSITIONS = true;
+    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+    // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
   if (environment === 'test') {
