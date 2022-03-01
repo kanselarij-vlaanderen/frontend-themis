@@ -8,13 +8,13 @@ module.exports = function (defaults) {
       includePaths: [
         'node_modules/@appuniversum/appuniversum',
         'node_modules/@appuniversum/ember-appuniversum/app/styles',
-      ]
+      ],
     },
     autoprefixer: {
       enabled: true,
       cascade: true,
-      sourcemap: true
-    }
+      sourcemap: true,
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -35,11 +35,11 @@ module.exports = function (defaults) {
   // https://vlaamseoverheid.atlassian.net/wiki/spaces/IKPubliek/pages/2327449182/Technische+documentatie+Widget-platform#Browser-Polyfills
   // (visted on 25/10/2021)
   // Since the @govflanders-sources are undisclosed, we're unsure what exactly is being polyfilled.
-  app.import("node_modules/@govflanders/vl-widget-polyfill/dist/index.js", {
+  app.import('node_modules/@govflanders/vl-widget-polyfill/dist/index.js', {
     using: [
       {
         // This dependency uses browser-api such as the "Text" class. We don't want that in fastboot.
-        transformation: "fastbootShim",
+        transformation: 'fastbootShim',
       },
     ],
   });
