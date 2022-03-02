@@ -21,7 +21,6 @@ Router.map(function () {
     classRoute(this, 'mandatee', {
       class: 'http://data.vlaanderen.be/ns/mandaat#Mandataris',
     });
-
     classRoute(this, 'government-body', {
       class: 'http://data.vlaanderen.be/ns/besluit#Bestuursorgaan',
     });
