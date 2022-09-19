@@ -5,12 +5,11 @@ export default class GovernmentBodyModel extends Model {
   @attr() uri;
   @belongsTo('government-body', { inverse: 'governmentBodies' })
   isTimespecializationOf;
-  @belongsTo('version') startDate;
-  @belongsTo('version') endDate;
+  @belongsTo('generation') startDate;
+  @belongsTo('invalidation') endDate;
   @hasMany('concept') classifications;
   @hasMany('government-unit') governmentUnits;
-  @hasMany('government-body', { inverse: 'isTimespecializationOf' })
-  governmentBodies;
+  @hasMany('government-body', { inverse: 'isTimespecializationOf' }) governmentBodies;
   @hasMany('mandates') mandates;
   @hasMany('mandatees', { inverse: 'governmentBody' }) mandatees;
 

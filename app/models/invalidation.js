@@ -1,6 +1,6 @@
 import Model, { attr } from '@ember-data/model';
 
-export default class VersionModel extends Model {
+export default class InvalidationModel extends Model {
   @attr() time;
   @attr() uri;
 
