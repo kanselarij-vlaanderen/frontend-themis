@@ -4,7 +4,7 @@ export default class ConceptModel extends Model {
   @attr() label;
   @attr() definition;
   @attr() uri;
-  @hasMany('concept-scheme', { inverse: 'concepts' }) inScheme;
+  @hasMany('concept-scheme', { inverse: 'concepts', async: true }) inScheme;
 
   get rdfaBindings() {
     return {

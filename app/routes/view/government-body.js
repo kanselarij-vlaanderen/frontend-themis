@@ -24,6 +24,6 @@ export default class ViewGovernmentbodyRoute extends Route {
       ].join(','),
     });
 
-    return governmentbodies.get('firstObject');
+    return governmentbodies[0];
   }
 }

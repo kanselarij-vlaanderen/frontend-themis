@@ -3,15 +3,20 @@ import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 export default class GovernmentBodyModel extends Model {
   @attr() name;
   @attr() uri;
-  @belongsTo('government-body', { inverse: 'governmentBodies' })
+  @belongsTo('government-body', { inverse: 'governmentBodies', async: true })
   isTimespecializationOf;
-  @belongsTo('generation') startDate;
-  @belongsTo('invalidation') endDate;
-  @hasMany('concept') classifications;
-  @hasMany('government-unit') governmentUnits;
-  @hasMany('government-body', { inverse: 'isTimespecializationOf' }) governmentBodies;
-  @hasMany('mandates') mandates;
-  @hasMany('mandatees', { inverse: 'governmentBody' }) mandatees;
+  @belongsTo('generation', { async: true, inverse: null }) startDate;
+  @belongsTo('invalidation', { async: true, inverse: null }) endDate;
+  @hasMany('concept', { async: true, inverse: null }) classifications;
+  @hasMany('government-unit', { async: true, inverse: 'governmentBodies' })
+  governmentUnits;
+  @hasMany('government-body', {
+    async: true,
+    inverse: 'isTimespecializationOf',
+  })
+  governmentBodies;
+  @hasMany('mandates', { async: true, inverse: 'governmentBody' }) mandates;
+  @hasMany('mandatees', { async: true, inverse: 'governmentBody' }) mandatees;
 
   get rdfaBindings() {
     return {

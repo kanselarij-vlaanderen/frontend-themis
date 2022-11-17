@@ -4,7 +4,7 @@ export default class NewsItemModel extends Model {
   @attr() shortTitle;
   @attr() date;
   @attr() uri;
-  @hasMany('mandatee') mandatees;
+  @hasMany('mandatee', { async: true, inverse: 'newsItems' }) mandatees;
 
   get rdfaBindings() {
     return {

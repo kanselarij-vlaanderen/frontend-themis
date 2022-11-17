@@ -19,6 +19,6 @@ export default class ViewPersonRoute extends Route {
       ].join(','),
     });
 
-    return persons.get('firstObject');
+    return persons[0];
   }
 }

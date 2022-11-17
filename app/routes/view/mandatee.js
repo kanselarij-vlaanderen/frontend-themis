@@ -20,6 +20,6 @@ export default class ViewMandateeRoute extends Route {
       ].join(','),
     });
 
-    return mandatees.get('firstObject');
+    return mandatees[0];
   }
 }

@@ -2,9 +2,11 @@ import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 export default class MandateModel extends Model {
   @attr() uri;
-  @belongsTo('government-function', { inverse: null }) governmentFunction;
-  @belongsTo('government-body') governmentBody;
-  @hasMany('mandatees') mandatees;
+  @belongsTo('government-function', { async: true, inverse: null })
+  governmentFunction;
+  @belongsTo('government-body', { async: true, inverse: 'mandates' })
+  governmentBody;
+  @hasMany('mandatees', { async: true, inverse: 'mandate' }) mandatees;
 
   get rdfaBindings() {
     return {

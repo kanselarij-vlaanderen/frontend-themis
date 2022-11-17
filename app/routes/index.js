@@ -36,7 +36,7 @@ export default class IndexRoute extends Route {
       },
     });
 
-    const dataset = datasets.firstObject;
+    const dataset = datasets[0];
     let meeting = null;
 
     if (dataset) {
@@ -48,12 +48,12 @@ export default class IndexRoute extends Route {
           size: 1,
         },
       });
-      meeting = meetings.firstObject;
+      meeting = meetings[0];
     }
 
     return {
       concepts: concepts,
-      currentGovernment: governmentBodies.firstObject,
+      currentGovernment: governmentBodies[0],
       mostRecentDataset: {
         dataset: dataset,
         meeting: meeting,
