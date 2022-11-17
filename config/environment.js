@@ -1,12 +1,12 @@
 'use strict';
 
 module.exports = function (environment) {
-  let ENV = {
+  const ENV = {
     modulePrefix: 'frontend-themis',
     environment,
     rootURL: '/',
-    locationType: 'auto',
-    moment: {
+    locationType: 'history',
+    'ember-moment': {
       allowEmpty: true,
     },
     metis: {
@@ -27,10 +27,6 @@ module.exports = function (environment) {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
-      },
-      EXTEND_PROTOTYPES: {
-        // Prevent Ember Data from overriding Date.parse.
-        Date: false,
       },
     },
     VO_HEADER_WIDGET_URL: '{{VO_HEADER_WIDGET_URL}}',
