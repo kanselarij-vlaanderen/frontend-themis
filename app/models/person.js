@@ -5,7 +5,6 @@ export default class PersonModel extends Model {
   @attr() firstName;
   @attr() uri;
   @hasMany('mandatee', { async: true, inverse: 'person' }) mandatees;
-  @hasMany('news-items', { async: true }) newsItems;
 
   get rdfaBindings() {
     return {

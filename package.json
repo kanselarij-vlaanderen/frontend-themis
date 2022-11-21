@@ -25,6 +25,9 @@
     "test": "npm-run-all --print-name \"lint\" \"test:*\"",
     "test:ember": "ember test"
   },
+  "fastbootDependencies": [
+    "crypto"
+  ],
   "devDependencies": {
     "@appuniversum/ember-appuniversum": "^1.10.0",
     "@ember/optional-features": "^2.0.0",
@@ -51,7 +54,7 @@
     "ember-cli-update": "^1.0.1",
     "ember-composable-helpers": "^5.0.0",
     "ember-concurrency": "^2.3.7",
-    "ember-data": "~4.7.3",
+    "ember-data": "~4.8.3",
     "ember-fetch": "^8.1.2",
     "ember-load-initializers": "^2.1.2",
     "ember-modifier": "^3.2.7",

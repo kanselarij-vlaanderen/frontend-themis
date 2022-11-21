@@ -15,8 +15,12 @@ export default class ViewPersonRoute extends Route {
         'mandatees',
         'mandatees.mandate',
         'mandatees.mandate.government-function',
+        'mandatees.government-body',
         'mandatees.mandate.government-body',
       ].join(','),
+      page: {
+        size: 1,
+      }
     });
 
     return persons[0];
