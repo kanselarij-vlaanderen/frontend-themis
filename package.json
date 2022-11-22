@@ -21,6 +21,7 @@
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
+    "release": "release-it",
     "start": "ember serve",
     "test": "npm-run-all --print-name \"lint\" \"test:*\"",
     "test:ember": "ember test"
@@ -47,7 +48,6 @@
     "ember-cli-fastboot": "^3.3.2",
     "ember-cli-htmlbars": "^6.1.1",
     "ember-cli-inject-live-reload": "^2.1.0",
-    "ember-cli-release": "^1.0.0-beta.2",
     "ember-cli-sass": "^10.0.1",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
@@ -80,6 +80,7 @@
     "prettier": "^2.7.1",
     "qunit": "^2.19.2",
     "qunit-dom": "^2.0.0",
+    "release-it": "^15.5.0",
     "sass": "^1.27.0",
     "webpack": "^5.74.0"
   },
