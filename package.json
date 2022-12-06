@@ -74,7 +74,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-qunit": "^7.3.1",
     "loader.js": "^4.7.0",
-    "metis": "github:redpencilio/ember-metis#v0.6.1",
+    "metis": "github:redpencilio/ember-metis#v0.6.2",
     "moment": "^2.29.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
