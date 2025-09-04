@@ -2,7 +2,8 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-module.exports = function (defaults) {
+module.exports = async function (defaults) {
+  const { setConfig } = await import('@warp-drive/build-config');
   const app = new EmberApp(defaults, {
     sassOptions: {
       includePaths: [
@@ -14,6 +15,12 @@ module.exports = function (defaults) {
       cascade: true,
       sourcemap: true,
     },
+  });
+
+  setConfig(app, __dirname, {
+    deprecations: {
+      DEPRECATE_STORE_EXTENDS_EMBER_OBJECT: false
+    }
   });
 
   app.import('node_modules/@triply/yasgui/build/yasgui.min.css');
