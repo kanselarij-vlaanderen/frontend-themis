@@ -6,7 +6,7 @@ export default class MandateModel extends Model {
   governmentFunction;
   @belongsTo('government-body', { async: true, inverse: 'mandates' })
   governmentBody;
-  @hasMany('mandatees', { async: true, inverse: 'mandate' }) mandatees;
+  @hasMany('mandatee', { async: true, inverse: 'mandate' }) mandatees;
 
   get rdfaBindings() {
     return {
