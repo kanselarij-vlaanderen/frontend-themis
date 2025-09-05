@@ -19,8 +19,8 @@ module.exports = async function (defaults) {
 
   setConfig(app, __dirname, {
     deprecations: {
-      DEPRECATE_STORE_EXTENDS_EMBER_OBJECT: false
-    }
+      DEPRECATE_STORE_EXTENDS_EMBER_OBJECT: false,
+    },
   });
 
   app.import('node_modules/@triply/yasgui/build/yasgui.min.css');
