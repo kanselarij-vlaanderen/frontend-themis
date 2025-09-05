@@ -15,34 +15,46 @@
       <div class="au-o-grid__item au-u-1-2">
         <AuCard as |c|>
           <c.header>
-            <LinkTo @route="view.government-body" @query={{hash
-              resource="http://themis.vlaanderen.be/id/bestuursorgaan/7f2c82aa-75ac-40f8-a6c3-9fe539163025" }}>
-              Bestuursorgaan Vlaamse Regering</LinkTo>
+            <AuContent>
+              <LinkTo @route="view.government-body" @query={{hash
+                resource="http://themis.vlaanderen.be/id/bestuursorgaan/7f2c82aa-75ac-40f8-a6c3-9fe539163025" }}>
+                Bestuursorgaan Vlaamse Regering</LinkTo>
+            </AuContent>
           </c.header>
           <c.content>
-            Bekijk alle legislaturen en regeringsamenstellingen
+            <AuContent>
+              Bekijk alle legislaturen en regeringsamenstellingen
+            </AuContent>
           </c.content>
         </AuCard>
       </div>
       <div class="au-o-grid__item au-u-1-2">
         <AuCard as |c|>
           <c.header>
-            <LinkTo @route="view.government-body" @query={{hash resource=this.model.currentGovernment.uri}}>
-              Regering {{this.model.currentGovernment.name}}
-            </LinkTo>
+            <AuContent>
+              <LinkTo @route="view.government-body" @query={{hash resource=this.model.currentGovernment.uri}}>
+                Regering {{this.model.currentGovernment.name}}
+              </LinkTo>
+            </AuContent>
           </c.header>
           <c.content>
-            Bekijk de samenstelling van de huidige Vlaamse Regering
+            <AuContent>
+              Bekijk de samenstelling van de huidige Vlaamse Regering
+            </AuContent>
           </c.content>
         </AuCard>
       </div>
       <div class="au-o-grid__item au-u-1-2">
         <AuCard as |c|>
           <c.header>
-            <LinkTo @route="sparql">SPARQL Endpoint</LinkTo>
+            <AuContent>
+              <LinkTo @route="sparql">SPARQL Endpoint</LinkTo>
+            </AuContent>
           </c.header>
           <c.content>
-            Ga zelf aan de slag om de data op te zoeken
+            <AuContent>
+              Ga zelf aan de slag om de data op te zoeken
+            </AuContent>
           </c.content>
         </AuCard>
       </div>
@@ -50,13 +62,17 @@
         <div class="au-o-grid__item au-u-1-2">
           <AuCard as |c|>
             <c.header>
-              <ThemisUri @uri={{this.model.mostRecentDataset.dataset.uri}}>
-                Dataset van de ministerraad van
-                {{moment-format this.model.mostRecentDataset.meeting.plannedStart 'DD/MM/YYYY'}}
-              </ThemisUri>
+              <AuContent>
+                <ThemisUri @uri={{this.model.mostRecentDataset.dataset.uri}}>
+                  Dataset van de ministerraad van
+                  {{moment-format this.model.mostRecentDataset.meeting.plannedStart 'DD/MM/YYYY'}}
+                </ThemisUri>
+              </AuContent>
             </c.header>
             <c.content>
-              Bekijk het kort bestek van de meest recent gepubliceerde ministerraad
+              <AuContent>
+                Bekijk het kort bestek van de meest recent gepubliceerde ministerraad
+              </AuContent>
             </c.content>
           </AuCard>
         </div>
@@ -74,12 +90,16 @@
           <div class="au-o-grid__item au-u-1-2">
             <AuCard as |c|>
               <c.header>
-                <ThemisUri @uri={{datasetType.uri}}>
-                  {{datasetType.label}}
-                </ThemisUri>
+                <AuContent>
+                  <ThemisUri @uri={{datasetType.uri}}>
+                    {{datasetType.label}}
+                  </ThemisUri>
+                </AuContent>
               </c.header>
               <c.content>
-                {{datasetType.definition}}
+                <AuContent>
+                  {{datasetType.definition}}
+                </AuContent>
               </c.content>
             </AuCard>
           </div>

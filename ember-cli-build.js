@@ -13,6 +13,13 @@ module.exports = async function (defaults) {
       cascade: true,
       sourcemap: true,
     },
+    '@embroider/macros': {
+      setConfig: {
+        '@appuniversum/ember-appuniversum': {
+          disableInternalAuContentUsage: true,
+        },
+      },
+    },
   });
 
   setConfig(app, __dirname, {
