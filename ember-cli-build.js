@@ -1,5 +1,6 @@
 'use strict';
 
+/* eslint-disable */
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = async function (defaults) {
