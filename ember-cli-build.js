@@ -6,9 +6,7 @@ module.exports = async function (defaults) {
   const { setConfig } = await import('@warp-drive/build-config');
   const app = new EmberApp(defaults, {
     sassOptions: {
-      includePaths: [
-        'node_modules/@appuniversum/ember-appuniversum/app/styles',
-      ],
+      includePaths: ['node_modules/@appuniversum/ember-appuniversum'],
     },
     autoprefixer: {
       enabled: true,
