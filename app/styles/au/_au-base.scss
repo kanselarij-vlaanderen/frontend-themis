@@ -1,0 +1,35 @@
+/* Appuniversum base
+   ========================================================================== */
+
+// SCSS variables (overrides & addons)
+
+/* */
+
+
+// Imports
+// sourced from '@appuniversum/ember-appuniversum' npm package
+
+@import "@appuniversum/ember-appuniversum/styles/settings/s-colors.scss";
+@import "@appuniversum/ember-appuniversum/styles/settings/s-global";
+@import "@appuniversum/ember-appuniversum/styles/settings/s-utilities";
+@import "@appuniversum/ember-appuniversum/styles/settings/s-root";
+
+@import "@appuniversum/ember-appuniversum/styles/tools/t-font-size";
+@import "@appuniversum/ember-appuniversum/styles/tools/t-sass-mq";
+
+@import "@appuniversum/ember-appuniversum/styles/generic/g-reset";
+@import "@appuniversum/ember-appuniversum/styles/generic/g-box-sizing";
+@import "@appuniversum/ember-appuniversum/styles/generic/g-font";
+
+@import "@appuniversum/ember-appuniversum/styles/elements/e-page";
+
+// @import "@appuniversum/ember-appuniversum/styles/objects/o-box";
+// @import "@appuniversum/ember-appuniversum/styles/objects/o-flow";
+@import "@appuniversum/ember-appuniversum/styles/objects/o-grid";
+@import "@appuniversum/ember-appuniversum/styles/objects/o-layout";
+@import "@appuniversum/ember-appuniversum/styles/objects/o-region";
+
+
+// Global overrides & addons
+
+/* */

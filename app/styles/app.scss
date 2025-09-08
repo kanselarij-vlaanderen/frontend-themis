@@ -1,8 +1,33 @@
-@import 'yasgui';
-@import "@appuniversum/ember-appuniversum/styles";
+/* ==================================
+   THEMIS
+   ================================== */
+
+/**
+ * CSS styling for the Themis application
+ */
+
+
+// BASE
+@import "au/au-base"; // Appuniversum base
+
+
+// COMPONENTS
+@import "au/au-components"; // Appuniversum components
+
+
+// EXTERNAL
+@import "external/yasgui"; // Yasgui - Sparql GUI
+
+
+// UTILITIES
+@import "au/au-utilities"; // Appuniversum utilities
+
+
+
+
+// EVERYTHING BELOW NEEDS TO BE PLACED INSIDE DEDICATED FILES
 
 // GENERAL ADDITION
-
 body {
   background-color: $au-white;
 }
@@ -53,7 +78,7 @@ ol {
   height: 43px;
   background: #fff;
 
-  // When the supported browsers support the :has selector (https://developer.mozilla.org/en-US/docs/Web/CSS/:has) we can also add a shadow to the placeholder (now, we'll get double shadows otherwise)
+  // When the supported browsers support the :has selector (https://developer.mozilla.org/en-US/docs/Web/CSS/:has) we can also add a shadow to the placeholder (now, we"ll get double shadows otherwise)
   // &:has(> .vlw) {
   //   box-shadow: 0 1px 3px rgb(12 13 14 / 10%), 0 4px 20px rgb(12 13 14 / 4%), 0 1px 1px rgb(12 13 14 / 3%);
   // }
