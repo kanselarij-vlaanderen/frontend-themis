@@ -1,0 +1,23 @@
+/* Divided card (previously "card table")
+   ========================================================================== */
+
+.l-divided-card {
+  //
+}
+
+.l-divided-card__item {
+  > .l-divided-card__item__liner {
+    height: 100%;
+    padding: $au-unit-small;
+  }
+}
+
+.l-divided-card__item--small {
+  min-width: 225px;
+}
+
+.l-divided-card__item--with-divider {
+  > .l-divided-card__item__liner {
+    border-right: thin solid $au-gray-300;
+  }
+}

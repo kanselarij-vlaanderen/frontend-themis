@@ -309,84 +309,75 @@
     <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
       Legislaturen
     </AuHeading>
-    <div class="au-o-grid">
+    <div class="au-o-flow--large">
       {{#let (await this.model.governmentBodies) as |modelGovernmentBodies|}}
         {{#each (sort-by "startDate.time:desc" modelGovernmentBodies)  as |governmentBody|}}
-          <div class="au-o-grid__item">
-            <table class="card-table-wrapper">
-              <tbody>
-                <tr>
-                  <td>
-                    <table class="card-table">
-                      <tbody>
-                        <tr>
-                          <div>
-                            <td class="card-table-cell title" rev={{governmentBody.rdfaBindings.isTimespecializationOf}}
-                              resource={{governmentBody.uri}} typeof={{governmentBody.rdfaBindings.class}}>
-                              <AuHeading @level="2" @skin="4">
-                                <ThemisUri @uri={{governmentBody.uri}}>
-                                  Legislatuur
-                                </ThemisUri>
-                              </AuHeading>
-                              <p>
-                                <span property={{governmentBody.rdfaBindings.startDate}}
-                                  resource={{governmentBody.startDate.uri}}
-                                  typeof={{governmentBody.startDate.rdfaBindings.class}}>
-                                  <span property={{governmentBody.startDate.rdfaBindings.time}}>
-                                    {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}}
-                                  </span>
-                                </span>
-                                -
-                                <span property={{governmentBody.rdfaBindings.endDate}} resource={{governmentBody.endDate.uri}}
-                                  typeof={{governmentBody.endDate.rdfaBindings.class}}>
-                                  <span property={{governmentBody.endDate.rdfaBindings.time}}>
-                                    {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
-                                  </span>
-                                </span>
-                              </p>
-                            </td>
-                            <td class="card-table-cell" resource={{governmentBody.uri}}>
-                              {{#let (await governmentBody.governmentBodies) as |governmentBodies|}}
-                                {{#each (sort-by "startDate.time:desc" governmentBodies) as |governmentBodyL3|}}
-                                  <div class="au-u-margin-top-small au-u-margin-left-large"
-                                    rev={{governmentBodyL3.rdfaBindings.isTimespecializationOf}}
-                                    resource={{governmentBodyL3.uri}} typeof={{governmentBodyL3.rdfaBindings.class}}>
-                                    <ThemisUri @uri={{governmentBodyL3.uri}}>
-                                      Regering
-                                      <span property={{governmentBodyL3.rdfaBindings.name}}>
-                                        {{governmentBodyL3.name}}
-                                      </span>
-                                    </ThemisUri>
-                                    <p>
-                                      <span property={{governmentBodyL3.rdfaBindings.startDate}}
-                                        resource={{governmentBodyL3.startDate.uri}}
-                                        typeof={{governmentBodyL3.startDate.rdfaBindings.class}}>
-                                        <span property={{governmentBodyL3.startDate.rdfaBindings.time}}>
-                                          {{moment-format governmentBodyL3.startDate.time 'DD/MM/YYYY'}}
-                                        </span>
-                                      </span>
-                                      -
-                                      <span property={{governmentBodyL3.rdfaBindings.endDate}}
-                                        resource={{governmentBodyL3.endDate.uri}}
-                                        typeof={{governmentBodyL3.endDate.rdfaBindings.class}}>
-                                        <span property={{governmentBodyL3.endDate.rdfaBindings.time}}>
-                                          {{if governmentBodyL3.endDate (moment-format governmentBodyL3.endDate.time 'DD/MM/YYYY') 'heden'}}
-                                        </span>
-                                      </span>
-                                    </p>
-                                  </div>
-                                {{/each}}
-                              {{/let}}
-                            </td>
-                          </div>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <AuCard @size="small" class="l-divided-card" as |c|>
+            <c.content>
+              <div class="au-o-grid au-u-flex--no-wrap">
+                <div class="au-o-grid__item au-u-1-4 l-divided-card__item l-divided-card__item--small l-divided-card__item--with-divider" rev={{governmentBody.rdfaBindings.isTimespecializationOf}} resource={{governmentBody.uri}} typeof={{governmentBody.rdfaBindings.class}}>
+                  <div class="l-divided-card__item__liner">
+                    <AuHeading @level="2" @skin="4">
+                      <ThemisUri @uri={{governmentBody.uri}}>
+                        Legislatuur
+                      </ThemisUri>
+                    </AuHeading>
+                    <p>
+                      <span property={{governmentBody.rdfaBindings.startDate}}
+                        resource={{governmentBody.startDate.uri}}
+                        typeof={{governmentBody.startDate.rdfaBindings.class}}>
+                        <span property={{governmentBody.startDate.rdfaBindings.time}}>
+                          {{moment-format governmentBody.startDate.time 'DD/MM/YYYY'}}
+                        </span>
+                      </span>
+                      -
+                      <span property={{governmentBody.rdfaBindings.endDate}} resource={{governmentBody.endDate.uri}}
+                        typeof={{governmentBody.endDate.rdfaBindings.class}}>
+                        <span property={{governmentBody.endDate.rdfaBindings.time}}>
+                          {{if governmentBody.endDate (moment-format governmentBody.endDate.time 'DD/MM/YYYY') 'heden'}}
+                        </span>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <div class="au-o-grid__item au-u-3-4 l-divided-card__item" resource={{governmentBody.uri}}>
+                  <div class="l-divided-card__item__liner au-o-flow--small">
+                    {{#let (await governmentBody.governmentBodies) as |governmentBodies|}}
+                      {{#each (sort-by "startDate.time:desc" governmentBodies) as |governmentBodyL3|}}
+                        <div
+                          rev={{governmentBodyL3.rdfaBindings.isTimespecializationOf}}
+                          resource={{governmentBodyL3.uri}} typeof={{governmentBodyL3.rdfaBindings.class}}>
+                          <ThemisUri @uri={{governmentBodyL3.uri}}>
+                            Regering
+                            <span property={{governmentBodyL3.rdfaBindings.name}}>
+                              {{governmentBodyL3.name}}
+                            </span>
+                          </ThemisUri>
+                          <p>
+                            <span property={{governmentBodyL3.rdfaBindings.startDate}}
+                              resource={{governmentBodyL3.startDate.uri}}
+                              typeof={{governmentBodyL3.startDate.rdfaBindings.class}}>
+                              <span property={{governmentBodyL3.startDate.rdfaBindings.time}}>
+                                {{moment-format governmentBodyL3.startDate.time 'DD/MM/YYYY'}}
+                              </span>
+                            </span>
+                            -
+                            <span property={{governmentBodyL3.rdfaBindings.endDate}}
+                              resource={{governmentBodyL3.endDate.uri}}
+                              typeof={{governmentBodyL3.endDate.rdfaBindings.class}}>
+                              <span property={{governmentBodyL3.endDate.rdfaBindings.time}}>
+                                {{if governmentBodyL3.endDate (moment-format governmentBodyL3.endDate.time 'DD/MM/YYYY') 'heden'}}
+                              </span>
+                            </span>
+                          </p>
+                        </div>
+                      {{/each}}
+                    {{/let}}
+                  </div>
+                </div>
+              </div>
+            </c.content>
+          </AuCard>
         {{/each}}
       {{/let}}
     </div>
