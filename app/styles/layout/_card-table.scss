@@ -1,0 +1,26 @@
+/* Card table
+   ========================================================================== */
+
+.card-table-wrapper {
+  width: 100%;
+  border: 0.1rem solid #CCD1D9;
+
+  // background-color: red;
+}
+
+.card-table-wrapper td {
+  padding: 1.2rem;
+}
+
+.card-table {
+  width: 100%;
+}
+
+.card-table-cell {
+  padding: 2.4rem;
+}
+
+.title {
+  width: 25%;
+  border-right: thin solid #A9A9A9;
+}

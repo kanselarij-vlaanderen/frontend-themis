@@ -32,4 +32,28 @@
 
 // Global overrides & addons
 
-/* */
+body {
+  background-color: $au-white;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: none;
+}
+
+p {
+  word-break: break-word;
+  white-space: normal;
+}
+
+code, pre {
+  background-color: $au-gray-100;
+  font-family: monospace;
+}
+
+code {
+  padding: .2rem .4rem;
+}
+
+pre {
+  padding: 2rem 3rem;
+}

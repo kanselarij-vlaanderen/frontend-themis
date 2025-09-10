@@ -1,0 +1,26 @@
+/* External VL header
+   ========================================================================== */
+
+.l-external-header {
+  //
+}
+
+.l-external-header__placeholder {
+  width: 100%;
+  height: 43px;
+  background: #fff;
+
+  // When the supported browsers support the :has selector (https://developer.mozilla.org/en-US/docs/Web/CSS/:has) we can also add a shadow to the placeholder (now, we"ll get double shadows otherwise)
+  // &:has(> .vlw) {
+  //   box-shadow: 0 1px 3px rgb(12 13 14 / 10%), 0 4px 20px rgb(12 13 14 / 4%), 0 1px 1px rgb(12 13 14 / 3%);
+  // }
+}
+
+
+// SPECIFIC ADDITION (PAGE LAYOUT)
+
+.l-external-header + .au-c-main-container{
+  @include mq(medium) {
+    height: calc(100vh - 43px); // Adjust the negating height (of the header) because the external one differs one pixel
+  }
+}
