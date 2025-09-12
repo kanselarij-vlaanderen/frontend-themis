@@ -314,8 +314,8 @@
         {{#each (sort-by "startDate.time:desc" modelGovernmentBodies)  as |governmentBody|}}
           <AuCard @size="small" class="l-divided-card" as |c|>
             <c.content>
-              <div class="au-o-grid au-u-flex--no-wrap">
-                <div class="au-o-grid__item au-u-1-4 l-divided-card__item l-divided-card__item--small l-divided-card__item--with-divider" rev={{governmentBody.rdfaBindings.isTimespecializationOf}} resource={{governmentBody.uri}} typeof={{governmentBody.rdfaBindings.class}}>
+              <div class="au-o-grid au-u-flex--no-wrap@xsmall">
+                <div class="au-o-grid__item au-u-4-4 au-u-1-4@xsmall l-divided-card__item l-divided-card__item--small l-divided-card__item--with-divider" rev={{governmentBody.rdfaBindings.isTimespecializationOf}} resource={{governmentBody.uri}} typeof={{governmentBody.rdfaBindings.class}}>
                   <div class="l-divided-card__item__liner">
                     <AuHeading @level="2" @skin="4">
                       <ThemisUri @uri={{governmentBody.uri}}>
@@ -340,7 +340,7 @@
                     </p>
                   </div>
                 </div>
-                <div class="au-o-grid__item au-u-3-4 l-divided-card__item" resource={{governmentBody.uri}}>
+                <div class="au-o-grid__item au-u-4-4 au-u-3-4@xsmall l-divided-card__item" resource={{governmentBody.uri}}>
                   <div class="l-divided-card__item__liner au-o-flow--small">
                     {{#let (await governmentBody.governmentBodies) as |governmentBodies|}}
                       {{#each (sort-by "startDate.time:desc" governmentBodies) as |governmentBodyL3|}}

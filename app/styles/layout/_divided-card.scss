@@ -7,17 +7,63 @@
 
 .l-divided-card__item {
   > .l-divided-card__item__liner {
+    position: relative;
     height: 100%;
-    padding: $au-unit-small;
+    padding: 0 $au-unit-small;
+
+    @include mq(xsmall) {
+      padding: $au-unit-small 0;
+    }
+  }
+
+  &:first-child {
+    > .l-divided-card__item__liner {
+      padding: $au-unit-small $au-unit-small 0 $au-unit-small;
+
+      @include mq(xsmall) {
+        padding: $au-unit-small 0 $au-unit-small $au-unit-small;
+      }
+    }
+  }
+
+  &:last-child {
+    > .l-divided-card__item__liner {
+      padding: 0 $au-unit-small $au-unit-small $au-unit-small;
+
+      @include mq(xsmall) {
+        padding: $au-unit-small $au-unit-small $au-unit-small 0;
+      }
+    }
+  }
+
+  &:not(:last-child) {
+    > .l-divided-card__item__liner {
+      &:after {
+        position: absolute;
+        bottom: -#{$au-unit};
+        left: 0;
+        width: 100%;
+
+        border-bottom: .1rem solid $au-gray-300;
+
+        content: '';
+
+        @include mq(xsmall) {
+          top: 0;
+          right: -#{$au-unit};
+          bottom: auto;
+          left: auto;
+          width: 0;
+          height: 100%;
+
+          border-bottom: none;
+          border-right: .1rem solid $au-gray-300;
+        }
+      }
+    }
   }
 }
 
 .l-divided-card__item--small {
-  min-width: 225px;
-}
-
-.l-divided-card__item--with-divider {
-  > .l-divided-card__item__liner {
-    border-right: thin solid $au-gray-300;
-  }
+  min-width: 240px;
 }
