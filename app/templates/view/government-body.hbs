@@ -280,20 +280,18 @@
         </span>
       </span>
     </AuHeading>
-    {{#each this.model.classifications as |classification|}}
-      <span class="au-u-h3" property={{this.model.rdfaBindings.classifications}}
+    {{#each this.model.classifications as |classification index|}}
+      <span class="au-u-h3 au-u-flex--inline" property={{this.model.rdfaBindings.classifications}}
         resource={{this.model.classifications.uri}} typeof={{this.model.classifications.rdfaBindings.class}}>
         <span property={{this.model.classifications.rdfaBindings.label}}>
-          <ThemisUri @uri={{classification.uri}}>
-            {{classification.label}}
-          </ThemisUri>
+          <ThemisUri @uri={{classification.uri}} class="au-u-flex--inline">{{classification.label}}</ThemisUri>
         </span>
-        {{#if (not-eq classification (object-at this.model.classifications.length this.model.classifications))}},{{/if}}
+        {{#unless (eq index (dec this.model.classifications.length))}},{{/unless}}
       </span>
     {{/each}}
      <p class="au-u-h3">van
-      {{#each this.model.governmentUnits as |governmentUnit|}}
-        <span class="au-u-h3" property={{this.model.rdfaBindings.governmentUnits}}
+      {{#each this.model.governmentUnits as |governmentUnit index|}}
+        <span class="au-u-h3 au-u-flex--inline" property={{this.model.rdfaBindings.governmentUnits}}
           resource={{this.model.governmentUnits.uri}} typeof={{this.model.governmentUnits.rdfaBindings.class}}>
 
           <span property={{this.model.governmentUnits.rdfaBindings.name}}>
@@ -301,7 +299,7 @@
               {{governmentUnit.name}}
             </ThemisUri>
           </span>
-          {{#if (not-eq governmentUnit (object-at this.model.governmentUnits.length this.model.governmentUnits))}},{{/if}}
+          {{#unless (eq index (dec this.model.governmentUnits.length))}},{{/unless}}
         </span>
       {{/each}}
     </p>
