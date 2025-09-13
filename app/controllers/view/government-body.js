@@ -7,7 +7,9 @@ export default class ViewGovernmentbodyController extends Controller {
     const persons = [];
 
     this.model.mandatees.forEach(function (mandatee) {
-      let person = persons.find((person) => person.id === mandatee.person.get('id'));
+      let person = persons.find(
+        (person) => person.id === mandatee.person.get('id'),
+      );
 
       if (!person) {
         person = {
@@ -33,7 +35,9 @@ export default class ViewGovernmentbodyController extends Controller {
 
     this.model.mandates.forEach(function (mandate) {
       mandate.mandatees.forEach(function (mandatee) {
-        let person = persons.find((person) => person.id === mandatee.person.get('id'));
+        let person = persons.find(
+          (person) => person.id === mandatee.person.get('id'),
+        );
 
         if (!person) {
           person = {
