@@ -22,7 +22,7 @@
           </span>
         </span>
       </AuHeading>
-      <p class="au-u-h3 metis-u-text-gray-600" rel={{this.model.rdfaBindings.isTimespecializationOf}}
+      <p class="au-u-h3" rel={{this.model.rdfaBindings.isTimespecializationOf}}
         resource={{this.model.isTimespecializationOf.uri}}
         typeof={{this.model.isTimespecializationOf.rdfaBindings.class}}>
         Tijdspecialisatie van
@@ -134,7 +134,7 @@
           </span>
         </span>
       </AuHeading>
-      <p class="au-u-h3 metis-u-text-gray-600" property={{this.model.rdfaBindings.isTimespecializationOf}}
+      <p class="au-u-h3" property={{this.model.rdfaBindings.isTimespecializationOf}}
         resource={{this.model.isTimespecializationOf.uri}}
         typeof={{this.model.isTimespecializationOf.rdfaBindings.class}}>
         Tijdspecialisatie van
@@ -281,7 +281,7 @@
       </span>
     </AuHeading>
     {{#each this.model.classifications as |classification|}}
-      <span class="au-u-h3 metis-u-text-gray-600" property={{this.model.rdfaBindings.classifications}}
+      <span class="au-u-h3" property={{this.model.rdfaBindings.classifications}}
         resource={{this.model.classifications.uri}} typeof={{this.model.classifications.rdfaBindings.class}}>
         <span property={{this.model.classifications.rdfaBindings.label}}>
           <ThemisUri @uri={{classification.uri}}>
@@ -291,9 +291,9 @@
         {{#if (not-eq classification (object-at this.model.classifications.length this.model.classifications))}},{{/if}}
       </span>
     {{/each}}
-     <p class="au-u-h3 metis-u-text-gray-600">van
+     <p class="au-u-h3">van
       {{#each this.model.governmentUnits as |governmentUnit|}}
-        <span class="au-u-h3 metis-u-text-gray-600" property={{this.model.rdfaBindings.governmentUnits}}
+        <span class="au-u-h3" property={{this.model.rdfaBindings.governmentUnits}}
           resource={{this.model.governmentUnits.uri}} typeof={{this.model.governmentUnits.rdfaBindings.class}}>
 
           <span property={{this.model.governmentUnits.rdfaBindings.name}}>
