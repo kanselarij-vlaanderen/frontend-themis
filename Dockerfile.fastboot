@@ -8,6 +8,7 @@ RUN npm install
 
 COPY . .
 RUN ember build --environment production
+RUN cd dist && npm install
 
 FROM redpencil/fastboot-app-server:1.3.0
 
