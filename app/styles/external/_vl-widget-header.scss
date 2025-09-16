@@ -1,68 +1,61 @@
 /* VL widget - header
    ========================================================================== */
 
-/*
-Extract adapted from
-https://vlaamseoverheid.atlassian.net/wiki/spaces/IKPubliek/pages/2604728345/Tools+om+de+header+en+branding+te+previewen
-*/
-$yellow: #FFE615;
+$vlw-brand-yellow: #ffed00;
 
-.l-external-header {
-  /* LEFT ICON IN HEADER */
-  .vlw .vlw__primary-bar__brand__umbrella--secondary::before,
-  .vlw .vlw__primary-bar__brand__umbrella--secondary::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 28px;
-    height: 100%;
-    background: $yellow;
-  }
+.t-themis {
+  .vlw {
+    .vlw__primary-bar__brand__umbrella--secondary {
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+      }
 
-  .vlw .vlw__primary-bar__brand__umbrella--secondary::after,
-  .vlw .vlw__primary-bar__brand__umbrella--secondary::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 28px;
-    width: 0;
-    height: 0;
-    background: none;
-    transform: none;
-    -ms-transform: none;
-    border-top: 43px solid transparent;
-    border-bottom: 0 solid transparent;
-    border-left: 13.5px solid $yellow;
-  }
+      &::before {
+        inset: 0;
+        width: 28px;
+        height: 100%;
+        background: $vlw-brand-yellow;
+        transition: background .1s ease-in-out;
+      }
 
-  /* TEKST "HULP NODIG" */
-  .vlw .vlw__contact--primary .vlw__contact__toggle::after,
-  .vlw .vlw__contact--secondary .vlw__contact__toggle::after,
-  .vlw .vlw__contact--tertiary .vlw__contact__toggle::after,
-  .vlw .vlw__contact--quaternary .vlw__contact__toggle::after {
-    border-right: $yellow;
-  }
+      &::after {
+        top: 0;
+        left: 28px;
+        width: 0;
+        height: 0;
+        border-top: 43px solid transparent;
+        border-bottom: 0 solid transparent;
+        border-left: 13.5px solid $vlw-brand-yellow;
+        transition: border-color .1s ease-in-out;
+      }
+    }
 
-  .vlw .vlw__contact--primary .vlw__contact__toggle,
-  .vlw .vlw__contact--secondary .vlw__contact__toggle,
-  .vlw .vlw__contact--tertiary .vlw__contact__toggle,
-  .vlw .vlw__contact--quaternary .vlw__contact__toggle,
-  .vlw .vlw__contact--primary .vlw__contact__toggle:hover,
-  .vlw .vlw__contact--secondary .vlw__contact__toggle:hover,
-  .vlw .vlw__contact--tertiary .vlw__contact__toggle:hover,
-  .vlw .vlw__contact--quaternary .vlw__contact__toggle:hover,
-  .vlw .vlw__contact--primary .vlw__contact__toggle:focus,
-  .vlw .vlw__contact--secondary .vlw__contact__toggle:focus,
-  .vlw .vlw__contact--tertiary .vlw__contact__toggle:focus,
-  .vlw .vlw__contact--quaternary .vlw__contact__toggle:focus {
-    background: $yellow;
-  }
+    .vlw__contact--primary,
+    .vlw__contact--secondary,
+    .vlw__contact--tertiary,
+    .vlw__contact--quaternary {
+      .vlw__contact__toggle {
 
-  /* PROGRESS BAR */
-  .vlw .vlw__primary-bar__progress {
-    background: $yellow;
+        &,
+        &:hover,
+        &:focus {
+          background: $vlw-brand-yellow;
+        }
+
+        &::after {
+          border-right: $vlw-brand-yellow;
+        }
+      }
+    }
+
+    .vlw__primary-bar__progress {
+      background: $vlw-brand-yellow;
+    }
+
+    .vlw__contact-panel {
+      height: 40rem;
+    }
   }
 }
