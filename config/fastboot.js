@@ -2,7 +2,9 @@ module.exports = function(environment) {
   return {
     buildSandboxGlobals(defaultGlobals) {
       return Object.assign({}, defaultGlobals, {
-        BACKEND_URL: 'https://themis-test.vlaanderen.be/',
+        // Enable BACKEND_URL and set to http://host (or http://localhost)
+        // for local development.
+        BACKEND_URL: 'http://host/',
 
         // Fastboot support for Ember Data >= 4.12
         AbortController,
