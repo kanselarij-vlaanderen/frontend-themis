@@ -57,3 +57,87 @@ code {
 pre {
   padding: 2rem 3rem;
 }
+
+@if (variable-exists(mq-breakpoints)) {
+  @each $au-bp-name, $au-bp-value in $mq-breakpoints {
+    @include mq($from: $au-bp-name) {
+      .au-o-grid--tiny\@#{$au-bp-name} {
+        margin: -$au-unit-tiny;
+
+        > .au-o-grid__item {
+          padding: $au-unit-tiny;
+        }
+      }
+
+      .au-o-grid--small\@#{$au-bp-name} {
+        margin: -$au-unit-small;
+
+        > .au-o-grid__item {
+          padding: $au-unit-small;
+        }
+      }
+
+      .au-o-grid--medium\@#{$au-bp-name} {
+        margin: -$au-unit;
+
+        > .au-o-grid__item {
+          padding: $au-unit;
+        }
+      }
+
+      .au-o-grid--large\@#{$au-bp-name} {
+        margin: -$au-unit-large;
+
+        > .au-o-grid__item {
+          padding: $au-unit-large;
+        }
+      }
+
+      .au-o-grid--huge\@#{$au-bp-name} {
+        margin: -$au-unit-huge;
+
+        > .au-o-grid__item {
+          padding: $au-unit-huge;
+        }
+      }
+
+      .au-o-grid--flush\@#{$au-bp-name} {
+        margin: 0;
+
+        > .au-o-grid__item {
+          padding: 0;
+        }
+      }
+
+      .au-o-flow--tiny\@#{$au-bp-name} {
+        > * + * {
+          margin-top: $au-unit-tiny;
+        }
+      }
+
+      .au-o-flow--small\@#{$au-bp-name} {
+        > * + * {
+          margin-top: $au-unit-small;
+        }
+      }
+
+      .au-o-flow--medium\@#{$au-bp-name} {
+        > * + * {
+          margin-top: $au-unit;
+        }
+      }
+
+      .au-o-flow--large\@#{$au-bp-name} {
+        > * + * {
+          margin-top: $au-unit-large;
+        }
+      }
+
+      .au-o-flow--huge\@#{$au-bp-name} {
+        > * + * {
+          margin-top: $au-unit-huge;
+        }
+      }
+    }
+  }
+}

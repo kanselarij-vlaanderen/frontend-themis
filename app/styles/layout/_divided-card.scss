@@ -11,7 +11,7 @@
     height: 100%;
     padding: 0 $au-unit-small;
 
-    @include mq(xsmall) {
+    @include mq(small) {
       padding: $au-unit-small 0;
     }
   }
@@ -20,7 +20,7 @@
     > .l-divided-card__item__liner {
       padding: $au-unit-small $au-unit-small 0 $au-unit-small;
 
-      @include mq(xsmall) {
+      @include mq(small) {
         padding: $au-unit-small 0 $au-unit-small $au-unit-small;
       }
     }
@@ -30,7 +30,7 @@
     > .l-divided-card__item__liner {
       padding: 0 $au-unit-small $au-unit-small $au-unit-small;
 
-      @include mq(xsmall) {
+      @include mq(small) {
         padding: $au-unit-small $au-unit-small $au-unit-small 0;
       }
     }
@@ -48,7 +48,7 @@
 
         content: '';
 
-        @include mq(xsmall) {
+        @include mq(small) {
           top: 0;
           right: -#{$au-unit};
           bottom: auto;
