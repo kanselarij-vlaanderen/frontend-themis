@@ -1,107 +1,28 @@
-@import 'yasgui';
-@import 'ember-appuniversum';
+/* ==================================
+   THEMIS
+   ================================== */
 
-// GENERAL ADDITION
-
-body {
-  background-color: $au-white;
-}
-
-code {
-  background-color: #f3f5f6;
-  font-family: monospace;
-  padding: 2px 4px;
-}
-
-pre {
-  background-color: #f3f5f6;
-  font-family: monospace;
-  padding: 20px 30px;
-}
-
-/* Heading numbers in documentation */
-body {counter-reset: h2}
-  h2 {counter-reset: h3}
-  h3 {counter-reset: h4}
-  h4 {counter-reset: h5}
-  h5 {counter-reset: h6}
+/**
+ * CSS styling for the Themis application
+ */
 
 
-.docs {
-  h2:before {counter-increment: h2; content: counter(h2) ". "}
-  h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
-  h4:before {counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) ". "}
-  h5:before {counter-increment: h5; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". "}
-  h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "}
-
-  h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none }
-}
-
-ol {
-  list-style: decimal;
-}
+// BASE
+@import "au/au-base"; // Appuniversum base
 
 
-// SPECIFIC ADDITION (HEADER PLACEHOLDER)
-
-.l-external-header {
-  //
-}
-
-.l-external-header__placeholder {
-  width: 100%;
-  height: 43px;
-  background: #fff;
-
-  // When the supported browsers support the :has selector (https://developer.mozilla.org/en-US/docs/Web/CSS/:has) we can also add a shadow to the placeholder (now, we'll get double shadows otherwise)
-  // &:has(> .vlw) {
-  //   box-shadow: 0 1px 3px rgb(12 13 14 / 10%), 0 4px 20px rgb(12 13 14 / 4%), 0 1px 1px rgb(12 13 14 / 3%);
-  // }
-}
+// COMPONENTS
+@import "au/au-components"; // Appuniversum components
 
 
-// SPECIFIC ADDITION (PAGE LAYOUT)
+// LAYOUT STYLING
+@import "layout/docs";
+@import "layout/divided-card";
 
-.l-external-header + .au-c-main-container{
-  @include mq(medium) {
-    height: calc(100vh - 43px); // Adjust the negating height (of the header) because the external one differs one pixel
-  }
-}
-
-// SPECIFIC ADDITION (AIV HEADER-WIDGET COLOR CUSTOMIZATION)
-@import "vo-widget";
+// EXTERNAL
+@import "external/vl-widget-header"; // VL widget - header
+@import "external/yasgui"; // Yasgui - Sparql GUI
 
 
-// SPECIFIC ADDITION
-
-.card-table-wrapper {
-  width: 100%;
-  border: 0.1rem solid #CCD1D9;
-}
-
-.card-table-wrapper td {
-  padding: 1.2rem;
-}
-
-.card-table {
-  width: 100%;
-}
-
-.card-table-cell {
-  padding: 2.4rem;
-}
-
-.title {
-  width: 25%;
-  border-right: thin solid #A9A9A9;
-}
-
-
-// OVERRIDES
-
-.au-c-intro {
-  @include au-font-size($au-h4);
-  font-weight: $au-light;
-  color: $au-gray-800;
-  max-width: 60ch;
-}
+// UTILITIES
+@import "au/au-utilities"; // Appuniversum utilities

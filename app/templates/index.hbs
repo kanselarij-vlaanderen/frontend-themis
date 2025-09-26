@@ -4,104 +4,129 @@
     Open data portaal rond de besluitvorming van de Vlaamse Regering
   </AuHeading>
   <AuHr @size="large" />
-  <div class="au-o-region-large">
+  <div class="au-o-region-large au-o-flow--small">
     <AuHeading @level="3" @skin="3">
       Ontdek de data
     </AuHeading>
-    <p class="au-c-intro au-u-margin-top-small au-u-margin-bottom-small">
+    <p class="au-c-intro">
       Bekijk de data of ga zelf op zoek
     </p>
-    <div class="au-o-grid">
-      <div class="au-o-grid__item au-u-1-2">
-        <AuCard as |c|>
-          <c.header>
-            <LinkTo @route="view.government-body" @query={{hash
-              resource="http://themis.vlaanderen.be/id/bestuursorgaan/7f2c82aa-75ac-40f8-a6c3-9fe539163025" }}>
-              Bestuursorgaan Vlaamse Regering</LinkTo>
-          </c.header>
-          <c.content>
-            Bekijk alle legislaturen en regeringsamenstellingen
-          </c.content>
-        </AuCard>
-      </div>
-      <div class="au-o-grid__item au-u-1-2">
-        <AuCard as |c|>
-          <c.header>
-            <LinkTo @route="view.government-body" @query={{hash resource=this.model.currentGovernment.uri}}>
-              Regering {{this.model.currentGovernment.name}}
-            </LinkTo>
-          </c.header>
-          <c.content>
-            Bekijk de samenstelling van de huidige Vlaamse Regering
-          </c.content>
-        </AuCard>
-      </div>
-      <div class="au-o-grid__item au-u-1-2">
-        <AuCard as |c|>
-          <c.header>
-            <LinkTo @route="sparql">SPARQL Endpoint</LinkTo>
-          </c.header>
-          <c.content>
-            Ga zelf aan de slag om de data op te zoeken
-          </c.content>
-        </AuCard>
-      </div>
-      {{#if this.model.mostRecentDataset.meeting}}
-        <div class="au-o-grid__item au-u-1-2">
+    <div class="au-u-margin-top">
+      <div class="au-o-grid au-o-grid--small au-o-grid--medium@small">
+        <div class="au-o-grid__item au-u-1-2@small">
           <AuCard as |c|>
             <c.header>
-              <ThemisUri @uri={{this.model.mostRecentDataset.dataset.uri}}>
-                Dataset van de ministerraad van
-                {{moment-format this.model.mostRecentDataset.meeting.plannedStart 'DD/MM/YYYY'}}
-              </ThemisUri>
+              <AuContent>
+                <LinkTo @route="view.government-body" @query={{hash
+                  resource="http://themis.vlaanderen.be/id/bestuursorgaan/7f2c82aa-75ac-40f8-a6c3-9fe539163025" }}>
+                  Bestuursorgaan Vlaamse Regering</LinkTo>
+              </AuContent>
             </c.header>
             <c.content>
-              Bekijk het kort bestek van de meest recent gepubliceerde ministerraad
+              <AuContent>
+                Bekijk alle legislaturen en regeringsamenstellingen
+              </AuContent>
             </c.content>
           </AuCard>
         </div>
-      {{/if}}
-    </div>
-    <div class="au-o-region-large">
-      <AuHeading @level="3" @skin="3">
-        Datasets
-      </AuHeading>
-      <p class="au-c-intro au-u-margin-top-small au-u-margin-bottom-small">
-        Soorten datasets op het data portaal
-      </p>
-      <div class="au-o-grid">
-        {{#each (sort-by "label" this.model.concepts)  as |datasetType|}}
-          <div class="au-o-grid__item au-u-1-2">
+        <div class="au-o-grid__item au-u-1-2@small">
+          <AuCard as |c|>
+            <c.header>
+              <AuContent>
+                <LinkTo @route="view.government-body" @query={{hash resource=this.model.currentGovernment.uri}}>
+                  Regering {{this.model.currentGovernment.name}}
+                </LinkTo>
+              </AuContent>
+            </c.header>
+            <c.content>
+              <AuContent>
+                Bekijk de samenstelling van de huidige Vlaamse Regering
+              </AuContent>
+            </c.content>
+          </AuCard>
+        </div>
+        <div class="au-o-grid__item au-u-1-2@small">
+          <AuCard as |c|>
+            <c.header>
+              <AuContent>
+                <LinkTo @route="sparql">SPARQL Endpoint</LinkTo>
+              </AuContent>
+            </c.header>
+            <c.content>
+              <AuContent>
+                Ga zelf aan de slag om de data op te zoeken
+              </AuContent>
+            </c.content>
+          </AuCard>
+        </div>
+        {{#if this.model.mostRecentDataset.meeting}}
+          <div class="au-o-grid__item au-u-1-2@small">
             <AuCard as |c|>
               <c.header>
-                <ThemisUri @uri={{datasetType.uri}}>
-                  {{datasetType.label}}
-                </ThemisUri>
+                <AuContent>
+                  <ThemisUri @uri={{this.model.mostRecentDataset.dataset.uri}}>
+                    Dataset van de ministerraad van
+                    {{moment-format this.model.mostRecentDataset.meeting.plannedStart 'DD/MM/YYYY'}}
+                  </ThemisUri>
+                </AuContent>
               </c.header>
               <c.content>
-                {{datasetType.definition}}
+                <AuContent>
+                  Bekijk het kort bestek van de meest recent gepubliceerde ministerraad
+                </AuContent>
+              </c.content>
+            </AuCard>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  <div class="au-o-region-large au-o-flow--small">
+    <AuHeading @level="3" @skin="3">
+      Datasets
+    </AuHeading>
+    <p class="au-c-intro">
+      Soorten datasets op het data portaal
+    </p>
+    <div class="au-u-margin-top">
+      <div class="au-o-grid au-o-grid--small au-o-grid--medium@small">
+        {{#each (sort-by "label" this.model.concepts)  as |datasetType|}}
+          <div class="au-o-grid__item au-u-1-2@small">
+            <AuCard as |c|>
+              <c.header>
+                <AuContent>
+                  <ThemisUri @uri={{datasetType.uri}}>
+                    {{datasetType.label}}
+                  </ThemisUri>
+                </AuContent>
+              </c.header>
+              <c.content>
+                <AuContent>
+                  {{datasetType.definition}}
+                </AuContent>
               </c.content>
             </AuCard>
           </div>
         {{/each}}
       </div>
     </div>
-    <div class="au-o-region-large">
-      <div>
-        <AuHeading @level="3" @skin="3">
-          Documentatie
-        </AuHeading>
-        <p class="au-u-margin-top-small au-u-margin-bottom-small">
-          Lees meer over de data ontsluiting en besluitvormingscatalogus in de
-          <LinkTo @route="docs">Themis documentatie</LinkTo>
-        </p>
-      </div>
-    </div>
-    <div class="au-o-region-large">
+  </div>
+  <div class="au-o-region-large">
+    <div>
+      <AuHeading @level="3" @skin="3">
+        Documentatie
+      </AuHeading>
       <p class="au-u-margin-top-small au-u-margin-bottom-small">
-        Het open data portaal wordt ondersteund met middelen uit de Faciliteit voor Herstel en Veerkracht van de Europese Unie (RRF).
+        Lees meer over de data ontsluiting en besluitvormingscatalogus in de
+        <LinkTo @route="docs">Themis documentatie</LinkTo>
       </p>
-      <img src="/assets/images/logo-rrf.png"/>
     </div>
+  </div>
+  <div class="au-o-region-large">
+    <p class="au-u-margin-top-small au-u-margin-bottom-small">
+      Het open data portaal wordt ondersteund met middelen uit de Faciliteit voor Herstel en Veerkracht van de Europese Unie (RRF).
+    </p>
+    <img src="/assets/images/logo-rrf.png"/>
   </div>
 </div>

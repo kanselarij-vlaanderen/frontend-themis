@@ -16,8 +16,7 @@ export default class NewsItemsTableComponent extends Component {
     this.getNewsItems.perform();
   }
 
-  @task
-  *getNewsItems() {
+  getNewsItems = task(async () => {
     const filter = {};
     if (this.args.person) {
       filter['mandatees'] = {
@@ -29,8 +28,8 @@ export default class NewsItemsTableComponent extends Component {
       filter['mandatees'] = { ':uri:': this.args.mandatee };
     }
 
-    this.newsItems = yield this.fetchNewsItems(filter);
-  }
+    this.newsItems = await this.fetchNewsItems(filter);
+  })
 
   // Executing store.query in separate async function
   // until https://github.com/emberjs/data/issues/8312 gets resolved

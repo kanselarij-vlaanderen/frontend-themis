@@ -15,8 +15,8 @@ export default class GovernmentBodyModel extends Model {
     inverse: 'isTimespecializationOf',
   })
   governmentBodies;
-  @hasMany('mandates', { async: true, inverse: 'governmentBody' }) mandates;
-  @hasMany('mandatees', { async: true, inverse: 'governmentBody' }) mandatees;
+  @hasMany('mandate', { async: true, inverse: 'governmentBody' }) mandates;
+  @hasMany('mandatee', { async: true, inverse: 'governmentBody' }) mandatees;
 
   get rdfaBindings() {
     return {

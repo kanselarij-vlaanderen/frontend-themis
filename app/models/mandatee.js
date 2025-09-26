@@ -10,7 +10,7 @@ export default class MandateeModel extends Model {
   @belongsTo('mandate', { async: true, inverse: 'mandatees' }) mandate;
   @belongsTo('government-body', { async: true, inverse: 'mandatees' })
   governmentBody;
-  @hasMany('news-items', { async: true, inverse: 'mandatees' }) newsItems;
+  @hasMany('news-item', { async: true, inverse: 'mandatees' }) newsItems;
 
   get rdfaBindings() {
     return {

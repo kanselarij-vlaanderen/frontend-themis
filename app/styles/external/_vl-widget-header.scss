@@ -1,0 +1,61 @@
+/* VL widget - header
+   ========================================================================== */
+
+$vlw-brand-yellow: #ffed00;
+
+.t-themis {
+  .vlw {
+    .vlw__primary-bar__brand__umbrella--secondary {
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+      }
+
+      &::before {
+        inset: 0;
+        width: 28px;
+        height: 100%;
+        background: $vlw-brand-yellow;
+        transition: background .1s ease-in-out;
+      }
+
+      &::after {
+        top: 0;
+        left: 28px;
+        width: 0;
+        height: 0;
+        border-top: 43px solid transparent;
+        border-bottom: 0 solid transparent;
+        border-left: 13.5px solid $vlw-brand-yellow;
+        transition: border-color .1s ease-in-out;
+      }
+    }
+
+    .vlw__contact--primary,
+    .vlw__contact--secondary,
+    .vlw__contact--tertiary,
+    .vlw__contact--quaternary {
+      .vlw__contact__toggle {
+
+        &,
+        &:hover,
+        &:focus {
+          background: $vlw-brand-yellow;
+        }
+
+        &::after {
+          border-right: $vlw-brand-yellow;
+        }
+      }
+    }
+
+    .vlw__primary-bar__progress {
+      background: $vlw-brand-yellow;
+    }
+
+    .vlw__contact-panel {
+      height: 40rem;
+    }
+  }
+}

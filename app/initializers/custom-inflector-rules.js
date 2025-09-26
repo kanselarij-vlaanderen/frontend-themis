@@ -1,9 +1,7 @@
-import Inflector from 'ember-inflector';
+import { irregular } from '@ember-data/request-utils/string';
 
 export function initialize(/* application */) {
-  const inflector = Inflector.inflector;
-
-  inflector.irregular('person', 'persons');
+  irregular('person', 'persons');
 }
 
 export default {

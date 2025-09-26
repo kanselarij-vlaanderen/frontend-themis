@@ -15,14 +15,14 @@
     </span>
   </AuHeading>
 
-  <div class="au-u-h3 metis-u-text-gray-600">
+  <p class="au-u-h3">
     {{#if this.model.title}}
-      <div property={{this.model.rdfaBindings.title}}>
+      <span property={{this.model.rdfaBindings.title}}>
         {{this.model.title}}
-      </div>
+      </span>
       in de
     {{/if}}
-    <div property={{this.model.rdfaBindings.mandate}} resource={{this.model.mandate.uri}}
+    <span property={{this.model.rdfaBindings.mandate}} resource={{this.model.mandate.uri}}
       typeof={{this.model.mandate.rdfaBindings.class}}>
       <span rev={{this.model.mandate.governmentBody.rdfaBindings.mandates}}
         resource={{this.model.mandate.governmentBody.uri}}
@@ -31,61 +31,68 @@
           {{this.model.mandate.governmentBody.name}}
         </span>
       </span>
-    </div>
-  </div>
-  <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
-    Mandaat
-  </AuHeading>
-  <AuCard as |c|>
-    <c.header>
-      <AuHeading @level="2" @skin="4">
-        <ThemisUri @uri={{this.model.mandate.uri}}>
-          <span property={{this.model.mandate.rdfaBindings.governmentFunction}}
-            resource={{this.model.mandate.governmentFunction.uri}}
-            typeof={{this.model.mandate.governmentFunction.rdfaBindings.class}}>
-            <span property={{this.model.mandate.governmentFunction.rdfaBindings.label}}>
-              {{this.model.mandate.governmentFunction.label}}
-            </span>
-          </span>
-        </ThemisUri>
-      </AuHeading>
-      {{#if this.model.priority}}
-        <p class="au-u-margin-top-small">
-          met rangorde
-          <span resource={{this.model.uri}} typeof={{this.model.rdfaBindings.class}}>
-            <span property={{this.model.rdfaBindings.priority}}>
-              {{this.model.priority}}
-            </span>
-          </span>
-        </p>
-      {{/if}}
-      <p class="au-u-margin-top-small">
-        in regering
-        <span rev={{this.model.governmentBody.rdfaBindings.mandatees}} resource={{this.model.governmentBody.uri}}
-          typeof={{this.model.governmentBody.rdfaBindings.class}}>
-          <ThemisUri @uri={{this.model.governmentBody.uri}}>
-            <span property={{this.model.governmentBody.rdfaBindings.name}}>
-              {{this.model.governmentBody.name}}
+    </span>
+  </p>
+
+  <AuHr @size="large" />
+
+  <div class="au-o-region-large au-o-flow--small">
+    <AuHeading class="word-break--break-all" @level="2" @skin="3">
+      Mandaat
+    </AuHeading>
+    <AuCard as |c|>
+      <c.content class="au-o-flow--small">
+        <AuHeading @level="2" @skin="4">
+          <ThemisUri @uri={{this.model.mandate.uri}}>
+            <span property={{this.model.mandate.rdfaBindings.governmentFunction}}
+              resource={{this.model.mandate.governmentFunction.uri}}
+              typeof={{this.model.mandate.governmentFunction.rdfaBindings.class}}>
+              <span property={{this.model.mandate.governmentFunction.rdfaBindings.label}}>
+                {{this.model.mandate.governmentFunction.label}}
+              </span>
             </span>
           </ThemisUri>
-          {{!-- Only for RDFa purposes: Link governments which are time specialisations of one another --}}
-          <span property={{this.model.governmentBody.rdfaBindings.isTimespecializationOf}}
-            resource={{this.model.mandate.governmentBody.uri}} />
-        </span>
-      </p>
-      <p class="au-u-margin-top-small">
-        van
-        <span property={{this.model.rdfaBindings.startDate}} datatype="xsd:date">
-          {{moment-format this.model.startDate 'DD/MM/YYYY'}}</span>
-        tot
-        <span property={{this.model.rdfaBindings.endDate}} datatype="xsd:date">
-          {{if this.model.endDate (moment-format this.model.endDate 'DD/MM/YYYY') 'heden'}}
-        </span>
-      </p>
-    </c.header>
-  </AuCard>
-  <AuHeading class="au-u-margin-top au-u-margin-bottom-small word-break--break-all" @level="2" @skin="3">
-    Nieuwsberichten
-  </AuHeading>
-  <NewsItemsTable @mandatee={{this.resource}} />
+        </AuHeading>
+        {{#if this.model.priority}}
+          <p>
+            met rangorde
+            <span resource={{this.model.uri}} typeof={{this.model.rdfaBindings.class}}>
+              <span property={{this.model.rdfaBindings.priority}}>
+                {{this.model.priority}}
+              </span>
+            </span>
+          </p>
+        {{/if}}
+        <p>
+          in regering
+          <span rev={{this.model.governmentBody.rdfaBindings.mandatees}} resource={{this.model.governmentBody.uri}}
+            typeof={{this.model.governmentBody.rdfaBindings.class}}>
+            <ThemisUri @uri={{this.model.governmentBody.uri}}>
+              <span property={{this.model.governmentBody.rdfaBindings.name}}>
+                {{this.model.governmentBody.name}}
+              </span>
+            </ThemisUri>
+            {{!-- Only for RDFa purposes: Link governments which are time specialisations of one another --}}
+            <span property={{this.model.governmentBody.rdfaBindings.isTimespecializationOf}}
+              resource={{this.model.mandate.governmentBody.uri}} />
+          </span>
+        </p>
+        <p>
+          van
+          <span property={{this.model.rdfaBindings.startDate}} datatype="xsd:date">
+            {{moment-format this.model.startDate 'DD/MM/YYYY'}}</span>
+          tot
+          <span property={{this.model.rdfaBindings.endDate}} datatype="xsd:date">
+            {{if this.model.endDate (moment-format this.model.endDate 'DD/MM/YYYY') 'heden'}}
+          </span>
+        </p>
+      </c.content>
+    </AuCard>
+  </div>
+  <div class="au-o-region-large au-o-flow--small">
+    <AuHeading class="word-break--break-all" @level="2" @skin="3">
+      Nieuwsberichten
+    </AuHeading>
+    <NewsItemsTable @mandatee={{this.resource}} />
+  </div>
 </div>

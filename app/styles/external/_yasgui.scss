@@ -1,0 +1,23 @@
+/* Yasgui - Sparql GUI
+   ========================================================================== */
+
+.yasgui {
+  .controlbar {
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
+
+  .autocompleteWrapper {
+    display: none !important;
+  }
+}
+
+.yasr {
+  .dataTable {
+    tbody {
+      td, th {
+        min-width: 2rem;
+      }
+    }
+  }
+}
