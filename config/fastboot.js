@@ -3,7 +3,7 @@ module.exports = function (environment) {
     buildSandboxGlobals(defaultGlobals) {
       // Enable BACKEND_URL and set to http://host (or http://localhost) for local development.
       // or https://themis-test.vlaanderen.be if you use the proxied version
-      const BACKEND_URL = 'https://themis.vlaanderen.be/';
+      const BACKEND_URL = 'http://host/';
 
       console.log(
         `Using ${BACKEND_URL} as BACKEND_URL. You can change this setting in ./config/fastboot.js`,

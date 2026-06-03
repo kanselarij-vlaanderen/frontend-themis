@@ -4,11 +4,13 @@ import ENV from 'frontend-themis/config/environment';
 
 export default class ApplicationRoute extends Route {
   @service plausible;
+  @service fastboot;
 
   beforeModel() {
     const { domain, apiHost } = ENV.plausible;
 
     if (
+      !this.fastboot.isFastBoot &&
       domain !== '{{ANALYTICS_APP_DOMAIN}}' &&
       apiHost !== '{{ANALYTICS_API_HOST}}'
     ) {
