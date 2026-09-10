@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 export default class ViewPersonRoute extends Route {
   @service store;
@@ -20,7 +20,7 @@ export default class ViewPersonRoute extends Route {
       ].join(','),
       page: {
         size: 1,
-      }
+      },
     });
 
     return persons[0];

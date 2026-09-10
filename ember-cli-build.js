@@ -2,10 +2,20 @@
 
 /* eslint-disable */
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
-
 module.exports = async function (defaults) {
-  const { setConfig } = await import('@warp-drive/build-config');
+  const { setConfig } = await import('@warp-drive/core/build-config');
   const app = new EmberApp(defaults, {
+    fingerprint: {
+      // public/fastboot.js is loaded by name (`require('/app/fastboot')`)
+      // by redpencil/fastboot-app-server and must keep its filename.
+      exclude: ['fastboot.js'],
+    },
+    babel: {
+      plugins: [
+        // Required since ember-concurrency >=v4 for task(async () => {}) syntax
+        require.resolve('ember-concurrency/async-arrow-task-transform'),
+      ],
+    },
     sassOptions: {
       includePaths: ['node_modules/@appuniversum/ember-appuniversum'],
     },
@@ -24,9 +34,8 @@ module.exports = async function (defaults) {
   });
 
   setConfig(app, __dirname, {
-    deprecations: {
-      DEPRECATE_STORE_EXTENDS_EMBER_OBJECT: false,
-    },
+    compatWith: '5.8',
+    deprecations: {},
   });
 
   app.import('node_modules/@triply/yasgui/build/yasgui.min.css');
