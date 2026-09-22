@@ -1,4 +1,4 @@
-import { irregular } from '@ember-data/request-utils/string';
+import { irregular } from '@warp-drive/utilities/string';
 
 export function initialize(/* application */) {
   irregular('person', 'persons');
